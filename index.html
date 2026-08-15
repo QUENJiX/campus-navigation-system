@@ -1,0 +1,2301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="CSE225L Campus Navigation System team handbook, code guide, and viva preparation site.">
+  <title>Campus Navigation System — Team + Viva Handbook</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open navigation" aria-expanded="false">☰ <span>Contents</span></button>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <a href="#top" class="brand">Campus Navigation</a>
+      <div class="brand-sub">CSE225L team handbook</div>
+      <input id="navSearch" class="nav-search" type="search" placeholder="Find a section..." aria-label="Find a section">
+    </div>
+    <nav class="sidebar-nav" aria-label="Contents">
+      <div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Start here</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<a class="nav-link" href="#0-how-we-use-this-site" data-section="0-how-we-use-this-site"><span class="nav-num">00</span><span>How we use this site</span></a>
+<a class="nav-link" href="#1-what-the-assignment-actually-asks-for" data-section="1-what-the-assignment-actually-asks-for"><span class="nav-num">01</span><span>What the assignment actually asks for</span></a>
+<a class="nav-link" href="#2-the-project-idea-in-one-minute" data-section="2-the-project-idea-in-one-minute"><span class="nav-num">02</span><span>The project idea in one minute</span></a>
+<a class="nav-link" href="#3-the-map-is-the-backbone-of-the-graph" data-section="3-the-map-is-the-backbone-of-the-graph"><span class="nav-num">03</span><span>The map is the backbone of the graph</span></a>
+<a class="nav-link" href="#4-current-source-of-truth-vertex-list" data-section="4-current-source-of-truth-vertex-list"><span class="nav-num">04</span><span>Current source-of-truth vertex list</span></a>
+<a class="nav-link" href="#5-current-source-of-truth-edge-list" data-section="5-current-source-of-truth-edge-list"><span class="nav-num">05</span><span>Current source-of-truth edge list</span></a>
+<a class="nav-link" href="#6-current-adjacency-list" data-section="6-current-adjacency-list"><span class="nav-num">06</span><span>Current adjacency list</span></a>
+<a class="nav-link" href="#7-graph-visualization" data-section="7-graph-visualization"><span class="nav-num">07</span><span>Graph visualization</span></a>
+<a class="nav-link" href="#8-why-the-graph-is-undirected-and-unweighted" data-section="8-why-the-graph-is-undirected-and-unweighted"><span class="nav-num">08</span><span>Why the graph is undirected and unweighted</span></a>
+</div></div>
+<div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Code + labs</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<a class="nav-link" href="#9-current-project-architecture" data-section="9-current-project-architecture"><span class="nav-num">09</span><span>Current project architecture</span></a>
+<a class="nav-link" href="#10-coding-style-rule" data-section="10-coding-style-rule"><span class="nav-num">10</span><span>Coding style rule</span></a>
+<a class="nav-link" href="#11-lab-grounding-which-lab-files-matter-and-why" data-section="11-lab-grounding-which-lab-files-matter-and-why"><span class="nav-num">11</span><span>Lab grounding: which lab files matter and why</span></a>
+<a class="nav-link" href="#12-adt-to-project-connection-map" data-section="12-adt-to-project-connection-map"><span class="nav-num">12</span><span>ADT-to-project connection map</span></a>
+<a class="nav-link" href="#13-current-class-architecture" data-section="13-current-class-architecture"><span class="nav-num">13</span><span>Current class architecture</span></a>
+<a class="nav-link" href="#14-current-file-by-file-responsibilities" data-section="14-current-file-by-file-responsibilities"><span class="nav-num">14</span><span>Current file-by-file responsibilities</span></a>
+<a class="nav-link" href="#15-feature-by-feature-explanation" data-section="15-feature-by-feature-explanation"><span class="nav-num">15</span><span>Feature-by-feature explanation</span></a>
+<a class="nav-link" href="#16-important-helper-functions" data-section="16-important-helper-functions"><span class="nav-num">16</span><span>Important helper functions</span></a>
+<a class="nav-link" href="#17-time-complexity-cheat-sheet" data-section="17-time-complexity-cheat-sheet"><span class="nav-num">17</span><span>Time complexity cheat sheet</span></a>
+</div></div>
+<div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Team split</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<a class="nav-link" href="#18-team-division-five-members" data-section="18-team-division-five-members"><span class="nav-num">18</span><span>Team division — five members</span></a>
+<a class="nav-link" href="#19-suggested-report-contribution-wording" data-section="19-suggested-report-contribution-wording"><span class="nav-num">19</span><span>Suggested report contribution wording</span></a>
+</div></div>
+<div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Viva prep</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<a class="nav-link" href="#20-viva-strategy-what-the-instructor-is-actually-testing" data-section="20-viva-strategy-what-the-instructor-is-actually-testing"><span class="nav-num">20</span><span>Viva strategy: what the instructor is actually testing</span></a>
+<a class="nav-link" href="#21-member-1-viva-modification-bank-map-topology-shortest-path" data-section="21-member-1-viva-modification-bank-map-topology-shortest-path"><span class="nav-num">21</span><span>Member 1 viva modification bank — map, topology, shortest path</span></a>
+<a class="nav-link" href="#22-member-2-viva-modification-bank-bfs-and-queue" data-section="22-member-2-viva-modification-bank-bfs-and-queue"><span class="nav-num">22</span><span>Member 2 viva modification bank — BFS and Queue</span></a>
+<a class="nav-link" href="#23-member-3-viva-modification-bank-dfs-and-stack" data-section="23-member-3-viva-modification-bank-dfs-and-stack"><span class="nav-num">23</span><span>Member 3 viva modification bank — DFS and Stack</span></a>
+<a class="nav-link" href="#24-member-4-viva-modification-bank-adjacency-lists-and-roads" data-section="24-member-4-viva-modification-bank-adjacency-lists-and-roads"><span class="nav-num">24</span><span>Member 4 viva modification bank — adjacency lists and roads</span></a>
+<a class="nav-link" href="#25-member-5-viva-modification-bank-menu-display-search" data-section="25-member-5-viva-modification-bank-menu-display-search"><span class="nav-num">25</span><span>Member 5 viva modification bank — menu, display, search</span></a>
+<a class="nav-link" href="#26-system-wide-viva-questions-everyone-should-know" data-section="26-system-wide-viva-questions-everyone-should-know"><span class="nav-num">26</span><span>System-wide viva questions everyone should know</span></a>
+<a class="nav-link" href="#27-common-swap-this-structure-traps" data-section="27-common-swap-this-structure-traps"><span class="nav-num">27</span><span>Common &quot;swap this structure&quot; traps</span></a>
+<a class="nav-link" href="#28-live-coding-survival-strategy" data-section="28-live-coding-survival-strategy"><span class="nav-num">28</span><span>Live-coding survival strategy</span></a>
+</div></div>
+<div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Testing + report</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<a class="nav-link" href="#29-current-known-test-cases" data-section="29-current-known-test-cases"><span class="nav-num">29</span><span>Current known test cases</span></a>
+<a class="nav-link" href="#30-recommended-project-demo-sequence" data-section="30-recommended-project-demo-sequence"><span class="nav-num">30</span><span>Recommended project demo sequence</span></a>
+<a class="nav-link" href="#31-what-should-go-into-the-3-5-page-report" data-section="31-what-should-go-into-the-3-5-page-report"><span class="nav-num">31</span><span>What should go into the 3-5 page report</span></a>
+<a class="nav-link" href="#32-important-code-details-that-are-easy-to-forget" data-section="32-important-code-details-that-are-easy-to-forget"><span class="nav-num">32</span><span>Important code details that are easy to forget</span></a>
+<a class="nav-link" href="#33-potential-improvements-we-should-not-add-unless-needed" data-section="33-potential-improvements-we-should-not-add-unless-needed"><span class="nav-num">33</span><span>Potential improvements we should NOT add unless needed</span></a>
+<a class="nav-link" href="#34-possible-simple-improvements-if-instructor-requests-them" data-section="34-possible-simple-improvements-if-instructor-requests-them"><span class="nav-num">34</span><span>Possible simple improvements if instructor requests them</span></a>
+</div></div>
+<div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Teach the team</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<a class="nav-link" href="#35-teaching-plan-for-the-team" data-section="35-teaching-plan-for-the-team"><span class="nav-num">35</span><span>Teaching plan for the team</span></a>
+<a class="nav-link" href="#36-rapid-fire-viva-drill" data-section="36-rapid-fire-viva-drill"><span class="nav-num">36</span><span>Rapid-fire viva drill</span></a>
+<a class="nav-link" href="#37-answers-to-the-most-dangerous-viva-questions" data-section="37-answers-to-the-most-dangerous-viva-questions"><span class="nav-num">37</span><span>Answers to the most dangerous viva questions</span></a>
+<a class="nav-link" href="#38-current-limitations-we-should-be-able-to-admit" data-section="38-current-limitations-we-should-be-able-to-admit"><span class="nav-num">38</span><span>Current limitations we should be able to admit</span></a>
+<a class="nav-link" href="#39-before-submission-checklist" data-section="39-before-submission-checklist"><span class="nav-num">39</span><span>Before-submission checklist</span></a>
+</div></div>
+<div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Keep it updated</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<a class="nav-link" href="#40-update-protocol-for-this-master-file" data-section="40-update-protocol-for-this-master-file"><span class="nav-num">40</span><span>Update protocol for this master file</span></a>
+<a class="nav-link" href="#41-change-log" data-section="41-change-log"><span class="nav-num">41</span><span>Change log</span></a>
+<a class="nav-link" href="#42-ultra-short-emergency-summary" data-section="42-ultra-short-emergency-summary"><span class="nav-num">42</span><span>Ultra-short emergency summary</span></a>
+<a class="nav-link" href="#43-final-mental-model" data-section="43-final-mental-model"><span class="nav-num">43</span><span>Final mental model</span></a>
+</div></div>
+    </nav>
+    <div class="sidebar-foot">
+      <a href="https://github.com/QUENJiX/campus-navigation-system">GitHub repository ↗</a>
+      <a href="src/main.cpp">Open main.cpp ↗</a>
+    </div>
+  </aside>
+
+  <main class="page" id="top">
+    <header class="hero">
+      <div class="eyebrow">CSE225L • Data Structures & Algorithms Lab</div>
+      <h1>Campus Navigation System</h1>
+      <p class="hero-copy">This is the one place we use when we sit together and go through the project. Start with the map and graph, then the code, then each member's part, then grind the viva variations until nobody freezes when the instructor changes something.</p>
+      <div class="stat-grid">
+        <div class="stat"><strong>18</strong><span>vertices</span></div>
+        <div class="stat"><strong>19</strong><span>undirected edges</span></div>
+        <div class="stat"><strong>363</strong><span>nonblank project lines</span></div>
+        <div class="stat"><strong>5</strong><span>team members</span></div>
+      </div>
+      <div class="hero-actions">
+        <a class="button primary" href="#1-what-the-assignment-actually-asks-for">Start from the beginning</a>
+        <a class="button" href="#18-team-division-five-members">Jump to team split</a>
+        <a class="button" href="#20-viva-strategy-what-the-instructor-is-actually-testing">Jump to viva prep</a>
+      </div>
+    </header>
+
+    <div class="content-shell">
+      <div class="callout intro-callout"><strong>How to use it:</strong> don't try to memorize this page. Use the left nav. When you're teaching a member, open their section and their viva bank side by side with the code.</div>
+      <article class="guide-content">
+        <p><strong>Document version:</strong> 1.0<br />
+<strong>Current code baseline:</strong> <code>CampusNavigationSystem_KR_Style</code><br />
+<strong>Course:</strong> CSE225L — Data Structures and Algorithms Lab<br />
+<strong>Project:</strong> Campus Navigation System<br />
+<strong>Purpose of this file:</strong> This is the single working reference for understanding, teaching, dividing, demonstrating, modifying, and defending the project in viva. Future project changes should be reflected here so that this document remains the source of truth.</p>
+<hr />
+<h1 id="0-how-we-use-this-site" class="anchor-heading">0. How we use this site<a class="heading-link" href="#0-how-we-use-this-site" aria-label="Link to this section">#</a></h1>
+<p>This is our working handbook. We use it when we sit together, explain the project, practice viva changes, and update anything that changes in the code.</p>
+<p>Use it in four ways:</p>
+<ol>
+<li><strong>Before coding:</strong> understand the graph, map, data structures, files, and why each choice exists.</li>
+<li><strong>While teaching the team:</strong> go member by member using the ownership and viva sections.</li>
+<li><strong>Before viva:</strong> practice the alternate implementations and modification prompts.</li>
+<li><strong>Whenever the project changes:</strong> update the Source of Truth, Function Inventory, Member Division if necessary, Testing Checklist, and Change Log.</li>
+</ol>
+<p>One rule matters more than anything else:</p>
+<blockquote>
+<p>Do not memorize code line-by-line. Understand what data is stored, what each ADT operation does, why an algorithm needs that ADT, and what changes when the implementation is replaced.</p>
+</blockquote>
+<hr />
+<h1 id="1-what-the-assignment-actually-asks-for" class="anchor-heading">1. What the assignment actually asks for<a class="heading-link" href="#1-what-the-assignment-actually-asks-for" aria-label="Link to this section">#</a></h1>
+<p>The selected assignment is <strong>Project 6: Campus Navigation System</strong>.</p>
+<p>The required core features are:</p>
+<ul>
+<li>Graph representation using <strong>adjacency lists</strong></li>
+<li><strong>BFS traversal</strong></li>
+<li><strong>DFS traversal</strong></li>
+<li><strong>Shortest path in an unweighted graph</strong></li>
+<li><strong>Dynamic addition and removal of roads</strong></li>
+</ul>
+<p>The course project guidance also evaluates implementation, correctness, understanding, code quality, demonstration, and individual viva. The project guidance warns against relying on STL containers to implement the required data structures. This is why the project uses the ADTs from the course labs rather than <code>vector</code>, STL <code>list</code>, STL <code>queue</code>, STL <code>stack</code>, <code>map</code>, etc.</p>
+<h3 id="what-this-means-for-our-design" class="anchor-heading">What this means for our design<a class="heading-link" href="#what-this-means-for-our-design" aria-label="Link to this section">#</a></h3>
+<p>The project is not supposed to be a Google Maps clone. It is a Data Structures and Algorithms project where a campus map becomes a graph.</p>
+<p>Therefore:</p>
+<ul>
+<li>A <strong>location</strong> becomes a graph vertex.</li>
+<li>A <strong>direct walkable connection</strong> becomes a graph edge.</li>
+<li>We use an <strong>unweighted graph</strong>, so every direct edge has equal cost: 1.</li>
+<li>The shortest path means the minimum number of modeled graph connections, not minimum meters or walking time.</li>
+<li>We dynamically add/remove edges to represent opening or closing routes.</li>
+</ul>
+<hr />
+<h1 id="2-the-project-idea-in-one-minute" class="anchor-heading">2. The project idea in one minute<a class="heading-link" href="#2-the-project-idea-in-one-minute" aria-label="Link to this section">#</a></h1>
+<p>The entire project can be explained with this paragraph:</p>
+<blockquote>
+<p>The NSU campus is modeled as an undirected, unweighted graph. Important campus places such as Gate 1, Gate 8, NAC, SAC, Ground Floor, Upper Plaza, Central Library, Cafeteria, Playground, and lounges are vertices. Direct walkable connections are edges. Each vertex stores its neighboring vertices in an adjacency list implemented using the linked-list <code>UnsortedType</code> ADT from the course. BFS uses a Queue ADT, DFS uses a Stack ADT, and the shortest path uses BFS because the graph is unweighted. Roads can also be added or removed dynamically by inserting into or deleting from the adjacency lists.</p>
+</blockquote>
+<p>If a member can explain that correctly, they already understand the skeleton of the project.</p>
+<hr />
+<h1 id="3-the-map-is-the-backbone-of-the-graph" class="anchor-heading">3. The map is the backbone of the graph<a class="heading-link" href="#3-the-map-is-the-backbone-of-the-graph" aria-label="Link to this section">#</a></h1>
+<p>The physical map was designed first, then simplified into a graph suitable for the project.</p>
+<div class="visual-card map-card">
+  <a href="assets/nsu-map.png" target="_blank" rel="noopener" title="Open the original map at full size">
+    <img class="map-image" src="assets/nsu-map.png" alt="Custom NSU campus map used to decide the project vertices and connections">
+  </a>
+  <p class="figure-note"><strong>Our original campus sketch.</strong> Use it to understand why the graph was built this way. The current edge list below is the final source of truth. One correction to remember: the City Bank ATM is modeled as a NAC connection in the final graph.</p>
+</div>
+<p>This matters because algorithms cannot operate until somebody has decided:</p>
+<ul>
+<li>what counts as a vertex,</li>
+<li>what does not need to be a vertex,</li>
+<li>which places are directly connected,</li>
+<li>which spaces act as navigation hubs,</li>
+<li>whether connections are one-way or two-way,</li>
+<li>whether routes are weighted or unweighted.</li>
+</ul>
+<h2 id="3-1-map-interpretation" class="anchor-heading">3.1 Map interpretation<a class="heading-link" href="#3-1-map-interpretation" aria-label="Link to this section">#</a></h2>
+<p>The custom campus map distinguishes important physical areas including:</p>
+<ul>
+<li>Gate 1</li>
+<li>Gate 8</li>
+<li>Administrative Building</li>
+<li>NAC</li>
+<li>SAC</li>
+<li>Ground Floor</li>
+<li>Upper Plaza, treated as the connected 2nd-floor common area</li>
+<li>Female Lounge</li>
+<li>Male Lounge</li>
+<li>Book Shop &amp; Stationery</li>
+<li>Medical Center</li>
+<li>City Bank ATM</li>
+<li>Cafeteria</li>
+<li>Student Affairs</li>
+<li>Auditorium</li>
+<li>Central Library</li>
+<li>Playground</li>
+<li>Gallery</li>
+</ul>
+<h3 id="important-modeling-decisions" class="anchor-heading">Important modeling decisions<a class="heading-link" href="#important-modeling-decisions" aria-label="Link to this section">#</a></h3>
+<p><strong>Gate 8:</strong> Gate 8 opens onto the ground-floor side below/near the Auditorium area. It can lead toward Cafeteria and also toward a NAC entrance. For the simplified graph, Gate 8 therefore has direct modeled connections to <strong>NAC</strong> and <strong>Cafeteria</strong>.</p>
+<p><strong>Upper Plaza:</strong> The yellow Upper Plaza area is treated as one connected second-floor navigation hub. Auditorium, Student Affairs, Gallery, and Central Library are represented as directly connected to it.</p>
+<p><strong>Ground Floor:</strong> Ground Floor is a central first-floor hub and connects several major campus components.</p>
+<p><strong>ATM:</strong> City Bank ATM is modeled as directly connected to <strong>NAC</strong>, because it is on/near the NAC ground-floor entrance area.</p>
+<p><strong>Entrances:</strong> Entrance rectangles on the drawn map are not separate graph vertices. They explain physical connectivity but would add unnecessary graph nodes.</p>
+<p><strong>Stationary/Pharmacy near Gate 8:</strong> These are not separate vertices in the current graph. The Gate 8 to Cafeteria edge abstracts that route for project simplicity.</p>
+<p><strong>NAC-SAC bridge:</strong> The physical bridge is not currently modeled as its own vertex or as a separate direct NAC-SAC edge. The project does not need to encode every possible corridor. It models a simplified set of meaningful routes.</p>
+<p><strong>Ground Floor to Upper Plaza:</strong> This edge represents vertical movement through normal campus circulation such as stairs/lifts. It is necessary to connect the first-floor and second-floor portions of the graph.</p>
+<hr />
+<h1 id="4-current-source-of-truth-vertex-list" class="anchor-heading">4. Current source-of-truth vertex list<a class="heading-link" href="#4-current-source-of-truth-vertex-list" aria-label="Link to this section">#</a></h1>
+<p>These IDs are currently hard-coded by insertion order in <code>main.cpp</code>. Do not casually reorder them because the initial edge list uses the numeric IDs.</p>
+<table>
+<thead>
+<tr>
+  <th style="text-align:right">ID</th>
+  <th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:right">0</td>
+  <td>Gate 1</td>
+</tr>
+<tr>
+  <td style="text-align:right">1</td>
+  <td>Gate 8</td>
+</tr>
+<tr>
+  <td style="text-align:right">2</td>
+  <td>Administrative Building</td>
+</tr>
+<tr>
+  <td style="text-align:right">3</td>
+  <td>NAC</td>
+</tr>
+<tr>
+  <td style="text-align:right">4</td>
+  <td>SAC</td>
+</tr>
+<tr>
+  <td style="text-align:right">5</td>
+  <td>Ground Floor</td>
+</tr>
+<tr>
+  <td style="text-align:right">6</td>
+  <td>Upper Plaza</td>
+</tr>
+<tr>
+  <td style="text-align:right">7</td>
+  <td>Female Lounge</td>
+</tr>
+<tr>
+  <td style="text-align:right">8</td>
+  <td>Male Lounge</td>
+</tr>
+<tr>
+  <td style="text-align:right">9</td>
+  <td>Book Shop &amp; Stationery</td>
+</tr>
+<tr>
+  <td style="text-align:right">10</td>
+  <td>Medical Center</td>
+</tr>
+<tr>
+  <td style="text-align:right">11</td>
+  <td>City Bank ATM</td>
+</tr>
+<tr>
+  <td style="text-align:right">12</td>
+  <td>Cafeteria</td>
+</tr>
+<tr>
+  <td style="text-align:right">13</td>
+  <td>Student Affairs</td>
+</tr>
+<tr>
+  <td style="text-align:right">14</td>
+  <td>Auditorium</td>
+</tr>
+<tr>
+  <td style="text-align:right">15</td>
+  <td>Central Library</td>
+</tr>
+<tr>
+  <td style="text-align:right">16</td>
+  <td>Playground</td>
+</tr>
+<tr>
+  <td style="text-align:right">17</td>
+  <td>Gallery</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Current number of vertices:</strong> 18</p>
+<hr />
+<h1 id="5-current-source-of-truth-edge-list" class="anchor-heading">5. Current source-of-truth edge list<a class="heading-link" href="#5-current-source-of-truth-edge-list" aria-label="Link to this section">#</a></h1>
+<p>All current campus roads are treated as <strong>undirected</strong>. <code>A &lt;-&gt; B</code> means both A can reach B and B can reach A.</p>
+<table>
+<thead>
+<tr>
+  <th style="text-align:right">#</th>
+  <th>Edge</th>
+  <th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:right">1</td>
+  <td>Gate 1 <code>&lt;-&gt;</code> SAC</td>
+  <td>Gate 1 enters the SAC side</td>
+</tr>
+<tr>
+  <td style="text-align:right">2</td>
+  <td>Gate 8 <code>&lt;-&gt;</code> NAC</td>
+  <td>Gate 8 can lead toward NAC</td>
+</tr>
+<tr>
+  <td style="text-align:right">3</td>
+  <td>Gate 8 <code>&lt;-&gt;</code> Cafeteria</td>
+  <td>Gate 8 ground-floor route toward Cafeteria</td>
+</tr>
+<tr>
+  <td style="text-align:right">4</td>
+  <td>Administrative Building <code>&lt;-&gt;</code> Ground Floor</td>
+  <td>Admin connects to common ground-floor circulation</td>
+</tr>
+<tr>
+  <td style="text-align:right">5</td>
+  <td>Administrative Building <code>&lt;-&gt;</code> Book Shop &amp; Stationery</td>
+  <td>Direct useful access</td>
+</tr>
+<tr>
+  <td style="text-align:right">6</td>
+  <td>NAC <code>&lt;-&gt;</code> Ground Floor</td>
+  <td>NAC connects to common ground floor</td>
+</tr>
+<tr>
+  <td style="text-align:right">7</td>
+  <td>NAC <code>&lt;-&gt;</code> Female Lounge</td>
+  <td>Female Lounge belongs to/accessed through NAC side</td>
+</tr>
+<tr>
+  <td style="text-align:right">8</td>
+  <td>NAC <code>&lt;-&gt;</code> City Bank ATM</td>
+  <td>ATM is near the NAC entrance</td>
+</tr>
+<tr>
+  <td style="text-align:right">9</td>
+  <td>NAC <code>&lt;-&gt;</code> Playground</td>
+  <td>NAC-side access to Playground</td>
+</tr>
+<tr>
+  <td style="text-align:right">10</td>
+  <td>SAC <code>&lt;-&gt;</code> Ground Floor</td>
+  <td>SAC connects to common ground floor</td>
+</tr>
+<tr>
+  <td style="text-align:right">11</td>
+  <td>SAC <code>&lt;-&gt;</code> Male Lounge</td>
+  <td>Male Lounge belongs to/accessed through SAC side</td>
+</tr>
+<tr>
+  <td style="text-align:right">12</td>
+  <td>SAC <code>&lt;-&gt;</code> Medical Center</td>
+  <td>Medical Center is reached through SAC</td>
+</tr>
+<tr>
+  <td style="text-align:right">13</td>
+  <td>Ground Floor <code>&lt;-&gt;</code> Upper Plaza</td>
+  <td>Vertical circulation between floors</td>
+</tr>
+<tr>
+  <td style="text-align:right">14</td>
+  <td>Ground Floor <code>&lt;-&gt;</code> Book Shop &amp; Stationery</td>
+  <td>Common route to Book Shop area</td>
+</tr>
+<tr>
+  <td style="text-align:right">15</td>
+  <td>Ground Floor <code>&lt;-&gt;</code> Cafeteria</td>
+  <td>Common ground-floor access</td>
+</tr>
+<tr>
+  <td style="text-align:right">16</td>
+  <td>Upper Plaza <code>&lt;-&gt;</code> Student Affairs</td>
+  <td>Second-floor hub connection</td>
+</tr>
+<tr>
+  <td style="text-align:right">17</td>
+  <td>Upper Plaza <code>&lt;-&gt;</code> Auditorium</td>
+  <td>Auditorium accessed from Upper Plaza</td>
+</tr>
+<tr>
+  <td style="text-align:right">18</td>
+  <td>Upper Plaza <code>&lt;-&gt;</code> Central Library</td>
+  <td>Library accessed from Upper Plaza</td>
+</tr>
+<tr>
+  <td style="text-align:right">19</td>
+  <td>Upper Plaza <code>&lt;-&gt;</code> Gallery</td>
+  <td>Gallery accessed from Upper Plaza</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Current number of undirected edges:</strong> 19</p>
+<hr />
+<h1 id="6-current-adjacency-list" class="anchor-heading">6. Current adjacency list<a class="heading-link" href="#6-current-adjacency-list" aria-label="Link to this section">#</a></h1>
+<p>Because <code>UnsortedType::Insert()</code> inserts at the head of the linked list, the printed order is reverse-ish relative to road insertion order. This is expected and does not change the graph.</p>
+<p>Current program output:</p>
+<pre><code class="language-text">Gate 1 -&gt; SAC
+Gate 8 -&gt; Cafeteria, NAC
+Administrative Building -&gt; Book Shop &amp; Stationery, Ground Floor
+NAC -&gt; Playground, City Bank ATM, Female Lounge, Ground Floor, Gate 8
+SAC -&gt; Medical Center, Male Lounge, Ground Floor, Gate 1
+Ground Floor -&gt; Cafeteria, Book Shop &amp; Stationery, Upper Plaza, SAC, NAC, Administrative Building
+Upper Plaza -&gt; Gallery, Central Library, Auditorium, Student Affairs, Ground Floor
+Female Lounge -&gt; NAC
+Male Lounge -&gt; SAC
+Book Shop &amp; Stationery -&gt; Ground Floor, Administrative Building
+Medical Center -&gt; SAC
+City Bank ATM -&gt; NAC
+Cafeteria -&gt; Ground Floor, Gate 8
+Student Affairs -&gt; Upper Plaza
+Auditorium -&gt; Upper Plaza
+Central Library -&gt; Upper Plaza
+Playground -&gt; NAC
+Gallery -&gt; Upper Plaza
+</code></pre>
+<h3 id="degrees-worth-remembering" class="anchor-heading">Degrees worth remembering<a class="heading-link" href="#degrees-worth-remembering" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Gate 1: 1</li>
+<li>Gate 8: 2</li>
+<li>Administrative Building: 2</li>
+<li>NAC: 5</li>
+<li>SAC: 4</li>
+<li><strong>Ground Floor: 6, the maximum current degree</strong></li>
+<li>Upper Plaza: 5</li>
+<li>Single-leaf destinations such as Female Lounge, Male Lounge, Medical Center, ATM, Student Affairs, Auditorium, Central Library, Playground, Gallery: degree 1</li>
+</ul>
+<p>The maximum degree being <strong>6</strong> matters in viva if somebody tries to replace the linked-list adjacency lists with the Lab 5 fixed-size array-based <code>UnsortedType</code>, whose manual uses <code>SIZE = 5</code>. As-is, that array would be too small for Ground Floor. The array-based alternative must use a capacity of at least 6, preferably <code>MAX_LOCATIONS</code> or another safe value such as 25.</p>
+<hr />
+<h1 id="7-graph-visualization" class="anchor-heading">7. Graph visualization<a class="heading-link" href="#7-graph-visualization" aria-label="Link to this section">#</a></h1>
+<div class="visual-card">
+  <img class="graph-image" src="assets/campus-graph.svg" alt="Simplified campus graph showing the 18 vertices and their connections">
+  <p class="figure-note">This is the simplified graph used by the program. It is a graph model, not an architectural floor plan.</p>
+</div>
+
+<p>This is a conceptual graph view, not a floor-plan drawing.</p>
+<pre><code class="language-mermaid">graph TD
+    G1[Gate 1] --- SAC[SAC]
+
+    G8[Gate 8] --- NAC[NAC]
+    G8 --- CAFE[Cafeteria]
+
+    ADMIN[Administrative Building] --- GF[Ground Floor]
+    ADMIN --- BOOK[Book Shop &amp; Stationery]
+
+    NAC --- GF
+    NAC --- FL[Female Lounge]
+    NAC --- ATM[City Bank ATM]
+    NAC --- PLAY[Playground]
+
+    SAC --- GF
+    SAC --- ML[Male Lounge]
+    SAC --- MED[Medical Center]
+
+    GF --- UP[Upper Plaza]
+    GF --- BOOK
+    GF --- CAFE
+
+    UP --- SA[Student Affairs]
+    UP --- AUD[Auditorium]
+    UP --- LIB[Central Library]
+    UP --- GAL[Gallery]
+</code></pre>
+<hr />
+<h1 id="8-why-the-graph-is-undirected-and-unweighted" class="anchor-heading">8. Why the graph is undirected and unweighted<a class="heading-link" href="#8-why-the-graph-is-undirected-and-unweighted" aria-label="Link to this section">#</a></h1>
+<h2 id="undirected" class="anchor-heading">Undirected<a class="heading-link" href="#undirected" aria-label="Link to this section">#</a></h2>
+<p>A modeled campus path can normally be walked in both directions. Therefore adding A-B performs two insertions:</p>
+<pre><code class="language-cpp">adjacencyList[location1].Insert(location2);
+adjacencyList[location2].Insert(location1);
+</code></pre>
+<p>If the graph were directed, only one insertion would be used.</p>
+<h2 id="unweighted" class="anchor-heading">Unweighted<a class="heading-link" href="#unweighted" aria-label="Link to this section">#</a></h2>
+<p>The assignment asks for shortest path in an unweighted graph. Therefore every direct connection has conceptual cost 1.</p>
+<p>Example:</p>
+<pre><code class="language-text">Gate 1 -&gt; SAC -&gt; Ground Floor -&gt; NAC -&gt; Playground
+</code></pre>
+<p>has 4 edges, so the shortest-path length is 4.</p>
+<p>This is <strong>not claiming four meters, four minutes, or four floors</strong>. It means four modeled graph steps.</p>
+<p>Because all edges are equal, BFS is the correct shortest-path method. A priority queue/Dijkstra-style approach is unnecessary.</p>
+<hr />
+<h1 id="9-current-project-architecture" class="anchor-heading">9. Current project architecture<a class="heading-link" href="#9-current-project-architecture" aria-label="Link to this section">#</a></h1>
+<pre><code class="language-text">CampusNavigationSystem/
+|
+|-- main.cpp
+|-- campusgraph.h
+|-- campusgraph.cpp
+|
+|-- unsortedtype.h
+|-- unsortedtype.cpp
+|
+|-- stacktype.h
+|-- stacktype.cpp
+|
+|-- queuetype.h
+|-- queuetype.cpp
+|
+`-- CampusNavigationSystem.cbp
+</code></pre>
+<h2 id="9-1-what-is-actually-project-specific-code" class="anchor-heading">9.1 What is actually project-specific code?<a class="heading-link" href="#9-1-what-is-actually-project-specific-code" aria-label="Link to this section">#</a></h2>
+<p>The ADT files are based directly on structures supplied/taught in the lab manuals. The project-specific logic is primarily:</p>
+<ul>
+<li><code>main.cpp</code></li>
+<li><code>campusgraph.h</code></li>
+<li><code>campusgraph.cpp</code></li>
+</ul>
+<p>Current K&amp;R-style line counts:</p>
+<table>
+<thead>
+<tr>
+  <th>Project-specific file</th>
+  <th style="text-align:right">Raw lines</th>
+  <th style="text-align:right">Nonblank lines</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>main.cpp</code></td>
+  <td style="text-align:right">123</td>
+  <td style="text-align:right">115</td>
+</tr>
+<tr>
+  <td><code>campusgraph.h</code></td>
+  <td style="text-align:right">44</td>
+  <td style="text-align:right">34</td>
+</tr>
+<tr>
+  <td><code>campusgraph.cpp</code></td>
+  <td style="text-align:right">277</td>
+  <td style="text-align:right">214</td>
+</tr>
+<tr>
+  <td><strong>Project-specific total</strong></td>
+  <td style="text-align:right"><strong>444</strong></td>
+  <td style="text-align:right"><strong>363</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The whole source set, including reused lab ADTs, is currently 779 raw lines.</p>
+<p>So mentally, this is not a mysterious 779-line custom application. It is roughly <strong>363 nonblank lines of actual campus-project logic sitting on top of taught ADTs</strong>.</p>
+<hr />
+<h1 id="10-coding-style-rule" class="anchor-heading">10. Coding style rule<a class="heading-link" href="#10-coding-style-rule" aria-label="Link to this section">#</a></h1>
+<p>Current formatting style is K&amp;R-style braces:</p>
+<pre><code class="language-cpp">void Function() {
+    // code
+}
+</code></pre>
+<p>not:</p>
+<pre><code class="language-cpp">void Function()
+{
+    // code
+}
+</code></pre>
+<p>Use the same style for future changes so the project stays visually consistent.</p>
+<p>Other style goals:</p>
+<ul>
+<li>straightforward <code>if</code>, <code>else</code>, <code>for</code>, <code>while</code></li>
+<li>ordinary arrays and pointers from the labs</li>
+<li>no STL containers for required structures</li>
+<li>no advanced modern-C++ tricks</li>
+<li>no unnecessary abstractions</li>
+<li>comments only where they genuinely help</li>
+<li>code should look like a CSE225L student project, not a framework</li>
+</ul>
+<hr />
+<h1 id="11-lab-grounding-which-lab-files-matter-and-why" class="anchor-heading">11. Lab grounding: which lab files matter and why<a class="heading-link" href="#11-lab-grounding-which-lab-files-matter-and-why" aria-label="Link to this section">#</a></h1>
+<p>The project should be defendable as a combination of topics taught in the course.</p>
+<h2 id="lab-4-template-class-operator-overloading" class="anchor-heading">Lab 4 — Template Class &amp; Operator Overloading<a class="heading-link" href="#lab-4-template-class-operator-overloading" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> templates, dynamic arrays, user-defined types, operator overloading.</p>
+<p><strong>Project relevance:</strong> indirect. Our taught ADTs are templates such as <code>UnsortedType&lt;T&gt;</code>, <code>StackType&lt;T&gt;</code>, and <code>QueueType&lt;T&gt;</code>. We do not need operator overloading for the campus graph.</p>
+<p><strong>Use in submitted project:</strong> no direct feature.</p>
+<hr />
+<h2 id="lab-5-unsorted-list-array-based" class="anchor-heading">Lab 5 — Unsorted List, Array-Based<a class="heading-link" href="#lab-5-unsorted-list-array-based" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> array-based <code>UnsortedType</code>, <code>Insert</code>, <code>Search</code>, <code>Delete</code>, <code>GetNext</code>, <code>Reset</code>, <code>Length</code>, fixed capacity.</p>
+<p><strong>Project relevance:</strong> important viva alternative.</p>
+<p>Our current adjacency lists are linked-list based, but the instructor may ask:</p>
+<blockquote>
+<p>Show the adjacency list using an array-based list instead.</p>
+</blockquote>
+<p>The same high-level ADT operations can be used, but the underlying storage becomes an array.</p>
+<p><strong>Important caveat:</strong> the manual's sample <code>SIZE = 5</code> is too small for our Ground Floor vertex, which currently has degree 6. Increase the array capacity for the alternate version.</p>
+<hr />
+<h2 id="lab-6-sorted-list-array-based" class="anchor-heading">Lab 6 — Sorted List, Array-Based<a class="heading-link" href="#lab-6-sorted-list-array-based" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> sorted insertion, binary search, deletion from a sorted array.</p>
+<p><strong>Project relevance:</strong> low-to-medium as a viva discussion point.</p>
+<p>We deliberately do <strong>not</strong> use a sorted adjacency list because graph traversal does not require neighbors to be sorted. Sorting neighbors adds complexity without helping the required algorithms.</p>
+<p>Potential viva variation:</p>
+<blockquote>
+<p>What changes if neighbors must always be displayed in ascending ID order?</p>
+</blockquote>
+<p>Then a <code>SortedType&lt;int&gt;</code> could replace <code>UnsortedType&lt;int&gt;</code>, but it is not necessary for the actual project.</p>
+<hr />
+<h2 id="lab-7-unsorted-list-linked-list-based" class="anchor-heading">Lab 7 — Unsorted List, Linked-List Based<a class="heading-link" href="#lab-7-unsorted-list-linked-list-based" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> linked-list <code>UnsortedType</code>, <code>Node</code>, <code>head</code>, insertion, searching, deletion, traversal/reset, dynamic memory.</p>
+<p><strong>Project relevance:</strong> <strong>direct and fundamental</strong>.</p>
+<p>Current graph declaration:</p>
+<pre><code class="language-cpp">UnsortedType&lt;int&gt; adjacencyList[MAX_LOCATIONS];
+</code></pre>
+<p>Each graph vertex owns one linked-list adjacency list.</p>
+<p>Operations used:</p>
+<ul>
+<li><code>Insert()</code> -&gt; add neighbor / add road</li>
+<li><code>Search()</code> -&gt; prevent duplicates / check road</li>
+<li><code>Delete()</code> -&gt; remove neighbor / remove road</li>
+<li><code>Length()</code> -&gt; count neighbors</li>
+<li><code>Reset()</code> + <code>GetNext()</code> -&gt; traverse neighbors</li>
+</ul>
+<p>This lab provides the literal storage backbone of the graph.</p>
+<hr />
+<h2 id="lab-8-sorted-list-linked-list-based" class="anchor-heading">Lab 8 — Sorted List, Linked-List Based<a class="heading-link" href="#lab-8-sorted-list-linked-list-based" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> linked-list storage with sorted insertion.</p>
+<p><strong>Project relevance:</strong> alternative only.</p>
+<p>We use unsorted linked lists because sorting is unnecessary. Could be used in a viva if asked to keep adjacency IDs sorted automatically.</p>
+<hr />
+<h2 id="lab-9-stack-array-based" class="anchor-heading">Lab 9 — Stack, Array-Based<a class="heading-link" href="#lab-9-stack-array-based" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> array stack, <code>top</code>, <code>Push</code>, <code>Pop</code>, <code>Top</code>, <code>IsEmpty</code>, <code>IsFull</code>.</p>
+<p><strong>Project relevance:</strong> important viva alternative.</p>
+<p>Current project uses the linked-list Stack from Lab 11. If asked to implement DFS using an array-based stack, the DFS logic is almost unchanged because both implementations provide the same ADT operations.</p>
+<p><strong>Important caveat:</strong> the Lab 9 manual uses a small fixed <code>SIZE = 5</code>. That is not safe for an 18-vertex graph. Use a capacity of at least 18, preferably <code>MAX_LOCATIONS</code>/25, for a project-sized alternate implementation.</p>
+<hr />
+<h2 id="lab-10-queue-array-based" class="anchor-heading">Lab 10 — Queue, Array-Based<a class="heading-link" href="#lab-10-queue-array-based" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> circular array queue with <code>front</code>, <code>rear</code>, modulo arithmetic, <code>Enqueue</code>, <code>Dequeue</code>, <code>IsEmpty</code>, <code>IsFull</code>.</p>
+<p><strong>Project relevance:</strong> important viva alternative.</p>
+<p>Current BFS uses the linked-list Queue from Lab 12. If asked for an array version, Lab 10 is the natural replacement.</p>
+<p>Its parameterized constructor allows a safer project-sized queue:</p>
+<pre><code class="language-cpp">QueueType&lt;int&gt; queue(MAX_LOCATIONS);
+</code></pre>
+<hr />
+<h2 id="lab-11-stack-linked-list-based" class="anchor-heading">Lab 11 — Stack, Linked-List Based<a class="heading-link" href="#lab-11-stack-linked-list-based" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> linked-list stack with a <code>head</code> pointer and <code>Push</code>, <code>Pop</code>, <code>Top</code>, <code>IsEmpty</code>, <code>IsFull</code>.</p>
+<p><strong>Project relevance:</strong> <strong>direct</strong>.</p>
+<p>Used in:</p>
+<ul>
+<li>DFS traversal</li>
+<li>reversing the shortest-path parent chain so the path prints source-to-destination</li>
+</ul>
+<p>Current conceptual behavior:</p>
+<pre><code class="language-text">Push -&gt; insert at head
+Top  -&gt; read head
+Pop  -&gt; delete head
+</code></pre>
+<p>LIFO behavior is what makes the explicit-stack traversal depth-first.</p>
+<hr />
+<h2 id="lab-12-queue-linked-list-based" class="anchor-heading">Lab 12 — Queue, Linked-List Based<a class="heading-link" href="#lab-12-queue-linked-list-based" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> linked-list queue with <code>front</code>, <code>rear</code>, <code>Enqueue</code>, <code>Dequeue</code>, <code>IsEmpty</code>, <code>MakeEmpty</code>.</p>
+<p><strong>Project relevance:</strong> <strong>direct</strong>.</p>
+<p>Used in:</p>
+<ul>
+<li>BFS</li>
+<li>retrieving adjacency vertices into a temporary queue</li>
+<li>shortest-path BFS</li>
+<li>DFS's neighbor collection before pushing to Stack</li>
+</ul>
+<p>FIFO behavior is what makes BFS expand level by level.</p>
+<hr />
+<h2 id="lab-13-recursion" class="anchor-heading">Lab 13 — Recursion<a class="heading-link" href="#lab-13-recursion" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> recursive functions and base/recursive cases.</p>
+<p><strong>Project relevance:</strong> not required in current submitted code, but <strong>very useful for viva alternatives</strong>.</p>
+<p>Two strong alternate implementations:</p>
+<ol>
+<li>Recursive DFS instead of explicit <code>StackType</code>.</li>
+<li>Recursive shortest-path printing instead of using a stack to reverse <code>parent[]</code>.</li>
+</ol>
+<p>We do not add recursion simply for decoration. The Graph lab explicitly teaches stack-based DFS, so the submitted version follows that.</p>
+<hr />
+<h2 id="priority-queue-lab" class="anchor-heading">Priority Queue Lab<a class="heading-link" href="#priority-queue-lab" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> heap-based priority queue, <code>ReheapUp</code>, <code>ReheapDown</code>, priority-based enqueue/dequeue.</p>
+<p><strong>Project relevance:</strong> deliberately not used.</p>
+<p>Why: our graph is unweighted. BFS already finds shortest paths in an unweighted graph. A priority queue would be unnecessary complexity.</p>
+<p>A good viva answer:</p>
+<blockquote>
+<p>If edges had different weights, we would need a weighted shortest-path approach and a priority structure might become useful. For our required unweighted graph, Queue-based BFS is sufficient.</p>
+</blockquote>
+<hr />
+<h2 id="binary-search-tree-lab" class="anchor-heading">Binary Search Tree Lab<a class="heading-link" href="#binary-search-tree-lab" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> BST insertion, search, deletion, inorder/preorder/postorder traversal, recursive tree functions, queues for traversal output.</p>
+<p><strong>Project relevance:</strong> deliberately not used.</p>
+<p>Why: a campus network is not naturally a hierarchy or ordered search tree. A BST is the wrong structure for general road connectivity because a vertex can have arbitrary graph relationships.</p>
+<p>The BST lab is still useful evidence that recursion, nodes, dynamic memory, and Queue ADTs are all part of the course vocabulary.</p>
+<hr />
+<h2 id="graph-lab" class="anchor-heading">Graph Lab<a class="heading-link" href="#graph-lab" aria-label="Link to this section">#</a></h2>
+<p><strong>What it teaches:</strong> Graph ADT, vertex storage, marks, DFS using Stack, BFS using Queue, outdegree, edge existence, shortest path length using BFS.</p>
+<p><strong>Project relevance:</strong> <strong>most important algorithmic lab</strong>.</p>
+<p>One key difference:</p>
+<ul>
+<li>Graph lab implementation: <strong>adjacency matrix</strong></li>
+<li>Project requirement: <strong>adjacency list</strong></li>
+</ul>
+<p>So our project deliberately takes the Graph lab's traversal logic but replaces matrix-based neighbor retrieval with a Lab 7 linked-list adjacency list.</p>
+<p>This is one of the strongest design explanations in the entire project:</p>
+<blockquote>
+<p>We combined the Graph lab's algorithms with the Linked-List Unsorted List lab because the project specifically requires adjacency lists.</p>
+</blockquote>
+<hr />
+<h1 id="12-adt-to-project-connection-map" class="anchor-heading">12. ADT-to-project connection map<a class="heading-link" href="#12-adt-to-project-connection-map" aria-label="Link to this section">#</a></h1>
+<pre><code class="language-text">COURSE ADTs / ALGORITHMS
+
+Lab 7 Unsorted Linked List
+        |
+        +--&gt; adjacencyList[vertex]
+        |       |
+        |       +--&gt; Insert  --&gt; AddRoad
+        |       +--&gt; Search  --&gt; duplicate/edge check
+        |       +--&gt; Delete  --&gt; RemoveRoad
+        |       +--&gt; GetNext --&gt; enumerate neighbors
+        |
+        +-----------------------------+
+                                      |
+Lab 12 Linked Queue                   |
+        |                             |
+        +--&gt; BFS ---------------------+--&gt; CampusGraph
+        +--&gt; ShortestPath BFS         |
+        +--&gt; temporary neighbors      |
+                                      |
+Lab 11 Linked Stack                   |
+        |                             |
+        +--&gt; DFS ---------------------+
+        +--&gt; reverse shortest path
+                                      |
+Graph Lab                             |
+        +--&gt; marks[] -----------------+
+        +--&gt; BFS/DFS structure -------+
+        +--&gt; shortest distance -------+
+</code></pre>
+<hr />
+<h1 id="13-current-class-architecture" class="anchor-heading">13. Current class architecture<a class="heading-link" href="#13-current-class-architecture" aria-label="Link to this section">#</a></h1>
+<pre><code class="language-mermaid">classDiagram
+    class CampusGraph {
+        -string locations[MAX_LOCATIONS]
+        -UnsortedType~int~ adjacencyList[MAX_LOCATIONS]
+        -bool marks[MAX_LOCATIONS]
+        -int numLocations
+        -bool ValidLocation(int id)
+        -void GetToVertices(int vertex, QueueType~int~ &amp;adjVertices)
+        -void ClearMarks()
+        -void MarkVertex(int vertex)
+        -bool IsMarked(int vertex)
+        +CampusGraph()
+        +void AddLocation(string name)
+        +void AddRoad(int a, int b)
+        +void RemoveRoad(int a, int b)
+        +void DisplayLocations()
+        +void DisplayGraph()
+        +void BFS(int start)
+        +void DFS(int start)
+        +void ShortestPath(int start, int end)
+        +void SearchByID(int id)
+        +void SearchByName(string name)
+    }
+
+    class UnsortedType~T~ {
+        -Node* head
+        -Node* pointTo
+        -int size
+        +Insert(T)
+        +Search(T, bool&amp;)
+        +Delete(T)
+        +Length()
+        +GetNext(T&amp;)
+        +Reset()
+    }
+
+    class StackType~T~ {
+        -Node* head
+        +Push(T)
+        +Pop()
+        +Top() T
+        +IsEmpty() bool
+    }
+
+    class QueueType~T~ {
+        -Node* front
+        -Node* rear
+        +Enqueue(T)
+        +Dequeue(T&amp;)
+        +IsEmpty() bool
+    }
+
+    CampusGraph --&gt; UnsortedType : adjacency lists
+    CampusGraph --&gt; StackType : DFS/path reversal
+    CampusGraph --&gt; QueueType : BFS/neighbor processing
+</code></pre>
+<hr />
+<h1 id="14-current-file-by-file-responsibilities" class="anchor-heading">14. Current file-by-file responsibilities<a class="heading-link" href="#14-current-file-by-file-responsibilities" aria-label="Link to this section">#</a></h1>
+<div class="source-links">
+  <a href="src/main.cpp">main.cpp</a>
+  <a href="src/campusgraph.h">campusgraph.h</a>
+  <a href="src/campusgraph.cpp">campusgraph.cpp</a>
+  <a href="src/unsortedtype.h">unsortedtype.h</a>
+  <a href="src/unsortedtype.cpp">unsortedtype.cpp</a>
+  <a href="src/stacktype.h">stacktype.h</a>
+  <a href="src/stacktype.cpp">stacktype.cpp</a>
+  <a href="src/queuetype.h">queuetype.h</a>
+  <a href="src/queuetype.cpp">queuetype.cpp</a>
+</div>
+
+<h2 id="main-cpp" class="anchor-heading"><code>main.cpp</code><a class="heading-link" href="#main-cpp" aria-label="Link to this section">#</a></h2>
+<p>Responsibilities:</p>
+<ul>
+<li>create the <code>CampusGraph</code> object</li>
+<li>add all 18 locations in the fixed ID order</li>
+<li>add all 19 initial roads</li>
+<li>display menu</li>
+<li>collect user input</li>
+<li>call the appropriate <code>CampusGraph</code> function</li>
+</ul>
+<p>It should not contain the internals of BFS, DFS, linked-list deletion, etc.</p>
+<hr />
+<h2 id="campusgraph-h" class="anchor-heading"><code>campusgraph.h</code><a class="heading-link" href="#campusgraph-h" aria-label="Link to this section">#</a></h2>
+<p>Defines the project-specific Graph class.</p>
+<p>Private data:</p>
+<pre><code class="language-cpp">string locations[MAX_LOCATIONS];
+UnsortedType&lt;int&gt; adjacencyList[MAX_LOCATIONS];
+bool marks[MAX_LOCATIONS];
+int numLocations;
+</code></pre>
+<p>Private helper functions:</p>
+<pre><code class="language-cpp">bool ValidLocation(int id);
+void GetToVertices(int vertex, QueueType&lt;int&gt; &amp;adjVertices);
+void ClearMarks();
+void MarkVertex(int vertex);
+bool IsMarked(int vertex);
+</code></pre>
+<p>Public project features:</p>
+<pre><code class="language-cpp">void AddLocation(string name);
+void AddRoad(int location1, int location2);
+void RemoveRoad(int location1, int location2);
+void DisplayLocations();
+void DisplayGraph();
+void BFS(int startVertex);
+void DFS(int startVertex);
+void ShortestPath(int startVertex, int endVertex);
+void SearchByID(int id);
+void SearchByName(string name);
+</code></pre>
+<hr />
+<h2 id="campusgraph-cpp" class="anchor-heading"><code>campusgraph.cpp</code><a class="heading-link" href="#campusgraph-cpp" aria-label="Link to this section">#</a></h2>
+<p>This is the main project logic file.</p>
+<p>Contains:</p>
+<ul>
+<li>constructor</li>
+<li>validation</li>
+<li>graph mutation</li>
+<li>displays/searches</li>
+<li>adjacency retrieval</li>
+<li>visited/mark logic</li>
+<li>BFS</li>
+<li>DFS</li>
+<li>shortest path</li>
+</ul>
+<hr />
+<h2 id="unsortedtype" class="anchor-heading"><code>unsortedtype.*</code><a class="heading-link" href="#unsortedtype" aria-label="Link to this section">#</a></h2>
+<p>Course ADT implementation used as the adjacency-list container.</p>
+<p>Important ideas to understand, but it is not the main custom project code.</p>
+<hr />
+<h2 id="stacktype" class="anchor-heading"><code>stacktype.*</code><a class="heading-link" href="#stacktype" aria-label="Link to this section">#</a></h2>
+<p>Course ADT implementation used for DFS and path reversal.</p>
+<hr />
+<h2 id="queuetype" class="anchor-heading"><code>queuetype.*</code><a class="heading-link" href="#queuetype" aria-label="Link to this section">#</a></h2>
+<p>Course ADT implementation used for BFS, shortest path, and neighbor handling.</p>
+<hr />
+<h1 id="15-feature-by-feature-explanation" class="anchor-heading">15. Feature-by-feature explanation<a class="heading-link" href="#15-feature-by-feature-explanation" aria-label="Link to this section">#</a></h1>
+<h2 id="feature-1-display-locations" class="anchor-heading">Feature 1 — Display Locations<a class="heading-link" href="#feature-1-display-locations" aria-label="Link to this section">#</a></h2>
+<p>Menu option:</p>
+<pre><code class="language-text">1. Display locations
+</code></pre>
+<p>Purpose: show every valid vertex ID and its name.</p>
+<p>Core idea:</p>
+<pre><code class="language-cpp">for (int i = 0; i &lt; numLocations; i++)
+    cout &lt;&lt; i &lt;&lt; &quot;. &quot; &lt;&lt; locations[i] &lt;&lt; endl;
+</code></pre>
+<p>Why useful:</p>
+<ul>
+<li>user needs IDs for other menu operations</li>
+<li>demonstrates vertex storage</li>
+<li>gives a direct ID/name mapping</li>
+</ul>
+<p>Viva modifications:</p>
+<ul>
+<li>show names only</li>
+<li>show IDs only</li>
+<li>display only a requested ID</li>
+<li>display in reverse order</li>
+</ul>
+<hr />
+<h2 id="feature-2-display-connections" class="anchor-heading">Feature 2 — Display Connections<a class="heading-link" href="#feature-2-display-connections" aria-label="Link to this section">#</a></h2>
+<p>Menu option:</p>
+<pre><code class="language-text">2. Display connections
+</code></pre>
+<p>For every vertex:</p>
+<ol>
+<li><code>Reset()</code> its adjacency-list iterator.</li>
+<li>Get <code>Length()</code>.</li>
+<li>Call <code>GetNext()</code> once per neighbor.</li>
+<li>Convert each neighbor ID to <code>locations[neighbor]</code>.</li>
+</ol>
+<p>This is important because it demonstrates actual linked-list ADT traversal.</p>
+<p>Viva modifications:</p>
+<ul>
+<li>display only one vertex's neighbors</li>
+<li>display neighbor IDs instead of names</li>
+<li>count neighbors instead of printing them</li>
+<li>display <code>A &lt;-&gt; B</code> edges without duplicates</li>
+</ul>
+<hr />
+<h2 id="feature-3-add-road" class="anchor-heading">Feature 3 — Add Road<a class="heading-link" href="#feature-3-add-road" aria-label="Link to this section">#</a></h2>
+<p>Menu option:</p>
+<pre><code class="language-text">3. Add road
+</code></pre>
+<p>Algorithm:</p>
+<pre><code class="language-text">validate both IDs
+    |
+Search B in A's adjacency list
+    |
+if found -&gt; Road already exists
+if not found:
+    Insert B into A's list
+    Insert A into B's list
+</code></pre>
+<p>Why two insertions: graph is undirected.</p>
+<p>Viva modifications:</p>
+<ul>
+<li>add by names instead of IDs</li>
+<li>make road directed</li>
+<li>remove duplicate checking</li>
+<li>ask what happens if self-edge A-A is allowed</li>
+</ul>
+<p>Note: current code does not explicitly forbid a self-edge. If the instructor asks, explain that <code>AddRoad(3,3)</code> is logically undesirable for campus navigation and could be rejected by adding:</p>
+<pre><code class="language-cpp">if (location1 == location2) {
+    cout &lt;&lt; &quot;Cannot connect a location to itself.&quot; &lt;&lt; endl;
+    return;
+}
+</code></pre>
+<hr />
+<h2 id="feature-4-remove-road" class="anchor-heading">Feature 4 — Remove Road<a class="heading-link" href="#feature-4-remove-road" aria-label="Link to this section">#</a></h2>
+<p>Menu option:</p>
+<pre><code class="language-text">4. Remove road
+</code></pre>
+<p>Algorithm:</p>
+<pre><code class="language-text">validate IDs
+    |
+Search B in A's list
+    |
+if not found -&gt; Road does not exist
+if found:
+    Delete B from A
+    Delete A from B
+</code></pre>
+<p>This directly connects the graph feature to Lab 7 linked-list deletion.</p>
+<p>Viva modifications:</p>
+<ul>
+<li>remove by name</li>
+<li>remove only one direction</li>
+<li>show how pointer deletion works inside <code>UnsortedType</code></li>
+<li>check whether removal disconnects a destination</li>
+</ul>
+<hr />
+<h2 id="feature-5-bfs-traversal" class="anchor-heading">Feature 5 — BFS Traversal<a class="heading-link" href="#feature-5-bfs-traversal" aria-label="Link to this section">#</a></h2>
+<p>Menu option:</p>
+<pre><code class="language-text">5. BFS traversal
+</code></pre>
+<p>BFS = Breadth First Search.</p>
+<p>Core data structure: <strong>Queue</strong>.</p>
+<p>Why Queue: FIFO means vertices discovered earlier are processed earlier, producing level-by-level exploration.</p>
+<p>Current skeleton:</p>
+<pre><code class="language-text">Clear marks
+Enqueue start
+
+while queue not empty:
+    Dequeue vertex
+    if not marked:
+        mark it
+        print it
+        get neighbors
+        enqueue unmarked neighbors
+</code></pre>
+<p>Current Gate 1 test output:</p>
+<pre><code class="language-text">BFS: Gate 1 SAC Medical Center Male Lounge Ground Floor Cafeteria
+Book Shop &amp; Stationery Upper Plaza NAC Administrative Building Gate 8
+Gallery Central Library Auditorium Student Affairs Playground City Bank ATM Female Lounge
+</code></pre>
+<p>The exact traversal order depends on adjacency-list insertion order. A different valid neighbor order can produce a different valid BFS ordering while preserving BFS levels.</p>
+<hr />
+<h2 id="feature-6-dfs-traversal" class="anchor-heading">Feature 6 — DFS Traversal<a class="heading-link" href="#feature-6-dfs-traversal" aria-label="Link to this section">#</a></h2>
+<p>Menu option:</p>
+<pre><code class="language-text">6. DFS traversal
+</code></pre>
+<p>DFS = Depth First Search.</p>
+<p>Core data structure: <strong>Stack</strong>.</p>
+<p>Why Stack: LIFO means the most recently discovered vertex is processed first, so traversal goes deep before returning.</p>
+<p>Current skeleton:</p>
+<pre><code class="language-text">Clear marks
+Push start
+
+while stack not empty:
+    vertex = Top
+    Pop
+    if not marked:
+        mark it
+        print it
+        get neighbors
+        push unmarked neighbors
+</code></pre>
+<p>Current Gate 1 test output:</p>
+<pre><code class="language-text">DFS: Gate 1 SAC Ground Floor Administrative Building Book Shop &amp; Stationery
+NAC Gate 8 Cafeteria Female Lounge City Bank ATM Playground Upper Plaza
+Student Affairs Auditorium Central Library Gallery Male Lounge Medical Center
+</code></pre>
+<p>Again, exact order depends on neighbor insertion order.</p>
+<hr />
+<h2 id="feature-7-shortest-path" class="anchor-heading">Feature 7 — Shortest Path<a class="heading-link" href="#feature-7-shortest-path" aria-label="Link to this section">#</a></h2>
+<p>Menu option:</p>
+<pre><code class="language-text">7. Shortest path
+</code></pre>
+<p>This is the most involved feature.</p>
+<h3 id="data-used" class="anchor-heading">Data used<a class="heading-link" href="#data-used" aria-label="Link to this section">#</a></h3>
+<pre><code class="language-cpp">int distance[MAX_LOCATIONS];
+int parent[MAX_LOCATIONS];
+QueueType&lt;int&gt; queue;
+StackType&lt;int&gt; path;
+</code></pre>
+<h3 id="meaning-of-distance" class="anchor-heading">Meaning of <code>distance[]</code><a class="heading-link" href="#meaning-of-distance" aria-label="Link to this section">#</a></h3>
+<p><code>distance[v]</code> = minimum number of graph edges from the start vertex to <code>v</code>.</p>
+<p>All values begin at <code>-1</code> to mean &quot;not discovered yet&quot;.</p>
+<p>Start vertex:</p>
+<pre><code class="language-cpp">distance[startVertex] = 0;
+</code></pre>
+<p>When BFS discovers neighbor <code>item</code> from <code>vertex</code>:</p>
+<pre><code class="language-cpp">distance[item] = distance[vertex] + 1;
+</code></pre>
+<h3 id="meaning-of-parent" class="anchor-heading">Meaning of <code>parent[]</code><a class="heading-link" href="#meaning-of-parent" aria-label="Link to this section">#</a></h3>
+<p><code>parent[item] = vertex</code> records which vertex first discovered <code>item</code>.</p>
+<p>Example shortest route:</p>
+<pre><code class="language-text">Gate 1 -&gt; SAC -&gt; Ground Floor -&gt; NAC -&gt; Playground
+</code></pre>
+<p>Conceptually:</p>
+<pre><code class="language-text">parent[Playground] = NAC
+parent[NAC] = Ground Floor
+parent[Ground Floor] = SAC
+parent[SAC] = Gate 1
+parent[Gate 1] = -1
+</code></pre>
+<p>Following parents gives the route backward:</p>
+<pre><code class="language-text">Playground -&gt; NAC -&gt; Ground Floor -&gt; SAC -&gt; Gate 1
+</code></pre>
+<p>So those IDs are pushed onto a Stack. Popping the Stack prints the route forward.</p>
+<h3 id="current-tested-example" class="anchor-heading">Current tested example<a class="heading-link" href="#current-tested-example" aria-label="Link to this section">#</a></h3>
+<p>Input:</p>
+<pre><code class="language-text">Start: 0   (Gate 1)
+End:   16  (Playground)
+</code></pre>
+<p>Output:</p>
+<pre><code class="language-text">Shortest path: Gate 1 -&gt; SAC -&gt; Ground Floor -&gt; NAC -&gt; Playground
+Path length: 4
+</code></pre>
+<h3 id="important-correctness-fact" class="anchor-heading">Important correctness fact<a class="heading-link" href="#important-correctness-fact" aria-label="Link to this section">#</a></h3>
+<p>BFS gives shortest path in an <strong>unweighted</strong> graph because vertices are discovered in nondecreasing distance from the source.</p>
+<hr />
+<h2 id="feature-8-search-by-id" class="anchor-heading">Feature 8 — Search by ID<a class="heading-link" href="#feature-8-search-by-id" aria-label="Link to this section">#</a></h2>
+<p>Menu option:</p>
+<pre><code class="language-text">8. Search location by ID
+</code></pre>
+<p>Because IDs are array indices, this is direct access:</p>
+<pre><code class="language-cpp">if (ValidLocation(id))
+    cout &lt;&lt; locations[id];
+</code></pre>
+<p>Conceptually O(1).</p>
+<hr />
+<h2 id="feature-9-search-by-name" class="anchor-heading">Feature 9 — Search by Name<a class="heading-link" href="#feature-9-search-by-name" aria-label="Link to this section">#</a></h2>
+<p>Menu option:</p>
+<pre><code class="language-text">9. Search location by name
+</code></pre>
+<p>Current implementation is linear search:</p>
+<pre><code class="language-cpp">for (int i = 0; i &lt; numLocations; i++) {
+    if (locations[i] == name) {
+        ...
+    }
+}
+</code></pre>
+<p>Conceptually O(V) where V is number of vertices.</p>
+<p>This feature is particularly useful for viva because the instructor explicitly mentioned changing search criteria.</p>
+<hr />
+<h1 id="16-important-helper-functions" class="anchor-heading">16. Important helper functions<a class="heading-link" href="#16-important-helper-functions" aria-label="Link to this section">#</a></h1>
+<h2 id="validlocation-int-id" class="anchor-heading"><code>ValidLocation(int id)</code><a class="heading-link" href="#validlocation-int-id" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-cpp">return (id &gt;= 0 &amp;&amp; id &lt; numLocations);
+</code></pre>
+<p>Prevents invalid array access.</p>
+<p>Possible viva change: validate a name instead of ID.</p>
+<hr />
+<h2 id="gettovertices-int-vertex-queuetypeint-adjvertices" class="anchor-heading"><code>GetToVertices(int vertex, QueueType&lt;int&gt; &amp;adjVertices)</code><a class="heading-link" href="#gettovertices-int-vertex-queuetypeint-adjvertices" aria-label="Link to this section">#</a></h2>
+<p>Purpose: translate the linked-list adjacency list into a Queue of neighbor IDs for traversal algorithms.</p>
+<p>Current idea:</p>
+<pre><code class="language-text">Reset adjacencyList[vertex]
+for Length() items:
+    GetNext(neighbor)
+    Enqueue(neighbor)
+</code></pre>
+<p>This function is the bridge between <strong>Lab 7 adjacency storage</strong> and <strong>Graph-lab traversal algorithms</strong>.</p>
+<hr />
+<h2 id="clearmarks" class="anchor-heading"><code>ClearMarks()</code><a class="heading-link" href="#clearmarks" aria-label="Link to this section">#</a></h2>
+<p>Set all existing vertices to unvisited:</p>
+<pre><code class="language-cpp">marks[i] = false;
+</code></pre>
+<hr />
+<h2 id="markvertex-int-vertex" class="anchor-heading"><code>MarkVertex(int vertex)</code><a class="heading-link" href="#markvertex-int-vertex" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-cpp">marks[vertex] = true;
+</code></pre>
+<hr />
+<h2 id="ismarked-int-vertex" class="anchor-heading"><code>IsMarked(int vertex)</code><a class="heading-link" href="#ismarked-int-vertex" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-cpp">return marks[vertex];
+</code></pre>
+<p>Marks prevent repeated processing in graphs containing cycles.</p>
+<hr />
+<h1 id="17-time-complexity-cheat-sheet" class="anchor-heading">17. Time complexity cheat sheet<a class="heading-link" href="#17-time-complexity-cheat-sheet" aria-label="Link to this section">#</a></h1>
+<p>Use V = number of vertices, E = number of undirected edges, and degree(v) = number of neighbors of vertex v.</p>
+<p>Because adjacency lists are linked lists:</p>
+<table>
+<thead>
+<tr>
+  <th>Operation</th>
+  <th>Approx. complexity</th>
+  <th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>AddLocation</td>
+  <td>O(1)</td>
+  <td>append name at next array index</td>
+</tr>
+<tr>
+  <td>SearchByID</td>
+  <td>O(1)</td>
+  <td>direct array access</td>
+</tr>
+<tr>
+  <td>SearchByName</td>
+  <td>O(V)</td>
+  <td>linear scan of names</td>
+</tr>
+<tr>
+  <td>DisplayLocations</td>
+  <td>O(V)</td>
+  <td>visit every vertex</td>
+</tr>
+<tr>
+  <td>DisplayGraph</td>
+  <td>O(V + E)</td>
+  <td>visit every adjacency entry</td>
+</tr>
+<tr>
+  <td>Search road A-B</td>
+  <td>O(degree(A))</td>
+  <td>linked-list search</td>
+</tr>
+<tr>
+  <td>AddRoad</td>
+  <td>O(degree(A)) current implementation</td>
+  <td>search for duplicate, then O(1) head insertions</td>
+</tr>
+<tr>
+  <td>RemoveRoad</td>
+  <td>O(degree(A) + degree(B))</td>
+  <td>linked-list deletions/search</td>
+</tr>
+<tr>
+  <td>BFS</td>
+  <td>O(V + E)</td>
+  <td>each vertex/edge processed a bounded number of times</td>
+</tr>
+<tr>
+  <td>DFS</td>
+  <td>O(V + E)</td>
+  <td>same adjacency-list traversal principle</td>
+</tr>
+<tr>
+  <td>ShortestPath BFS</td>
+  <td>O(V + E)</td>
+  <td>BFS plus linear route reconstruction</td>
+</tr>
+</tbody>
+</table>
+<p>For this tiny graph, runtime is irrelevant in practice, but complexity explanation matters academically.</p>
+<hr />
+<h1 id="18-team-division-five-members" class="anchor-heading">18. Team division — five members<a class="heading-link" href="#18-team-division-five-members" aria-label="Link to this section">#</a></h1>
+<p>The goal is not identical line counts. The goal is five coherent, defendable modules with the hardest architectural/algorithmic work assigned to the project backbone owner.</p>
+<h2 id="member-1-map-topology-shortest-path-graph-architecture-hardest" class="anchor-heading">Member 1 — Map/topology + shortest path + graph architecture — hardest<a class="heading-link" href="#member-1-map-topology-shortest-path-graph-architecture-hardest" aria-label="Link to this section">#</a></h2>
+<h3 id="ownership" class="anchor-heading">Ownership<a class="heading-link" href="#ownership" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>designed the custom campus map used to create the graph</li>
+<li>selected the meaningful navigation vertices</li>
+<li>determined direct graph connections</li>
+<li>translated physical campus layout into the 18-vertex, 19-edge graph</li>
+<li>decided the graph abstraction is undirected and unweighted</li>
+<li>initial <code>AddLocation()</code> setup in <code>main.cpp</code></li>
+<li>initial <code>AddRoad()</code> graph construction in <code>main.cpp</code></li>
+<li>overall <code>CampusGraph</code> architecture/integration</li>
+<li><code>AddLocation()</code></li>
+<li><code>ShortestPath()</code></li>
+<li>understands how Queue + <code>distance[]</code> + <code>parent[]</code> + Stack work together</li>
+</ul>
+<h3 id="why-this-is-the-hardest-contribution" class="anchor-heading">Why this is the hardest contribution<a class="heading-link" href="#why-this-is-the-hardest-contribution" aria-label="Link to this section">#</a></h3>
+<p>Every traversal and shortest-path result depends on the topology. This member also owns the most involved algorithm in the submitted project.</p>
+<h3 id="must-know-cold" class="anchor-heading">Must know cold<a class="heading-link" href="#must-know-cold" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>vertex vs edge</li>
+<li>adjacency list</li>
+<li>why graph is undirected</li>
+<li>why graph is unweighted</li>
+<li>BFS shortest-path proof intuition</li>
+<li><code>distance[]</code></li>
+<li><code>parent[]</code></li>
+<li>route reconstruction</li>
+<li>why Stack reverses parent path</li>
+<li>why a priority queue is unnecessary</li>
+<li>consequences of adding/removing an edge</li>
+</ul>
+<hr />
+<h2 id="member-2-bfs-visited-marks-adjacency-retrieval" class="anchor-heading">Member 2 — BFS + visited/marks + adjacency retrieval<a class="heading-link" href="#member-2-bfs-visited-marks-adjacency-retrieval" aria-label="Link to this section">#</a></h2>
+<h3 id="ownership" class="anchor-heading">Ownership<a class="heading-link" href="#ownership" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><code>BFS()</code></li>
+<li><code>GetToVertices()</code></li>
+<li><code>ClearMarks()</code></li>
+<li><code>MarkVertex()</code></li>
+<li><code>IsMarked()</code></li>
+<li>Queue integration for BFS</li>
+</ul>
+<h3 id="must-know-cold" class="anchor-heading">Must know cold<a class="heading-link" href="#must-know-cold" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>FIFO</li>
+<li>why Queue creates breadth-first order</li>
+<li>purpose of marks</li>
+<li>duplicate enqueues vs duplicate processing</li>
+<li>how <code>GetToVertices()</code> reads the adjacency list</li>
+<li>BFS traversal vs BFS target search</li>
+</ul>
+<hr />
+<h2 id="member-3-dfs-stack-integration" class="anchor-heading">Member 3 — DFS + Stack integration<a class="heading-link" href="#member-3-dfs-stack-integration" aria-label="Link to this section">#</a></h2>
+<h3 id="ownership" class="anchor-heading">Ownership<a class="heading-link" href="#ownership" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><code>DFS()</code></li>
+<li>Stack usage in traversal</li>
+<li>understands Stack ADT integration</li>
+<li>understands difference between explicit-stack DFS and recursive DFS</li>
+<li>understands Stack's second use in shortest-path printing even though Member 1 owns the shortest-path algorithm</li>
+</ul>
+<h3 id="must-know-cold" class="anchor-heading">Must know cold<a class="heading-link" href="#must-know-cold" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>LIFO</li>
+<li><code>Push</code>, <code>Top</code>, <code>Pop</code></li>
+<li>why Stack produces depth-first behavior</li>
+<li>DFS vs BFS</li>
+<li>visited marks</li>
+<li>linked-list Stack vs array Stack</li>
+<li>recursive DFS alternative</li>
+</ul>
+<hr />
+<h2 id="member-4-adjacency-lists-dynamic-roads" class="anchor-heading">Member 4 — adjacency lists + dynamic roads<a class="heading-link" href="#member-4-adjacency-lists-dynamic-roads" aria-label="Link to this section">#</a></h2>
+<h3 id="ownership" class="anchor-heading">Ownership<a class="heading-link" href="#ownership" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>graph adjacency-list representation concept</li>
+<li><code>AddRoad()</code></li>
+<li><code>RemoveRoad()</code></li>
+<li><code>ValidLocation()</code> can be jointly understood here</li>
+<li>Lab 7 <code>UnsortedType</code> integration</li>
+<li><code>Insert</code>, <code>Search</code>, <code>Delete</code></li>
+<li>undirected two-way insertion/deletion</li>
+</ul>
+<h3 id="must-know-cold" class="anchor-heading">Must know cold<a class="heading-link" href="#must-know-cold" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>why each vertex gets a separate list</li>
+<li>linked-list node structure</li>
+<li>head insertion</li>
+<li>linear linked-list search</li>
+<li>linked-list deletion with <code>prev</code></li>
+<li>why road is inserted/deleted twice</li>
+<li>array-based adjacency-list alternative</li>
+</ul>
+<hr />
+<h2 id="member-5-interface-display-search" class="anchor-heading">Member 5 — interface + display + search<a class="heading-link" href="#member-5-interface-display-search" aria-label="Link to this section">#</a></h2>
+<h3 id="ownership" class="anchor-heading">Ownership<a class="heading-link" href="#ownership" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>menu/input flow in <code>main.cpp</code> excluding initial graph design/setup</li>
+<li><code>DisplayLocations()</code></li>
+<li><code>DisplayGraph()</code></li>
+<li><code>SearchByID()</code></li>
+<li><code>SearchByName()</code></li>
+<li>user-facing input/output</li>
+</ul>
+<h3 id="must-know-cold" class="anchor-heading">Must know cold<a class="heading-link" href="#must-know-cold" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>ID-to-name array mapping</li>
+<li>linear name search</li>
+<li>adjacency-list iteration using <code>Length</code>, <code>Reset</code>, <code>GetNext</code></li>
+<li>display one node's neighbors</li>
+<li>degree/outdegree-style counting</li>
+<li>name-based alternatives for menu operations</li>
+</ul>
+<hr />
+<h1 id="19-suggested-report-contribution-wording" class="anchor-heading">19. Suggested report contribution wording<a class="heading-link" href="#19-suggested-report-contribution-wording" aria-label="Link to this section">#</a></h1>
+<p>Replace placeholders with actual member names later.</p>
+<table>
+<thead>
+<tr>
+  <th>Member</th>
+  <th>Contribution wording</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Member 1</td>
+  <td>Designed the NSU campus navigation map and graph topology; selected vertices and direct connections; translated the campus layout into the initial graph; developed location initialization and BFS-based shortest-path route computation; contributed to overall graph architecture and integration.</td>
+</tr>
+<tr>
+  <td>Member 2</td>
+  <td>Implemented BFS traversal, adjacency retrieval for traversal, and vertex marking/visited operations using the Queue ADT.</td>
+</tr>
+<tr>
+  <td>Member 3</td>
+  <td>Implemented DFS traversal using the Stack ADT and handled stack integration for graph traversal.</td>
+</tr>
+<tr>
+  <td>Member 4</td>
+  <td>Implemented the linked-list adjacency-list operations and dynamic road addition/removal using the Unsorted List ADT.</td>
+</tr>
+<tr>
+  <td>Member 5</td>
+  <td>Implemented location/connection display, ID/name searching, menu-driven user interaction, and input/output integration.</td>
+</tr>
+</tbody>
+</table>
+<p>Do not claim that a member &quot;invented QueueType.cpp&quot; or &quot;wrote StackType.cpp&quot; if those files are essentially the taught lab ADTs. The project contribution is applying/integrating those ADTs.</p>
+<hr />
+<h1 id="20-viva-strategy-what-the-instructor-is-actually-testing" class="anchor-heading">20. Viva strategy: what the instructor is actually testing<a class="heading-link" href="#20-viva-strategy-what-the-instructor-is-actually-testing" aria-label="Link to this section">#</a></h1>
+<p>The instructor's modification questions are testing whether the member understands:</p>
+<ol>
+<li>the <strong>abstract data structure</strong> rather than memorized code,</li>
+<li>the difference between <strong>ADT behavior and implementation</strong>,</li>
+<li>whether the algorithm still works after a change,</li>
+<li>whether the member understands their claimed project contribution.</li>
+</ol>
+<p>Typical patterns:</p>
+<ul>
+<li>array implementation -&gt; linked-list implementation</li>
+<li>linked-list implementation -&gt; array implementation</li>
+<li>ID input -&gt; name input</li>
+<li>Stack implementation -&gt; Queue implementation</li>
+<li>iterative -&gt; recursive</li>
+<li>traversal -&gt; search</li>
+<li>undirected -&gt; directed</li>
+<li>print all -&gt; print only one / count / return bool</li>
+</ul>
+<p>The correct response is not always &quot;yes, replace the type.&quot; Sometimes a requested replacement changes the algorithm. Explain that before coding.</p>
+<p>Example:</p>
+<blockquote>
+<p>If BFS's Queue is replaced directly by a Stack, the traversal is no longer BFS. FIFO is essential to breadth-first behavior. A Stack changes the processing order to depth-first behavior.</p>
+</blockquote>
+<p>That is a stronger answer than blindly changing <code>QueueType</code> to <code>StackType</code>.</p>
+<hr />
+<h1 id="21-member-1-viva-modification-bank-map-topology-shortest-path" class="anchor-heading">21. Member 1 viva modification bank — map, topology, shortest path<a class="heading-link" href="#21-member-1-viva-modification-bank-map-topology-shortest-path" aria-label="Link to this section">#</a></h1>
+<h2 id="variation-1-print-shortest-distance-only" class="anchor-heading">Variation 1 — Print shortest distance only<a class="heading-link" href="#variation-1-print-shortest-distance-only" aria-label="Link to this section">#</a></h2>
+<p>Current code also reconstructs the path. If asked for distance only, remove <code>parent[]</code> and Stack reconstruction.</p>
+<p>Core idea:</p>
+<pre><code class="language-cpp">int ShortestPathLength(int startVertex, int endVertex) {
+    int distance[MAX_LOCATIONS];
+
+    for (int i = 0; i &lt; numLocations; i++)
+        distance[i] = -1;
+
+    QueueType&lt;int&gt; q;
+    q.Enqueue(startVertex);
+    distance[startVertex] = 0;
+
+    while (!q.IsEmpty()) {
+        int v;
+        q.Dequeue(v);
+
+        QueueType&lt;int&gt; adj;
+        GetToVertices(v, adj);
+
+        while (!adj.IsEmpty()) {
+            int w;
+            adj.Dequeue(w);
+
+            if (distance[w] == -1) {
+                distance[w] = distance[v] + 1;
+                if (w == endVertex)
+                    return distance[w];
+                q.Enqueue(w);
+            }
+        }
+    }
+
+    return -1;
+}
+</code></pre>
+<p>This is closest to the Graph lab's shortest-path implementation.</p>
+<hr />
+<h2 id="variation-2-accept-names-instead-of-ids" class="anchor-heading">Variation 2 — Accept names instead of IDs<a class="heading-link" href="#variation-2-accept-names-instead-of-ids" aria-label="Link to this section">#</a></h2>
+<p>Do not rewrite BFS. Convert names to IDs first.</p>
+<p>Possible helper:</p>
+<pre><code class="language-cpp">int CampusGraph::FindIDByName(string name) {
+    for (int i = 0; i &lt; numLocations; i++) {
+        if (locations[i] == name)
+            return i;
+    }
+    return -1;
+}
+</code></pre>
+<p>Then:</p>
+<pre><code class="language-cpp">int start = FindIDByName(startName);
+int end = FindIDByName(endName);
+ShortestPath(start, end);
+</code></pre>
+<p>Lesson: input representation changed, algorithm did not.</p>
+<hr />
+<h2 id="variation-3-print-path-recursively-instead-of-using-stack" class="anchor-heading">Variation 3 — Print path recursively instead of using Stack<a class="heading-link" href="#variation-3-print-path-recursively-instead-of-using-stack" aria-label="Link to this section">#</a></h2>
+<p>Because <code>parent[]</code> gives destination-to-source order, recursion can print parents before children.</p>
+<p>Conceptual helper:</p>
+<pre><code class="language-cpp">void CampusGraph::PrintPathRecursive(int parent[], int vertex) {
+    if (vertex == -1)
+        return;
+
+    PrintPathRecursive(parent, parent[vertex]);
+
+    cout &lt;&lt; locations[vertex] &lt;&lt; &quot; &quot;;
+}
+</code></pre>
+<p>A nicer source-aware version can stop at the source and control arrows.</p>
+<p>Main viva point:</p>
+<blockquote>
+<p>Stack was used only to reverse the backward parent chain. Recursion can perform that reversal through call-stack return order.</p>
+</blockquote>
+<hr />
+<h2 id="variation-4-stop-bfs-as-soon-as-destination-is-discovered" class="anchor-heading">Variation 4 — Stop BFS as soon as destination is discovered<a class="heading-link" href="#variation-4-stop-bfs-as-soon-as-destination-is-discovered" aria-label="Link to this section">#</a></h2>
+<p>Current <code>ShortestPath()</code> continues until the queue empties even after finding the destination. For shortest path, it is valid to stop when the destination is first discovered because BFS discovery gives minimum distance.</p>
+<p>Possible change:</p>
+<pre><code class="language-cpp">if (item == endVertex) {
+    // destination found with shortest distance
+    // stop search
+}
+</code></pre>
+<p>Need handle breaking both nested loops cleanly, e.g. a <code>bool found</code>.</p>
+<hr />
+<h2 id="variation-5-what-if-edges-become-weighted" class="anchor-heading">Variation 5 — What if edges become weighted?<a class="heading-link" href="#variation-5-what-if-edges-become-weighted" aria-label="Link to this section">#</a></h2>
+<p>Correct answer:</p>
+<blockquote>
+<p>Current BFS shortest path is only guaranteed for equal/unweighted edges. If edges had different costs, the algorithm would need to change. A priority-based shortest-path approach would become relevant. I would not simply keep the same BFS and call it shortest by weight.</p>
+</blockquote>
+<p>No need to implement Dijkstra unless it was taught/explicitly requested.</p>
+<hr />
+<h2 id="variation-6-remove-ground-floor-nac-what-happens" class="anchor-heading">Variation 6 — Remove Ground Floor -&gt; NAC, what happens?<a class="heading-link" href="#variation-6-remove-ground-floor-nac-what-happens" aria-label="Link to this section">#</a></h2>
+<p>Reason through topology before coding.</p>
+<p>The graph may still have other paths depending on remaining connections. Dynamic road removal changes reachability/shortest routes, not the BFS algorithm itself.</p>
+<p>Practice mentally tracing alternate routes.</p>
+<hr />
+<h2 id="variation-7-make-the-route-source-and-destination-names-case-insensitive" class="anchor-heading">Variation 7 — Make the route source and destination names case-insensitive<a class="heading-link" href="#variation-7-make-the-route-source-and-destination-names-case-insensitive" aria-label="Link to this section">#</a></h2>
+<p>Not required in current project. If asked, normalize both strings before comparison. Keep this simple and only do it if asked because case conversion utilities may go beyond the course's main focus.</p>
+<hr />
+<h2 id="variation-8-explain-parent-without-code" class="anchor-heading">Variation 8 — Explain <code>parent[]</code> without code<a class="heading-link" href="#variation-8-explain-parent-without-code" aria-label="Link to this section">#</a></h2>
+<p>Answer:</p>
+<blockquote>
+<p>When BFS first discovers a vertex, <code>parent[child]</code> stores the vertex from which it was discovered. Because BFS first discovery is on a shortest route in an unweighted graph, following parents from destination back to source reconstructs one shortest path.</p>
+</blockquote>
+<hr />
+<h2 id="variation-9-why-not-use-dfs-for-shortest-path" class="anchor-heading">Variation 9 — Why not use DFS for shortest path?<a class="heading-link" href="#variation-9-why-not-use-dfs-for-shortest-path" aria-label="Link to this section">#</a></h2>
+<p>Answer:</p>
+<blockquote>
+<p>DFS can find a path, but the first path it finds is not guaranteed to use the minimum number of edges. BFS explores level by level and therefore provides shortest edge-count distance in an unweighted graph.</p>
+</blockquote>
+<hr />
+<h2 id="variation-10-build-the-same-graph-using-names-as-vertices" class="anchor-heading">Variation 10 — Build the same graph using names as vertices<a class="heading-link" href="#variation-10-build-the-same-graph-using-names-as-vertices" aria-label="Link to this section">#</a></h2>
+<p>Current project uses integer IDs in adjacency lists because they make indexing <code>locations[]</code> and <code>marks[]</code> easy. A name-based graph could use strings as list items, but then marking and lookup become more awkward. The current ID representation is simpler and more compatible with array-based marks.</p>
+<hr />
+<h1 id="22-member-2-viva-modification-bank-bfs-and-queue" class="anchor-heading">22. Member 2 viva modification bank — BFS and Queue<a class="heading-link" href="#22-member-2-viva-modification-bank-bfs-and-queue" aria-label="Link to this section">#</a></h1>
+<h2 id="variation-1-linked-list-queue-array-based-queue" class="anchor-heading">Variation 1 — Linked-list Queue -&gt; array-based Queue<a class="heading-link" href="#variation-1-linked-list-queue-array-based-queue" aria-label="Link to this section">#</a></h2>
+<p>The BFS algorithm stays conceptually identical. Only the Queue implementation changes.</p>
+<p>Use the Lab 10 array Queue with a capacity large enough for the graph:</p>
+<pre><code class="language-cpp">QueueType&lt;int&gt; queue(MAX_LOCATIONS);
+</code></pre>
+<p>Temporary adjacency queues also need safe capacity:</p>
+<pre><code class="language-cpp">QueueType&lt;int&gt; adj(MAX_LOCATIONS);
+</code></pre>
+<p>Main explanation:</p>
+<blockquote>
+<p>BFS depends on Queue ADT behavior, especially FIFO. It does not fundamentally depend on whether the Queue is backed by linked nodes or a circular array.</p>
+</blockquote>
+<hr />
+<h2 id="variation-2-turn-bfs-traversal-into-bfs-target-search" class="anchor-heading">Variation 2 — Turn BFS traversal into BFS target search<a class="heading-link" href="#variation-2-turn-bfs-traversal-into-bfs-target-search" aria-label="Link to this section">#</a></h2>
+<p>Add a target argument and stop when target is reached.</p>
+<pre><code class="language-cpp">if (vertex == target) {
+    cout &lt;&lt; &quot;Found&quot; &lt;&lt; endl;
+    return;
+}
+</code></pre>
+<hr />
+<h2 id="variation-3-return-bool-reachability" class="anchor-heading">Variation 3 — Return <code>bool</code> reachability<a class="heading-link" href="#variation-3-return-bool-reachability" aria-label="Link to this section">#</a></h2>
+<p>Instead of printing traversal:</p>
+<pre><code class="language-cpp">bool Reachable(int start, int target)
+</code></pre>
+<p>Return <code>true</code> if target is discovered, otherwise <code>false</code>.</p>
+<hr />
+<h2 id="variation-4-count-how-many-vertices-bfs-visits" class="anchor-heading">Variation 4 — Count how many vertices BFS visits<a class="heading-link" href="#variation-4-count-how-many-vertices-bfs-visits" aria-label="Link to this section">#</a></h2>
+<p>Add:</p>
+<pre><code class="language-cpp">int count = 0;
+</code></pre>
+<p>Increment when a vertex is marked/processed, not every time it is enqueued.</p>
+<hr />
+<h2 id="variation-5-bfs-from-a-name-instead-of-id" class="anchor-heading">Variation 5 — BFS from a name instead of ID<a class="heading-link" href="#variation-5-bfs-from-a-name-instead-of-id" aria-label="Link to this section">#</a></h2>
+<p>Use a name-to-ID conversion before normal BFS.</p>
+<hr />
+<h2 id="variation-6-remove-marks-what-breaks" class="anchor-heading">Variation 6 — Remove marks: what breaks?<a class="heading-link" href="#variation-6-remove-marks-what-breaks" aria-label="Link to this section">#</a></h2>
+<p>Cycles cause repeated processing/enqueueing. In a connected undirected graph, A can lead to B and B can lead back to A. Marks prevent endless/redundant traversal.</p>
+<hr />
+<h2 id="variation-7-mark-when-enqueuing-instead-of-when-dequeuing" class="anchor-heading">Variation 7 — Mark when enqueuing instead of when dequeuing<a class="heading-link" href="#variation-7-mark-when-enqueuing-instead-of-when-dequeuing" aria-label="Link to this section">#</a></h2>
+<p>This is a valid BFS variant and can reduce duplicate enqueues.</p>
+<p>Current code marks when dequeued. Alternate:</p>
+<pre><code class="language-cpp">MarkVertex(startVertex);
+queue.Enqueue(startVertex);
+
+...
+
+if (!IsMarked(item)) {
+    MarkVertex(item);
+    queue.Enqueue(item);
+}
+</code></pre>
+<p>Then print/process when dequeued.</p>
+<p>Explain both are possible if used consistently.</p>
+<hr />
+<h2 id="variation-8-replace-queue-with-stack" class="anchor-heading">Variation 8 — Replace Queue with Stack<a class="heading-link" href="#variation-8-replace-queue-with-stack" aria-label="Link to this section">#</a></h2>
+<p>Correct response:</p>
+<blockquote>
+<p>Direct replacement changes FIFO to LIFO, so it becomes DFS-like traversal, not BFS.</p>
+</blockquote>
+<p>If instructor still wants to see it, show the changed behavior and name it correctly.</p>
+<hr />
+<h2 id="variation-9-print-bfs-level-distance-from-start" class="anchor-heading">Variation 9 — Print BFS level/distance from start<a class="heading-link" href="#variation-9-print-bfs-level-distance-from-start" aria-label="Link to this section">#</a></h2>
+<p>Add <code>distance[]</code>, just like shortest-path BFS. Every discovered neighbor gets <code>distance[current] + 1</code>.</p>
+<hr />
+<h2 id="variation-10-why-use-gettovertices" class="anchor-heading">Variation 10 — Why use <code>GetToVertices()</code>?<a class="heading-link" href="#variation-10-why-use-gettovertices" aria-label="Link to this section">#</a></h2>
+<p>Answer:</p>
+<blockquote>
+<p>It isolates neighbor retrieval from traversal logic. The Graph lab needed a function to obtain adjacent vertices from its matrix. Our project keeps the same traversal pattern but retrieves them from each linked-list adjacency list.</p>
+</blockquote>
+<hr />
+<h1 id="23-member-3-viva-modification-bank-dfs-and-stack" class="anchor-heading">23. Member 3 viva modification bank — DFS and Stack<a class="heading-link" href="#23-member-3-viva-modification-bank-dfs-and-stack" aria-label="Link to this section">#</a></h1>
+<h2 id="variation-1-linked-list-stack-array-based-stack" class="anchor-heading">Variation 1 — Linked-list Stack -&gt; array-based Stack<a class="heading-link" href="#variation-1-linked-list-stack-array-based-stack" aria-label="Link to this section">#</a></h2>
+<p>DFS logic remains the same because both provide:</p>
+<pre><code class="language-text">Push
+Pop
+Top
+IsEmpty
+</code></pre>
+<p>But the Lab 9 fixed size 5 is too small for a safe 18-vertex traversal. Increase the capacity to at least 18/25 for the alternate project implementation.</p>
+<hr />
+<h2 id="variation-2-recursive-dfs-instead-of-stack" class="anchor-heading">Variation 2 — Recursive DFS instead of Stack<a class="heading-link" href="#variation-2-recursive-dfs-instead-of-stack" aria-label="Link to this section">#</a></h2>
+<p>Possible conceptual implementation:</p>
+<pre><code class="language-cpp">void CampusGraph::DFSRecursive(int vertex) {
+    MarkVertex(vertex);
+    cout &lt;&lt; locations[vertex] &lt;&lt; &quot; &quot;;
+
+    adjacencyList[vertex].Reset();
+    int length = adjacencyList[vertex].Length();
+
+    for (int i = 0; i &lt; length; i++) {
+        int neighbor;
+        adjacencyList[vertex].GetNext(neighbor);
+
+        if (!IsMarked(neighbor))
+            DFSRecursive(neighbor);
+    }
+}
+</code></pre>
+<p>Wrapper:</p>
+<pre><code class="language-cpp">ClearMarks();
+DFSRecursive(startVertex);
+</code></pre>
+<p>Main explanation:</p>
+<blockquote>
+<p>Recursive DFS uses the program's call stack implicitly. Iterative DFS uses our explicit <code>StackType</code> ADT.</p>
+</blockquote>
+<hr />
+<h2 id="variation-3-dfs-target-search" class="anchor-heading">Variation 3 — DFS target search<a class="heading-link" href="#variation-3-dfs-target-search" aria-label="Link to this section">#</a></h2>
+<p>Add target and stop/return when reached.</p>
+<hr />
+<h2 id="variation-4-count-dfs-visited-vertices" class="anchor-heading">Variation 4 — Count DFS visited vertices<a class="heading-link" href="#variation-4-count-dfs-visited-vertices" aria-label="Link to this section">#</a></h2>
+<p>Increment only when a previously unmarked vertex is marked.</p>
+<hr />
+<h2 id="variation-5-replace-stack-with-queue" class="anchor-heading">Variation 5 — Replace Stack with Queue<a class="heading-link" href="#variation-5-replace-stack-with-queue" aria-label="Link to this section">#</a></h2>
+<p>Correct explanation:</p>
+<blockquote>
+<p>The traversal changes from depth-first to breadth-first because Queue is FIFO.</p>
+</blockquote>
+<hr />
+<h2 id="variation-6-why-top-before-pop" class="anchor-heading">Variation 6 — Why <code>Top()</code> before <code>Pop()</code>?<a class="heading-link" href="#variation-6-why-top-before-pop" aria-label="Link to this section">#</a></h2>
+<p><code>Top()</code> retrieves the current value. <code>Pop()</code> removes it. If you pop first, the value is lost unless <code>Pop</code> is redesigned to return it.</p>
+<hr />
+<h2 id="variation-7-dfs-from-name" class="anchor-heading">Variation 7 — DFS from name<a class="heading-link" href="#variation-7-dfs-from-name" aria-label="Link to this section">#</a></h2>
+<p>Name -&gt; ID, then same DFS.</p>
+<hr />
+<h2 id="variation-8-explain-linked-stack-pointers" class="anchor-heading">Variation 8 — Explain linked Stack pointers<a class="heading-link" href="#variation-8-explain-linked-stack-pointers" aria-label="Link to this section">#</a></h2>
+<p>Current linked stack:</p>
+<pre><code class="language-text">head -&gt; top node -&gt; next -&gt; next -&gt; NULL
+</code></pre>
+<p><code>Push</code>: new node becomes head.<br />
+<code>Pop</code>: old head is deleted, head moves to next.<br />
+<code>Top</code>: returns <code>head-&gt;data</code>.</p>
+<hr />
+<h1 id="24-member-4-viva-modification-bank-adjacency-lists-and-roads" class="anchor-heading">24. Member 4 viva modification bank — adjacency lists and roads<a class="heading-link" href="#24-member-4-viva-modification-bank-adjacency-lists-and-roads" aria-label="Link to this section">#</a></h1>
+<h2 id="variation-1-linked-list-adjacency-list-array-based-adjacency-list" class="anchor-heading">Variation 1 — Linked-list adjacency list -&gt; array-based adjacency list<a class="heading-link" href="#variation-1-linked-list-adjacency-list-array-based-adjacency-list" aria-label="Link to this section">#</a></h2>
+<p>This is one of the most likely questions.</p>
+<p>Current declaration can conceptually remain:</p>
+<pre><code class="language-cpp">UnsortedType&lt;int&gt; adjacencyList[MAX_LOCATIONS];
+</code></pre>
+<p>but <code>UnsortedType</code> is swapped from the Lab 7 linked-list implementation to the Lab 5 array-based implementation.</p>
+<p>The graph algorithms can still call:</p>
+<pre><code class="language-text">Insert
+Search
+Delete
+Length
+Reset
+GetNext
+</code></pre>
+<p>because the ADT interface is similar.</p>
+<p><strong>Critical issue:</strong> Lab 5's manual capacity 5 is insufficient for Ground Floor degree 6. Use a larger capacity.</p>
+<p>Main viva explanation:</p>
+<blockquote>
+<p>The adjacency-list concept stays the same. Only the internal representation of each list changes from dynamically linked nodes to an array.</p>
+</blockquote>
+<hr />
+<h2 id="variation-2-add-road-by-names" class="anchor-heading">Variation 2 — Add Road by names<a class="heading-link" href="#variation-2-add-road-by-names" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-text">name A -&gt; find ID A
+name B -&gt; find ID B
+AddRoad(A, B)
+</code></pre>
+<p>Do not duplicate graph logic.</p>
+<hr />
+<h2 id="variation-3-remove-road-by-names" class="anchor-heading">Variation 3 — Remove Road by names<a class="heading-link" href="#variation-3-remove-road-by-names" aria-label="Link to this section">#</a></h2>
+<p>Same conversion idea.</p>
+<hr />
+<h2 id="variation-4-make-roads-directed" class="anchor-heading">Variation 4 — Make roads directed<a class="heading-link" href="#variation-4-make-roads-directed" aria-label="Link to this section">#</a></h2>
+<p>Current undirected:</p>
+<pre><code class="language-cpp">adjacencyList[a].Insert(b);
+adjacencyList[b].Insert(a);
+</code></pre>
+<p>Directed A -&gt; B:</p>
+<pre><code class="language-cpp">adjacencyList[a].Insert(b);
+</code></pre>
+<p>Removal also deletes only one direction.</p>
+<hr />
+<h2 id="variation-5-check-if-a-road-exists" class="anchor-heading">Variation 5 — Check if a road exists<a class="heading-link" href="#variation-5-check-if-a-road-exists" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-cpp">bool found;
+adjacencyList[a].Search(b, found);
+</code></pre>
+<p>Return/print <code>found</code>.</p>
+<p>This is equivalent in spirit to the Graph lab's <code>FoundEdge</code> task.</p>
+<hr />
+<h2 id="variation-6-get-degree-of-a-vertex" class="anchor-heading">Variation 6 — Get degree of a vertex<a class="heading-link" href="#variation-6-get-degree-of-a-vertex" aria-label="Link to this section">#</a></h2>
+<p>For our undirected adjacency list:</p>
+<pre><code class="language-cpp">return adjacencyList[id].Length();
+</code></pre>
+<p>Ground Floor should currently return 6.</p>
+<hr />
+<h2 id="variation-7-explain-linked-list-deletion" class="anchor-heading">Variation 7 — Explain linked-list deletion<a class="heading-link" href="#variation-7-explain-linked-list-deletion" aria-label="Link to this section">#</a></h2>
+<p>Need to be able to draw:</p>
+<pre><code class="language-text">prev -&gt; current -&gt; next
+</code></pre>
+<p>If deleting middle node:</p>
+<pre><code class="language-text">prev-&gt;next = current-&gt;next
+</code></pre>
+<p>then delete current.</p>
+<p>If deleting head:</p>
+<pre><code class="language-text">head = current-&gt;next
+</code></pre>
+<hr />
+<h2 id="variation-8-prevent-self-road" class="anchor-heading">Variation 8 — Prevent self-road<a class="heading-link" href="#variation-8-prevent-self-road" aria-label="Link to this section">#</a></h2>
+<p>Add <code>if (a == b)</code> validation.</p>
+<hr />
+<h2 id="variation-9-why-unsorted-list-instead-of-sorted-list" class="anchor-heading">Variation 9 — Why unsorted list instead of sorted list?<a class="heading-link" href="#variation-9-why-unsorted-list-instead-of-sorted-list" aria-label="Link to this section">#</a></h2>
+<p>Graph algorithms only need to enumerate neighbors. Maintaining sorted order adds work but is not required for BFS/DFS/shortest path correctness.</p>
+<hr />
+<h1 id="25-member-5-viva-modification-bank-menu-display-search" class="anchor-heading">25. Member 5 viva modification bank — menu, display, search<a class="heading-link" href="#25-member-5-viva-modification-bank-menu-display-search" aria-label="Link to this section">#</a></h1>
+<h2 id="variation-1-id-search-name-search" class="anchor-heading">Variation 1 — ID search -&gt; name search<a class="heading-link" href="#variation-1-id-search-name-search" aria-label="Link to this section">#</a></h2>
+<p>Already exists in current project. Understand both fully.</p>
+<hr />
+<h2 id="variation-2-name-search-id-search" class="anchor-heading">Variation 2 — Name search -&gt; ID search<a class="heading-link" href="#variation-2-name-search-id-search" aria-label="Link to this section">#</a></h2>
+<p>Directly access <code>locations[id]</code> after validation.</p>
+<hr />
+<h2 id="variation-3-display-only-one-vertex-s-neighbors" class="anchor-heading">Variation 3 — Display only one vertex's neighbors<a class="heading-link" href="#variation-3-display-only-one-vertex-s-neighbors" aria-label="Link to this section">#</a></h2>
+<p>Instead of outer loop over every vertex, accept one <code>id</code> and traverse only <code>adjacencyList[id]</code>.</p>
+<hr />
+<h2 id="variation-4-count-neighbors-degree" class="anchor-heading">Variation 4 — Count neighbors / degree<a class="heading-link" href="#variation-4-count-neighbors-degree" aria-label="Link to this section">#</a></h2>
+<p>Use:</p>
+<pre><code class="language-cpp">adjacencyList[id].Length()
+</code></pre>
+<hr />
+<h2 id="variation-5-check-whether-two-locations-are-directly-connected" class="anchor-heading">Variation 5 — Check whether two locations are directly connected<a class="heading-link" href="#variation-5-check-whether-two-locations-are-directly-connected" aria-label="Link to this section">#</a></h2>
+<p>Use <code>Search</code> on one adjacency list.</p>
+<hr />
+<h2 id="variation-6-menu-operations-using-names-instead-of-ids" class="anchor-heading">Variation 6 — Menu operations using names instead of IDs<a class="heading-link" href="#variation-6-menu-operations-using-names-instead-of-ids" aria-label="Link to this section">#</a></h2>
+<p>For AddRoad, RemoveRoad, BFS, DFS, ShortestPath:</p>
+<ol>
+<li>read name with <code>getline</code></li>
+<li>convert to ID</li>
+<li>call the existing ID-based function</li>
+</ol>
+<hr />
+<h2 id="variation-7-why-cin-ignore-before-getline" class="anchor-heading">Variation 7 — Why <code>cin.ignore()</code> before <code>getline()</code>?<a class="heading-link" href="#variation-7-why-cin-ignore-before-getline" aria-label="Link to this section">#</a></h2>
+<p><code>cin &gt;&gt; choice</code> leaves the newline in the input buffer. <code>cin.ignore(...)</code> removes it so <code>getline()</code> reads the actual location name instead of an empty line.</p>
+<hr />
+<h2 id="variation-8-search-complexity" class="anchor-heading">Variation 8 — Search complexity<a class="heading-link" href="#variation-8-search-complexity" aria-label="Link to this section">#</a></h2>
+<p>Search by ID: O(1).<br />
+Search by name: O(V) with current linear scan.</p>
+<hr />
+<h2 id="variation-9-display-neighbors-as-ids-instead-of-names" class="anchor-heading">Variation 9 — Display neighbors as IDs instead of names<a class="heading-link" href="#variation-9-display-neighbors-as-ids-instead-of-names" aria-label="Link to this section">#</a></h2>
+<p>Print <code>neighbor</code> instead of <code>locations[neighbor]</code>.</p>
+<hr />
+<h2 id="variation-10-add-an-outdegree-degree-menu-option" class="anchor-heading">Variation 10 — Add an OutDegree/Degree menu option<a class="heading-link" href="#variation-10-add-an-outdegree-degree-menu-option" aria-label="Link to this section">#</a></h2>
+<p>For undirected graph call it Degree, but the Graph lab uses OutDegree for directed graphs.</p>
+<hr />
+<h1 id="26-system-wide-viva-questions-everyone-should-know" class="anchor-heading">26. System-wide viva questions everyone should know<a class="heading-link" href="#26-system-wide-viva-questions-everyone-should-know" aria-label="Link to this section">#</a></h1>
+<h2 id="what-is-a-graph" class="anchor-heading">What is a graph?<a class="heading-link" href="#what-is-a-graph" aria-label="Link to this section">#</a></h2>
+<p>A data structure made of vertices and edges representing relationships/connections.</p>
+<h2 id="what-is-a-vertex-in-this-project" class="anchor-heading">What is a vertex in this project?<a class="heading-link" href="#what-is-a-vertex-in-this-project" aria-label="Link to this section">#</a></h2>
+<p>A modeled campus location.</p>
+<h2 id="what-is-an-edge" class="anchor-heading">What is an edge?<a class="heading-link" href="#what-is-an-edge" aria-label="Link to this section">#</a></h2>
+<p>A direct modeled walkable connection between two locations.</p>
+<h2 id="what-is-an-adjacency-list" class="anchor-heading">What is an adjacency list?<a class="heading-link" href="#what-is-an-adjacency-list" aria-label="Link to this section">#</a></h2>
+<p>For every vertex, store a list of the vertices directly connected to it.</p>
+<h2 id="why-not-adjacency-matrix" class="anchor-heading">Why not adjacency matrix?<a class="heading-link" href="#why-not-adjacency-matrix" aria-label="Link to this section">#</a></h2>
+<p>The project specifically requires adjacency lists. Also, a sparse campus graph stores only actual connections instead of a full V x V matrix.</p>
+<h2 id="what-does-unweighted-mean" class="anchor-heading">What does unweighted mean?<a class="heading-link" href="#what-does-unweighted-mean" aria-label="Link to this section">#</a></h2>
+<p>Edges do not have different costs. Each connection is treated equally for shortest-path length.</p>
+<h2 id="what-does-undirected-mean" class="anchor-heading">What does undirected mean?<a class="heading-link" href="#what-does-undirected-mean" aria-label="Link to this section">#</a></h2>
+<p>A road A-B can be traversed both A-&gt;B and B-&gt;A.</p>
+<h2 id="difference-between-bfs-and-dfs" class="anchor-heading">Difference between BFS and DFS?<a class="heading-link" href="#difference-between-bfs-and-dfs" aria-label="Link to this section">#</a></h2>
+<p>BFS explores breadth/levels using a Queue. DFS explores depth using a Stack or recursion.</p>
+<h2 id="why-queue-for-bfs" class="anchor-heading">Why Queue for BFS?<a class="heading-link" href="#why-queue-for-bfs" aria-label="Link to this section">#</a></h2>
+<p>FIFO processes earlier-discovered vertices first.</p>
+<h2 id="why-stack-for-dfs" class="anchor-heading">Why Stack for DFS?<a class="heading-link" href="#why-stack-for-dfs" aria-label="Link to this section">#</a></h2>
+<p>LIFO processes the newest discovered vertex first.</p>
+<h2 id="why-are-marks-needed" class="anchor-heading">Why are marks needed?<a class="heading-link" href="#why-are-marks-needed" aria-label="Link to this section">#</a></h2>
+<p>To avoid repeatedly processing vertices in graphs with cycles.</p>
+<h2 id="why-bfs-for-shortest-path" class="anchor-heading">Why BFS for shortest path?<a class="heading-link" href="#why-bfs-for-shortest-path" aria-label="Link to this section">#</a></h2>
+<p>In an unweighted graph, BFS discovers vertices in increasing number of edges from the source.</p>
+<h2 id="can-dfs-find-a-path" class="anchor-heading">Can DFS find a path?<a class="heading-link" href="#can-dfs-find-a-path" aria-label="Link to this section">#</a></h2>
+<p>Yes. It is not guaranteed to find the shortest path first.</p>
+<h2 id="why-use-ids-internally" class="anchor-heading">Why use IDs internally?<a class="heading-link" href="#why-use-ids-internally" aria-label="Link to this section">#</a></h2>
+<p>They index arrays efficiently: <code>locations[id]</code>, <code>marks[id]</code>, <code>adjacencyList[id]</code>, <code>distance[id]</code>, and <code>parent[id]</code>.</p>
+<h2 id="why-use-linked-lists-for-adjacency-lists" class="anchor-heading">Why use linked lists for adjacency lists?<a class="heading-link" href="#why-use-linked-lists-for-adjacency-lists" aria-label="Link to this section">#</a></h2>
+<p>They naturally store a variable number of neighbors and directly use the course's Lab 7 ADT.</p>
+<h2 id="what-is-an-adt" class="anchor-heading">What is an ADT?<a class="heading-link" href="#what-is-an-adt" aria-label="Link to this section">#</a></h2>
+<p>An Abstract Data Type defines behavior/operations independently of the underlying implementation. A Stack can be array-based or linked-list based while still supporting Push/Pop/Top.</p>
+<h2 id="adt-vs-implementation-example" class="anchor-heading">ADT vs implementation example<a class="heading-link" href="#adt-vs-implementation-example" aria-label="Link to this section">#</a></h2>
+<p>Stack ADT = LIFO operations.<br />
+Array Stack = one implementation.<br />
+Linked-list Stack = another implementation.</p>
+<p>This distinction is likely central to the instructor's viva style.</p>
+<hr />
+<h1 id="27-common-swap-this-structure-traps" class="anchor-heading">27. Common &quot;swap this structure&quot; traps<a class="heading-link" href="#27-common-swap-this-structure-traps" aria-label="Link to this section">#</a></h1>
+<h2 id="queue-stack-in-bfs" class="anchor-heading">Queue -&gt; Stack in BFS<a class="heading-link" href="#queue-stack-in-bfs" aria-label="Link to this section">#</a></h2>
+<p>Not equivalent. It changes BFS behavior to DFS-like behavior.</p>
+<h2 id="stack-queue-in-dfs" class="anchor-heading">Stack -&gt; Queue in DFS<a class="heading-link" href="#stack-queue-in-dfs" aria-label="Link to this section">#</a></h2>
+<p>Not equivalent. It changes DFS behavior to breadth-first behavior.</p>
+<h2 id="linked-queue-array-queue" class="anchor-heading">Linked Queue -&gt; Array Queue<a class="heading-link" href="#linked-queue-array-queue" aria-label="Link to this section">#</a></h2>
+<p>Equivalent at ADT level if capacity is sufficient. BFS remains BFS.</p>
+<h2 id="linked-stack-array-stack" class="anchor-heading">Linked Stack -&gt; Array Stack<a class="heading-link" href="#linked-stack-array-stack" aria-label="Link to this section">#</a></h2>
+<p>Equivalent at ADT level if capacity is sufficient. DFS remains DFS.</p>
+<h2 id="linked-adjacency-list-array-based-list" class="anchor-heading">Linked adjacency list -&gt; array-based list<a class="heading-link" href="#linked-adjacency-list-array-based-list" aria-label="Link to this section">#</a></h2>
+<p>Still an adjacency-list graph if each vertex owns its own neighbor list. The internal list implementation changes.</p>
+<h2 id="adjacency-list-adjacency-matrix" class="anchor-heading">Adjacency list -&gt; adjacency matrix<a class="heading-link" href="#adjacency-list-adjacency-matrix" aria-label="Link to this section">#</a></h2>
+<p>This changes the graph representation itself. It may be valid as a viva alternate, but it no longer satisfies the submitted project's required adjacency-list representation.</p>
+<h2 id="bfs-priority-queue" class="anchor-heading">BFS -&gt; Priority Queue<a class="heading-link" href="#bfs-priority-queue" aria-label="Link to this section">#</a></h2>
+<p>A priority queue is not needed for equal edge costs. Do not add it without a reason.</p>
+<hr />
+<h1 id="28-live-coding-survival-strategy" class="anchor-heading">28. Live-coding survival strategy<a class="heading-link" href="#28-live-coding-survival-strategy" aria-label="Link to this section">#</a></h1>
+<p>When the instructor gives a modification:</p>
+<h3 id="step-1-identify-what-type-of-change-it-is" class="anchor-heading">Step 1 — Identify what type of change it is<a class="heading-link" href="#step-1-identify-what-type-of-change-it-is" aria-label="Link to this section">#</a></h3>
+<p>Is she changing:</p>
+<ul>
+<li>input format?</li>
+<li>ADT implementation?</li>
+<li>algorithm?</li>
+<li>output requirement?</li>
+<li>graph direction/weight?</li>
+</ul>
+<h3 id="step-2-say-what-stays-unchanged" class="anchor-heading">Step 2 — Say what stays unchanged<a class="heading-link" href="#step-2-say-what-stays-unchanged" aria-label="Link to this section">#</a></h3>
+<p>Example:</p>
+<blockquote>
+<p>&quot;If I switch the Queue from linked list to array, BFS itself stays the same because the Queue ADT operations are the same.&quot;</p>
+</blockquote>
+<h3 id="step-3-say-what-must-change" class="anchor-heading">Step 3 — Say what must change<a class="heading-link" href="#step-3-say-what-must-change" aria-label="Link to this section">#</a></h3>
+<p>Example:</p>
+<blockquote>
+<p>&quot;The array queue needs sufficient capacity for all vertices.&quot;</p>
+</blockquote>
+<h3 id="step-4-modify-the-smallest-possible-region" class="anchor-heading">Step 4 — Modify the smallest possible region<a class="heading-link" href="#step-4-modify-the-smallest-possible-region" aria-label="Link to this section">#</a></h3>
+<p>Do not rewrite the whole project.</p>
+<h3 id="step-5-test-with-one-tiny-example" class="anchor-heading">Step 5 — Test with one tiny example<a class="heading-link" href="#step-5-test-with-one-tiny-example" aria-label="Link to this section">#</a></h3>
+<p>For a search, try one existing and one nonexistent value.<br />
+For a road, add/remove one known pair.<br />
+For traversal, start from Gate 1 or Gate 8.<br />
+For shortest path, use Gate 1 -&gt; Playground.</p>
+<hr />
+<h1 id="29-current-known-test-cases" class="anchor-heading">29. Current known test cases<a class="heading-link" href="#29-current-known-test-cases" aria-label="Link to this section">#</a></h1>
+<h2 id="test-a-display-graph" class="anchor-heading">Test A — Display graph<a class="heading-link" href="#test-a-display-graph" aria-label="Link to this section">#</a></h2>
+<p>Expected key checks:</p>
+<ul>
+<li>Gate 1 -&gt; SAC</li>
+<li>Gate 8 -&gt; Cafeteria, NAC</li>
+<li>NAC has 5 neighbors</li>
+<li>Ground Floor has 6 neighbors</li>
+<li>Upper Plaza has 5 neighbors</li>
+<li>ATM -&gt; NAC</li>
+<li>Gallery -&gt; Upper Plaza</li>
+</ul>
+<hr />
+<h2 id="test-b-bfs-from-gate-1" class="anchor-heading">Test B — BFS from Gate 1<a class="heading-link" href="#test-b-bfs-from-gate-1" aria-label="Link to this section">#</a></h2>
+<p>Current output order:</p>
+<pre><code class="language-text">Gate 1 SAC Medical Center Male Lounge Ground Floor Cafeteria
+Book Shop &amp; Stationery Upper Plaza NAC Administrative Building Gate 8
+Gallery Central Library Auditorium Student Affairs Playground City Bank ATM Female Lounge
+</code></pre>
+<p>If adjacency insertion order changes, exact order may change while still being a valid BFS.</p>
+<hr />
+<h2 id="test-c-dfs-from-gate-1" class="anchor-heading">Test C — DFS from Gate 1<a class="heading-link" href="#test-c-dfs-from-gate-1" aria-label="Link to this section">#</a></h2>
+<p>Current output order:</p>
+<pre><code class="language-text">Gate 1 SAC Ground Floor Administrative Building Book Shop &amp; Stationery
+NAC Gate 8 Cafeteria Female Lounge City Bank ATM Playground Upper Plaza
+Student Affairs Auditorium Central Library Gallery Male Lounge Medical Center
+</code></pre>
+<hr />
+<h2 id="test-d-shortest-path" class="anchor-heading">Test D — Shortest path<a class="heading-link" href="#test-d-shortest-path" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-text">Gate 1 -&gt; Playground
+</code></pre>
+<p>Expected:</p>
+<pre><code class="language-text">Shortest path: Gate 1 -&gt; SAC -&gt; Ground Floor -&gt; NAC -&gt; Playground
+Path length: 4
+</code></pre>
+<hr />
+<h2 id="test-e-search-by-id" class="anchor-heading">Test E — Search by ID<a class="heading-link" href="#test-e-search-by-id" aria-label="Link to this section">#</a></h2>
+<p>Input:</p>
+<pre><code class="language-text">15
+</code></pre>
+<p>Expected:</p>
+<pre><code class="language-text">Location found: Central Library
+</code></pre>
+<hr />
+<h2 id="test-f-search-by-name" class="anchor-heading">Test F — Search by Name<a class="heading-link" href="#test-f-search-by-name" aria-label="Link to this section">#</a></h2>
+<p>Input:</p>
+<pre><code class="language-text">Central Library
+</code></pre>
+<p>Expected:</p>
+<pre><code class="language-text">Location found. ID: 15
+</code></pre>
+<hr />
+<h2 id="test-g-add-remove-dynamic-road" class="anchor-heading">Test G — Add/remove dynamic road<a class="heading-link" href="#test-g-add-remove-dynamic-road" aria-label="Link to this section">#</a></h2>
+<p>Choose a road that does not currently exist, e.g. NAC &lt;-&gt; Central Library:</p>
+<pre><code class="language-text">3 &lt;-&gt; 15
+</code></pre>
+<ol>
+<li>Add it.</li>
+<li>Display connections and verify both lists show the new neighbor.</li>
+<li>Calculate a shortest path that could use it.</li>
+<li>Remove it.</li>
+<li>Display again and confirm it is gone in both directions.</li>
+</ol>
+<hr />
+<h1 id="30-recommended-project-demo-sequence" class="anchor-heading">30. Recommended project demo sequence<a class="heading-link" href="#30-recommended-project-demo-sequence" aria-label="Link to this section">#</a></h1>
+<p>For the final demonstration, avoid randomly clicking every menu item. Tell a small story:</p>
+<ol>
+<li><strong>Display locations</strong> to establish IDs.</li>
+<li><strong>Display graph</strong> to show adjacency-list representation.</li>
+<li><strong>BFS from Gate 1</strong> to show Queue-based breadth traversal.</li>
+<li><strong>DFS from Gate 1</strong> to show a different Stack-based traversal order.</li>
+<li><strong>Shortest path Gate 1 -&gt; Playground</strong> to show practical navigation.</li>
+<li><strong>Remove one road</strong> to simulate a closed route.</li>
+<li>Re-run shortest path or display connections to show the graph changed dynamically.</li>
+<li><strong>Add the road back</strong>.</li>
+<li>Search once by <strong>ID</strong> and once by <strong>name</strong>.</li>
+</ol>
+<p>This demonstrates every major requirement without turning the demo into a menu marathon.</p>
+<hr />
+<h1 id="31-what-should-go-into-the-3-5-page-report" class="anchor-heading">31. What should go into the 3-5 page report<a class="heading-link" href="#31-what-should-go-into-the-3-5-page-report" aria-label="Link to this section">#</a></h1>
+<p>The assignment guidance asks for a short report with items such as problem description, data structures, structure/class diagram, complexity, sample input/output, and demonstration material.</p>
+<p>Recommended report structure:</p>
+<h2 id="1-problem-description" class="anchor-heading">1. Problem Description<a class="heading-link" href="#1-problem-description" aria-label="Link to this section">#</a></h2>
+<p>Explain campus navigation as an undirected unweighted graph.</p>
+<h2 id="2-campus-graph-design" class="anchor-heading">2. Campus Graph Design<a class="heading-link" href="#2-campus-graph-design" aria-label="Link to this section">#</a></h2>
+<p>Include:</p>
+<ul>
+<li>custom map image</li>
+<li>vertex list</li>
+<li>selected direct connections</li>
+<li>explanation of Ground Floor/Upper Plaza as hubs</li>
+</ul>
+<h2 id="3-data-structures-used" class="anchor-heading">3. Data Structures Used<a class="heading-link" href="#3-data-structures-used" aria-label="Link to this section">#</a></h2>
+<ul>
+<li>linked-list <code>UnsortedType&lt;int&gt;</code> adjacency lists</li>
+<li>linked-list Queue for BFS</li>
+<li>linked-list Stack for DFS/path reconstruction</li>
+<li>arrays for names, marks, distance, parent</li>
+</ul>
+<h2 id="4-program-structure" class="anchor-heading">4. Program Structure<a class="heading-link" href="#4-program-structure" aria-label="Link to this section">#</a></h2>
+<p>Use the class diagram from this document in simplified form.</p>
+<h2 id="5-algorithms" class="anchor-heading">5. Algorithms<a class="heading-link" href="#5-algorithms" aria-label="Link to this section">#</a></h2>
+<p>Briefly explain:</p>
+<ul>
+<li>AddRoad / RemoveRoad</li>
+<li>BFS</li>
+<li>DFS</li>
+<li>shortest path</li>
+</ul>
+<h2 id="6-time-complexity" class="anchor-heading">6. Time Complexity<a class="heading-link" href="#6-time-complexity" aria-label="Link to this section">#</a></h2>
+<p>Use the cheat sheet from Section 17.</p>
+<h2 id="7-sample-inputs-outputs" class="anchor-heading">7. Sample Inputs/Outputs<a class="heading-link" href="#7-sample-inputs-outputs" aria-label="Link to this section">#</a></h2>
+<p>Include a few screenshots or console snippets.</p>
+<h2 id="8-team-contributions" class="anchor-heading">8. Team Contributions<a class="heading-link" href="#8-team-contributions" aria-label="Link to this section">#</a></h2>
+<p>Use the contribution table, with real names inserted.</p>
+<hr />
+<h1 id="32-important-code-details-that-are-easy-to-forget" class="anchor-heading">32. Important code details that are easy to forget<a class="heading-link" href="#32-important-code-details-that-are-easy-to-forget" aria-label="Link to this section">#</a></h1>
+<h2 id="template-cpp-inclusion" class="anchor-heading">Template <code>.cpp</code> inclusion<a class="heading-link" href="#template-cpp-inclusion" aria-label="Link to this section">#</a></h2>
+<p>Current <code>campusgraph.cpp</code> includes:</p>
+<pre><code class="language-cpp">#include &quot;unsortedtype.cpp&quot;
+#include &quot;stacktype.cpp&quot;
+#include &quot;queuetype.cpp&quot;
+</code></pre>
+<p>This mirrors the course's template organization style. In production C++ templates are often fully defined in headers, but we are staying consistent with the course materials.</p>
+<hr />
+<h2 id="cin-ignore" class="anchor-heading"><code>cin.ignore()</code><a class="heading-link" href="#cin-ignore" aria-label="Link to this section">#</a></h2>
+<p>Needed before <code>getline</code> after formatted numeric input.</p>
+<hr />
+<h2 id="head-insertion-reverses-neighbor-display-order" class="anchor-heading">Head insertion reverses neighbor display order<a class="heading-link" href="#head-insertion-reverses-neighbor-display-order" aria-label="Link to this section">#</a></h2>
+<p>This is normal and not a bug.</p>
+<hr />
+<h2 id="maxlocations-25" class="anchor-heading"><code>MAX_LOCATIONS = 25</code><a class="heading-link" href="#maxlocations-25" aria-label="Link to this section">#</a></h2>
+<p>Current graph uses 18 vertices but leaves room for additions.</p>
+<hr />
+<h2 id="shortestpath-currently-does-not-use-marks" class="anchor-heading">ShortestPath currently does not use <code>marks[]</code><a class="heading-link" href="#shortestpath-currently-does-not-use-marks" aria-label="Link to this section">#</a></h2>
+<p>It uses:</p>
+<pre><code class="language-cpp">distance[item] == -1
+</code></pre>
+<p>as the discovery/visited test. This is perfectly valid. Do not assume every graph function must use <code>marks[]</code>.</p>
+<hr />
+<h2 id="dynamic-road-changes-affect-algorithms-automatically" class="anchor-heading">Dynamic road changes affect algorithms automatically<a class="heading-link" href="#dynamic-road-changes-affect-algorithms-automatically" aria-label="Link to this section">#</a></h2>
+<p>Because BFS/DFS/ShortestPath read the current adjacency lists, no algorithm code needs rewriting after AddRoad/RemoveRoad. The graph data changes and algorithms automatically operate on the updated graph.</p>
+<hr />
+<h1 id="33-potential-improvements-we-should-not-add-unless-needed" class="anchor-heading">33. Potential improvements we should NOT add unless needed<a class="heading-link" href="#33-potential-improvements-we-should-not-add-unless-needed" aria-label="Link to this section">#</a></h1>
+<p>Avoid feature creep before submission:</p>
+<ul>
+<li>GUI</li>
+<li>real coordinates</li>
+<li>map images inside program</li>
+<li>weighted walking distances</li>
+<li>Dijkstra unless required/taught for this task</li>
+<li>STL <code>vector</code>, <code>queue</code>, <code>stack</code>, <code>list</code></li>
+<li>file/database persistence</li>
+<li>login/accounts</li>
+<li>live maps/API</li>
+<li>unnecessarily sorted neighbors</li>
+<li>complex inheritance</li>
+</ul>
+<p>These do not increase the educational value enough to justify extra viva risk.</p>
+<hr />
+<h1 id="34-possible-simple-improvements-if-instructor-requests-them" class="anchor-heading">34. Possible simple improvements if instructor requests them<a class="heading-link" href="#34-possible-simple-improvements-if-instructor-requests-them" aria-label="Link to this section">#</a></h1>
+<p>Safe extensions grounded in current labs:</p>
+<ul>
+<li><code>Degree(int vertex)</code></li>
+<li><code>FoundEdge(int a, int b)</code></li>
+<li><code>Reachable(int start, int end)</code> using BFS/DFS</li>
+<li>Add/Remove road by names</li>
+<li>BFS target search</li>
+<li>DFS target search</li>
+<li>shortest-path length only</li>
+<li>recursive DFS</li>
+<li>array Queue alternative</li>
+<li>array Stack alternative</li>
+<li>array-based adjacency-list alternative</li>
+</ul>
+<hr />
+<h1 id="35-teaching-plan-for-the-team" class="anchor-heading">35. Teaching plan for the team<a class="heading-link" href="#35-teaching-plan-for-the-team" aria-label="Link to this section">#</a></h1>
+<p>When sitting together, teach in this order.</p>
+<h2 id="session-1-everyone-20-30-minutes" class="anchor-heading">Session 1 — Everyone, 20-30 minutes<a class="heading-link" href="#session-1-everyone-20-30-minutes" aria-label="Link to this section">#</a></h2>
+<p>Explain:</p>
+<ol>
+<li>physical map</li>
+<li>vertex list</li>
+<li>edge list</li>
+<li>graph = locations + roads</li>
+<li>adjacency list</li>
+<li>undirected/unweighted</li>
+<li>file architecture</li>
+</ol>
+<p>Nobody should learn their function before understanding the graph.</p>
+<h2 id="session-2-everyone-20-minutes" class="anchor-heading">Session 2 — Everyone, 20 minutes<a class="heading-link" href="#session-2-everyone-20-minutes" aria-label="Link to this section">#</a></h2>
+<p>Draw the ADTs on paper:</p>
+<pre><code class="language-text">Linked adjacency list:
+head -&gt; neighbor -&gt; neighbor -&gt; NULL
+
+Queue:
+front -&gt; ... -&gt; rear
+FIFO
+
+Stack:
+head/top -&gt; ...
+LIFO
+</code></pre>
+<p>Then connect them to AddRoad/BFS/DFS.</p>
+<h2 id="session-3-individual-modules" class="anchor-heading">Session 3 — Individual modules<a class="heading-link" href="#session-3-individual-modules" aria-label="Link to this section">#</a></h2>
+<p>Each member explains their own code without looking at notes.</p>
+<h2 id="session-4-viva-mutations" class="anchor-heading">Session 4 — Viva mutations<a class="heading-link" href="#session-4-viva-mutations" aria-label="Link to this section">#</a></h2>
+<p>Give each member random alternate requests from Sections 21-25.</p>
+<p>Do not let them merely read the answer. Make them say:</p>
+<ul>
+<li>what changes,</li>
+<li>what stays the same,</li>
+<li>why,</li>
+<li>then code it.</li>
+</ul>
+<h2 id="session-5-cross-questioning" class="anchor-heading">Session 5 — Cross-questioning<a class="heading-link" href="#session-5-cross-questioning" aria-label="Link to this section">#</a></h2>
+<p>Every member should still know the six core facts:</p>
+<ol>
+<li>location = vertex</li>
+<li>road = edge</li>
+<li>adjacency list = Lab 7 linked list</li>
+<li>BFS = Queue</li>
+<li>DFS = Stack</li>
+<li>unweighted shortest path = BFS</li>
+</ol>
+<hr />
+<h1 id="36-rapid-fire-viva-drill" class="anchor-heading">36. Rapid-fire viva drill<a class="heading-link" href="#36-rapid-fire-viva-drill" aria-label="Link to this section">#</a></h1>
+<p>Use these verbally with the team.</p>
+<ol>
+<li>What is stored in <code>adjacencyList[3]</code>?</li>
+<li>Why does AddRoad insert twice?</li>
+<li>Why does RemoveRoad delete twice?</li>
+<li>What does <code>marks[]</code> prevent?</li>
+<li>Why does BFS use Queue?</li>
+<li>Why does DFS use Stack?</li>
+<li>What happens if BFS uses Stack instead?</li>
+<li>What does <code>distance[i] = -1</code> mean?</li>
+<li>What does <code>parent[i]</code> store?</li>
+<li>Why does shortest path use Stack at the end?</li>
+<li>Can shortest path print without Stack?</li>
+<li>Why is DFS not used for shortest path?</li>
+<li>Why is a priority queue unnecessary?</li>
+<li>Why is BST unsuitable for road connectivity?</li>
+<li>What is the difference between ADT and implementation?</li>
+<li>Could Queue be array-based instead?</li>
+<li>Could Stack be array-based instead?</li>
+<li>Could adjacency lists be array-based instead?</li>
+<li>What capacity problem occurs with Lab 5 <code>SIZE=5</code>?</li>
+<li>What is the maximum current degree?</li>
+<li>Which node has that degree?</li>
+<li>How do you search by name instead of ID?</li>
+<li>How do you add a road by name?</li>
+<li>How do you make one-way roads?</li>
+<li>How do you count a vertex's degree?</li>
+<li>How do you test whether a direct edge exists?</li>
+<li>What is the difference between a traversal and a path?</li>
+<li>What is the difference between a path and shortest path?</li>
+<li>Why does removing one road not require changing BFS code?</li>
+<li>Why are entrance rectangles not vertices?</li>
+</ol>
+<hr />
+<h1 id="37-answers-to-the-most-dangerous-viva-questions" class="anchor-heading">37. Answers to the most dangerous viva questions<a class="heading-link" href="#37-answers-to-the-most-dangerous-viva-questions" aria-label="Link to this section">#</a></h1>
+<h2 id="you-used-linked-list-do-it-with-array" class="anchor-heading">&quot;You used linked list. Do it with array.&quot;<a class="heading-link" href="#you-used-linked-list-do-it-with-array" aria-label="Link to this section">#</a></h2>
+<blockquote>
+<p>The graph can still use an adjacency list. I replace each linked-list <code>UnsortedType</code> with the array-based <code>UnsortedType</code> from Lab 5. The operations remain Insert/Search/Delete/GetNext. I need to increase capacity because our maximum degree is 6 and the lab sample uses size 5.</p>
+</blockquote>
+<h2 id="you-used-stack-do-it-with-queue" class="anchor-heading">&quot;You used Stack. Do it with Queue.&quot;<a class="heading-link" href="#you-used-stack-do-it-with-queue" aria-label="Link to this section">#</a></h2>
+<blockquote>
+<p>If this is DFS, directly replacing the Stack with Queue changes the traversal to breadth-first behavior. Queue is FIFO and Stack is LIFO. If you want the alternate traversal I can implement it, but it should be called BFS-like rather than DFS.</p>
+</blockquote>
+<h2 id="you-used-queue-do-it-with-stack" class="anchor-heading">&quot;You used Queue. Do it with Stack.&quot;<a class="heading-link" href="#you-used-queue-do-it-with-stack" aria-label="Link to this section">#</a></h2>
+<p>Same reasoning in reverse.</p>
+<h2 id="you-searched-by-id-search-by-name" class="anchor-heading">&quot;You searched by ID. Search by name.&quot;<a class="heading-link" href="#you-searched-by-id-search-by-name" aria-label="Link to this section">#</a></h2>
+<blockquote>
+<p>Loop through <code>locations[]</code>, find the matching string, get its ID, then reuse the same graph function.</p>
+</blockquote>
+<h2 id="why-didn-t-you-use-bst" class="anchor-heading">&quot;Why didn't you use BST?&quot;<a class="heading-link" href="#why-didn-t-you-use-bst" aria-label="Link to this section">#</a></h2>
+<blockquote>
+<p>The campus is a general network, not an ordered hierarchy. BST left/right ordering does not represent arbitrary road connectivity.</p>
+</blockquote>
+<h2 id="why-didn-t-you-use-priority-queue" class="anchor-heading">&quot;Why didn't you use Priority Queue?&quot;<a class="heading-link" href="#why-didn-t-you-use-priority-queue" aria-label="Link to this section">#</a></h2>
+<blockquote>
+<p>The graph is unweighted, so normal Queue-based BFS already produces shortest edge-count paths.</p>
+</blockquote>
+<h2 id="why-use-linked-queue-instead-of-array-queue" class="anchor-heading">&quot;Why use linked Queue instead of array Queue?&quot;<a class="heading-link" href="#why-use-linked-queue-instead-of-array-queue" aria-label="Link to this section">#</a></h2>
+<blockquote>
+<p>Both are taught and both satisfy Queue ADT. We chose the linked implementation because it avoids a fixed capacity. The array Queue from Lab 10 would also work if given sufficient size.</p>
+</blockquote>
+<h2 id="why-use-linked-stack-instead-of-array-stack" class="anchor-heading">&quot;Why use linked Stack instead of array Stack?&quot;<a class="heading-link" href="#why-use-linked-stack-instead-of-array-stack" aria-label="Link to this section">#</a></h2>
+<blockquote>
+<p>Same ADT behavior. Linked Stack avoids the small fixed capacity in the lab's array example. DFS only depends on LIFO behavior.</p>
+</blockquote>
+<hr />
+<h1 id="38-current-limitations-we-should-be-able-to-admit" class="anchor-heading">38. Current limitations we should be able to admit<a class="heading-link" href="#38-current-limitations-we-should-be-able-to-admit" aria-label="Link to this section">#</a></h1>
+<p>A good viva is not about pretending the program is perfect.</p>
+<p>Current limitations:</p>
+<ul>
+<li>graph is a simplified campus model, not every hallway</li>
+<li>shortest path minimizes number of graph edges, not physical walking distance</li>
+<li>names are exact and case-sensitive</li>
+<li>locations cannot currently be dynamically deleted</li>
+<li>code uses fixed maximum 25 locations</li>
+<li>current AddRoad does not explicitly reject self-edges</li>
+<li>no persistence after program closes</li>
+<li>traversal order depends on linked-list insertion order</li>
+</ul>
+<p>None of these violate the assignment.</p>
+<hr />
+<h1 id="39-before-submission-checklist" class="anchor-heading">39. Before-submission checklist<a class="heading-link" href="#39-before-submission-checklist" aria-label="Link to this section">#</a></h1>
+<h2 id="graph-data" class="anchor-heading">Graph/data<a class="heading-link" href="#graph-data" aria-label="Link to this section">#</a></h2>
+<ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>18 vertex names still match source-of-truth table</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>ATM still connects to NAC, not SAC</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Gallery exists</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Ground Floor &lt;-&gt; Upper Plaza exists</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>exactly 19 intended undirected initial roads</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>no accidental duplicate roads</li>
+</ul>
+<h2 id="code" class="anchor-heading">Code<a class="heading-link" href="#code" aria-label="Link to this section">#</a></h2>
+<ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>K&amp;R brace style remains consistent</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>compiles in Code::Blocks</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>no STL containers slipped in</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>BFS works</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>DFS works</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>shortest path works</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>add road works both directions</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>remove road works both directions</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>invalid IDs handled</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>name search with spaces works</li>
+</ul>
+<h2 id="team" class="anchor-heading">Team<a class="heading-link" href="#team" aria-label="Link to this section">#</a></h2>
+<ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>every member can explain overall graph concept</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>every member can explain their own functions without notes</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>every member has practiced at least 3 viva modifications</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Member 1 has practiced all shortest-path alternatives</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Member 2 can swap Queue implementation</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Member 3 can write recursive DFS</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Member 4 can swap adjacency-list implementation</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Member 5 can convert ID operations to name operations</li>
+</ul>
+<h2 id="report-demo" class="anchor-heading">Report/demo<a class="heading-link" href="#report-demo" aria-label="Link to this section">#</a></h2>
+<ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>map included</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>class/program structure included</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>data structures explained</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>complexity included</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>sample I/O included</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>contribution table accurate</li>
+</ul>
+<hr />
+<h1 id="40-update-protocol-for-this-master-file" class="anchor-heading">40. Update protocol for this master file<a class="heading-link" href="#40-update-protocol-for-this-master-file" aria-label="Link to this section">#</a></h1>
+<p>Whenever code changes, update this file in the same work session.</p>
+<h3 id="if-locations-roads-change" class="anchor-heading">If locations/roads change<a class="heading-link" href="#if-locations-roads-change" aria-label="Link to this section">#</a></h3>
+<p>Update:</p>
+<ul>
+<li>Section 4 vertex list</li>
+<li>Section 5 edge list</li>
+<li>Section 6 adjacency list</li>
+<li>Section 7 Mermaid graph</li>
+<li>known test cases</li>
+</ul>
+<h3 id="if-functions-change" class="anchor-heading">If functions change<a class="heading-link" href="#if-functions-change" aria-label="Link to this section">#</a></h3>
+<p>Update:</p>
+<ul>
+<li>class architecture</li>
+<li>feature explanation</li>
+<li>member ownership</li>
+<li>viva bank if affected</li>
+</ul>
+<h3 id="if-adt-implementation-changes" class="anchor-heading">If ADT implementation changes<a class="heading-link" href="#if-adt-implementation-changes" aria-label="Link to this section">#</a></h3>
+<p>Update:</p>
+<ul>
+<li>Lab grounding section</li>
+<li>ADT-to-project map</li>
+<li>viva swap notes</li>
+<li>capacity warnings</li>
+</ul>
+<h3 id="if-member-responsibilities-change" class="anchor-heading">If member responsibilities change<a class="heading-link" href="#if-member-responsibilities-change" aria-label="Link to this section">#</a></h3>
+<p>Update:</p>
+<ul>
+<li>Team Division</li>
+<li>contribution wording</li>
+<li>member viva bank</li>
+</ul>
+<h3 id="versioning-rule" class="anchor-heading">Versioning rule<a class="heading-link" href="#versioning-rule" aria-label="Link to this section">#</a></h3>
+<p>Use simple versions:</p>
+<pre><code class="language-text">v1.0 = first comprehensive baseline
+v1.1 = small code/graph/member update
+v1.2 = another small update
+v2.0 = major redesign
+</code></pre>
+<hr />
+<h1 id="41-change-log" class="anchor-heading">41. Change log<a class="heading-link" href="#41-change-log" aria-label="Link to this section">#</a></h1>
+<h2 id="v1-0-2026-08-15" class="anchor-heading">v1.0 — 2026-08-15<a class="heading-link" href="#v1-0-2026-08-15" aria-label="Link to this section">#</a></h2>
+<ul>
+<li>Established comprehensive project/team/viva master guide.</li>
+<li>Locked current 18-vertex, 19-edge graph as baseline.</li>
+<li>Recorded current K&amp;R-style source architecture.</li>
+<li>Distinguished 444 raw project-specific lines from reused course ADTs.</li>
+<li>Grounded project choices in Labs 4 through Graph, with direct relevance identified.</li>
+<li>Documented five-member responsibility split.</li>
+<li>Added detailed viva modification banks for all five members.</li>
+<li>Added complexity, testing, demo, report, and teaching plans.</li>
+</ul>
+<hr />
+<h1 id="42-ultra-short-emergency-summary" class="anchor-heading">42. Ultra-short emergency summary<a class="heading-link" href="#42-ultra-short-emergency-summary" aria-label="Link to this section">#</a></h1>
+<p>If everything else disappears from your brain five minutes before viva, remember this:</p>
+<pre><code class="language-text">PROJECT
+Campus Navigation System
+
+GRAPH
+18 campus locations = vertices
+19 direct connections = undirected edges
+Unweighted = every edge costs 1
+
+REPRESENTATION
+adjacencyList[vertex]
+= Lab 7 linked-list UnsortedType&lt;int&gt;
+
+ADD/REMOVE ROAD
+Search + Insert/Delete in both adjacency lists
+
+BFS
+Queue / FIFO / breadth-level traversal
+
+DFS
+Stack / LIFO / depth traversal
+
+SHORTEST PATH
+BFS + distance[] + parent[]
+Stack reverses destination-&gt;source parent chain
+
+SEARCH
+ID -&gt; direct array lookup
+Name -&gt; linear scan
+
+MAIN VIVA IDEA
+ADT behavior can stay the same while implementation changes:
+linked Queue &lt;-&gt; array Queue
+linked Stack &lt;-&gt; array Stack
+linked Unsorted List &lt;-&gt; array Unsorted List
+
+BUT
+Queue &lt;-&gt; Stack changes traversal behavior,
+so do not pretend BFS remains BFS after replacing Queue with Stack.
+</code></pre>
+<hr />
+<h1 id="43-final-mental-model" class="anchor-heading">43. Final mental model<a class="heading-link" href="#43-final-mental-model" aria-label="Link to this section">#</a></h1>
+<p>Do not think of the project as hundreds of lines of code.</p>
+<p>Think of it as this chain:</p>
+<pre><code class="language-text">REAL CAMPUS
+    |
+    v
+CUSTOM MAP
+    |
+    v
+18 VERTICES + 19 EDGES
+    |
+    v
+ADJACENCY LIST GRAPH
+    |
+    +--&gt; Linked Unsorted List stores neighbors
+    |
+    +--&gt; Queue explores breadth-first
+    |
+    +--&gt; Stack explores depth-first
+    |
+    +--&gt; BFS + distance + parent finds shortest route
+    |
+    +--&gt; Insert/Delete changes roads dynamically
+    |
+    v
+MENU-DRIVEN CAMPUS NAVIGATION SYSTEM
+</code></pre>
+<p>The map decides the graph. The adjacency lists store the graph. The taught ADTs operate on the graph. The traversal algorithms turn the graph into useful navigation behavior. The viva variations test whether you understand those layers separately.</p>
+<p>That is the project.</p>
+
+      </article>
+      <footer class="site-footer">Keep this site and the source code in sync. If the graph, functions, member split, or viva plan changes, update the handbook too.</footer>
+    </div>
+  </main>
+
+  <button class="back-top" id="backTop" type="button" aria-label="Back to top">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>
