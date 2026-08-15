@@ -12,6 +12,7 @@
   <div class="scroll-progress" id="scrollProgress"></div>
   <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open navigation" aria-expanded="false">☰ <span>Contents</span></button>
   <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+  <button class="desktop-sidebar-toggle" id="desktopSidebarToggle" type="button" aria-label="Collapse navigation" aria-expanded="true" title="Collapse navigation">‹</button>
 
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-head">
@@ -20,7 +21,7 @@
       <input id="navSearch" class="nav-search" type="search" placeholder="Find a section..." aria-label="Find a section">
     </div>
     <nav class="sidebar-nav" aria-label="Contents">
-      <div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Start here</span><span class="chev">⌄</span></button><div class="nav-group-links">
+      <div class="nav-group collapsed"><button class="nav-group-title" type="button" aria-expanded="false"><span>Start here</span><span class="chev">⌄</span></button><div class="nav-group-links">
 <a class="nav-link" href="#0-how-we-use-this-site" data-section="0-how-we-use-this-site"><span class="nav-num">00</span><span>How we use this site</span></a>
 <a class="nav-link" href="#1-what-the-assignment-actually-asks-for" data-section="1-what-the-assignment-actually-asks-for"><span class="nav-num">01</span><span>What the assignment actually asks for</span></a>
 <a class="nav-link" href="#2-the-project-idea-in-one-minute" data-section="2-the-project-idea-in-one-minute"><span class="nav-num">02</span><span>The project idea in one minute</span></a>
@@ -31,7 +32,7 @@
 <a class="nav-link" href="#7-graph-visualization" data-section="7-graph-visualization"><span class="nav-num">07</span><span>Graph visualization</span></a>
 <a class="nav-link" href="#8-why-the-graph-is-undirected-and-unweighted" data-section="8-why-the-graph-is-undirected-and-unweighted"><span class="nav-num">08</span><span>Why the graph is undirected and unweighted</span></a>
 </div></div>
-<div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Code + labs</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<div class="nav-group collapsed"><button class="nav-group-title" type="button" aria-expanded="false"><span>Code + labs</span><span class="chev">⌄</span></button><div class="nav-group-links">
 <a class="nav-link" href="#9-current-project-architecture" data-section="9-current-project-architecture"><span class="nav-num">09</span><span>Current project architecture</span></a>
 <a class="nav-link" href="#10-coding-style-rule" data-section="10-coding-style-rule"><span class="nav-num">10</span><span>Coding style rule</span></a>
 <a class="nav-link" href="#11-lab-grounding-which-lab-files-matter-and-why" data-section="11-lab-grounding-which-lab-files-matter-and-why"><span class="nav-num">11</span><span>Lab grounding: which lab files matter and why</span></a>
@@ -42,11 +43,11 @@
 <a class="nav-link" href="#16-important-helper-functions" data-section="16-important-helper-functions"><span class="nav-num">16</span><span>Important helper functions</span></a>
 <a class="nav-link" href="#17-time-complexity-cheat-sheet" data-section="17-time-complexity-cheat-sheet"><span class="nav-num">17</span><span>Time complexity cheat sheet</span></a>
 </div></div>
-<div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Team split</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<div class="nav-group collapsed"><button class="nav-group-title" type="button" aria-expanded="false"><span>Team split</span><span class="chev">⌄</span></button><div class="nav-group-links">
 <a class="nav-link" href="#18-team-division-five-members" data-section="18-team-division-five-members"><span class="nav-num">18</span><span>Team division — five members</span></a>
 <a class="nav-link" href="#19-suggested-report-contribution-wording" data-section="19-suggested-report-contribution-wording"><span class="nav-num">19</span><span>Suggested report contribution wording</span></a>
 </div></div>
-<div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Viva prep</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<div class="nav-group collapsed"><button class="nav-group-title" type="button" aria-expanded="false"><span>Viva prep</span><span class="chev">⌄</span></button><div class="nav-group-links">
 <a class="nav-link" href="#20-viva-strategy-what-the-instructor-is-actually-testing" data-section="20-viva-strategy-what-the-instructor-is-actually-testing"><span class="nav-num">20</span><span>Viva strategy: what the instructor is actually testing</span></a>
 <a class="nav-link" href="#21-member-1-viva-modification-bank-map-topology-shortest-path" data-section="21-member-1-viva-modification-bank-map-topology-shortest-path"><span class="nav-num">21</span><span>Member 1 viva modification bank — map, topology, shortest path</span></a>
 <a class="nav-link" href="#22-member-2-viva-modification-bank-bfs-and-queue" data-section="22-member-2-viva-modification-bank-bfs-and-queue"><span class="nav-num">22</span><span>Member 2 viva modification bank — BFS and Queue</span></a>
@@ -57,7 +58,7 @@
 <a class="nav-link" href="#27-common-swap-this-structure-traps" data-section="27-common-swap-this-structure-traps"><span class="nav-num">27</span><span>Common &quot;swap this structure&quot; traps</span></a>
 <a class="nav-link" href="#28-live-coding-survival-strategy" data-section="28-live-coding-survival-strategy"><span class="nav-num">28</span><span>Live-coding survival strategy</span></a>
 </div></div>
-<div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Testing + report</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<div class="nav-group collapsed"><button class="nav-group-title" type="button" aria-expanded="false"><span>Testing + report</span><span class="chev">⌄</span></button><div class="nav-group-links">
 <a class="nav-link" href="#29-current-known-test-cases" data-section="29-current-known-test-cases"><span class="nav-num">29</span><span>Current known test cases</span></a>
 <a class="nav-link" href="#30-recommended-project-demo-sequence" data-section="30-recommended-project-demo-sequence"><span class="nav-num">30</span><span>Recommended project demo sequence</span></a>
 <a class="nav-link" href="#31-what-should-go-into-the-3-5-page-report" data-section="31-what-should-go-into-the-3-5-page-report"><span class="nav-num">31</span><span>What should go into the 3-5 page report</span></a>
@@ -65,14 +66,14 @@
 <a class="nav-link" href="#33-potential-improvements-we-should-not-add-unless-needed" data-section="33-potential-improvements-we-should-not-add-unless-needed"><span class="nav-num">33</span><span>Potential improvements we should NOT add unless needed</span></a>
 <a class="nav-link" href="#34-possible-simple-improvements-if-instructor-requests-them" data-section="34-possible-simple-improvements-if-instructor-requests-them"><span class="nav-num">34</span><span>Possible simple improvements if instructor requests them</span></a>
 </div></div>
-<div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Teach the team</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<div class="nav-group collapsed"><button class="nav-group-title" type="button" aria-expanded="false"><span>Teach the team</span><span class="chev">⌄</span></button><div class="nav-group-links">
 <a class="nav-link" href="#35-teaching-plan-for-the-team" data-section="35-teaching-plan-for-the-team"><span class="nav-num">35</span><span>Teaching plan for the team</span></a>
 <a class="nav-link" href="#36-rapid-fire-viva-drill" data-section="36-rapid-fire-viva-drill"><span class="nav-num">36</span><span>Rapid-fire viva drill</span></a>
 <a class="nav-link" href="#37-answers-to-the-most-dangerous-viva-questions" data-section="37-answers-to-the-most-dangerous-viva-questions"><span class="nav-num">37</span><span>Answers to the most dangerous viva questions</span></a>
 <a class="nav-link" href="#38-current-limitations-we-should-be-able-to-admit" data-section="38-current-limitations-we-should-be-able-to-admit"><span class="nav-num">38</span><span>Current limitations we should be able to admit</span></a>
 <a class="nav-link" href="#39-before-submission-checklist" data-section="39-before-submission-checklist"><span class="nav-num">39</span><span>Before-submission checklist</span></a>
 </div></div>
-<div class="nav-group"><button class="nav-group-title" type="button" aria-expanded="true"><span>Keep it updated</span><span class="chev">⌄</span></button><div class="nav-group-links">
+<div class="nav-group collapsed"><button class="nav-group-title" type="button" aria-expanded="false"><span>Keep it updated</span><span class="chev">⌄</span></button><div class="nav-group-links">
 <a class="nav-link" href="#40-update-protocol-for-this-master-file" data-section="40-update-protocol-for-this-master-file"><span class="nav-num">40</span><span>Update protocol for this master file</span></a>
 <a class="nav-link" href="#41-change-log" data-section="41-change-log"><span class="nav-num">41</span><span>Change log</span></a>
 <a class="nav-link" href="#42-ultra-short-emergency-summary" data-section="42-ultra-short-emergency-summary"><span class="nav-num">42</span><span>Ultra-short emergency summary</span></a>
@@ -81,7 +82,6 @@
     </nav>
     <div class="sidebar-foot">
       <a href="https://github.com/QUENJiX/campus-navigation-system">GitHub repository ↗</a>
-      <a href="src/main.cpp">Open main.cpp ↗</a>
     </div>
   </aside>
 
@@ -104,9 +104,9 @@
     </header>
 
     <div class="content-shell">
-      <div class="callout intro-callout"><strong>How to use it:</strong> don't try to memorize this page. Use the left nav. When you're teaching a member, open their section and their viva bank side by side with the code.</div>
+      <div class="callout intro-callout"><strong>How to use it:</strong> don't try to memorize this page. The left nav starts collapsed and automatically opens only the group for the section you are currently reading. You can also hide the whole sidebar when you want more room for the main content.</div>
       <article class="guide-content">
-        <p><strong>Document version:</strong> 1.0<br />
+        <p><strong>Document version:</strong> 1.1<br />
 <strong>Current code baseline:</strong> <code>CampusNavigationSystem_KR_Style</code><br />
 <strong>Course:</strong> CSE225L — Data Structures and Algorithms Lab<br />
 <strong>Project:</strong> Campus Navigation System<br />
@@ -436,39 +436,31 @@ Gallery -&gt; Upper Plaza
 <p>The maximum degree being <strong>6</strong> matters in viva if somebody tries to replace the linked-list adjacency lists with the Lab 5 fixed-size array-based <code>UnsortedType</code>, whose manual uses <code>SIZE = 5</code>. As-is, that array would be too small for Ground Floor. The array-based alternative must use a capacity of at least 6, preferably <code>MAX_LOCATIONS</code> or another safe value such as 25.</p>
 <hr />
 <h1 id="7-graph-visualization" class="anchor-heading">7. Graph visualization<a class="heading-link" href="#7-graph-visualization" aria-label="Link to this section">#</a></h1>
-<div class="visual-card">
-  <img class="graph-image" src="assets/campus-graph.svg" alt="Simplified campus graph showing the 18 vertices and their connections">
-  <p class="figure-note">This is the simplified graph used by the program. It is a graph model, not an architectural floor plan.</p>
+<p>This diagram is the <strong>connectivity model used by the program</strong>. It is not trying to redraw the physical campus. Read it as: <em>which modeled place connects directly to which other modeled place?</em></p>
+
+<div class="graph-legend" aria-label="Graph legend">
+  <span><i class="legend-dot entrance"></i>Entrance</span>
+  <span><i class="legend-dot building"></i>Building / destination</span>
+  <span><i class="legend-dot ground"></i>Ground Floor hub</span>
+  <span><i class="legend-dot upper"></i>Upper Plaza hub</span>
 </div>
 
-<p>This is a conceptual graph view, not a floor-plan drawing.</p>
-<pre><code class="language-mermaid">graph TD
-    G1[Gate 1] --- SAC[SAC]
+<div class="visual-card graph-card">
+  <a class="graph-link" href="assets/campus-graph.svg" target="_blank" rel="noopener" title="Open the graph full size">
+    <img class="graph-image" src="assets/campus-graph.svg" alt="Exact campus navigation graph with 18 numbered vertices grouped into entrances, the ground-floor network, and the Upper Plaza network">
+  </a>
+  <p class="figure-note"><strong>Exact topology used by the project.</strong> The numbers are the same IDs used in <code>main.cpp</code>. Every line is one of the 19 undirected edges in the source-of-truth edge list. Click the diagram to open it full size.</p>
+</div>
 
-    G8[Gate 8] --- NAC[NAC]
-    G8 --- CAFE[Cafeteria]
+<h2 id="how-to-read-the-graph" class="anchor-heading">How to read this graph<a class="heading-link" href="#how-to-read-the-graph" aria-label="Link to this section">#</a></h2>
+<div class="explain-grid">
+  <div class="explain-card"><strong>Gate 1 side</strong><span>Gate 1 connects to SAC. SAC then connects into the main network through Ground Floor.</span></div>
+  <div class="explain-card"><strong>Gate 8 side</strong><span>Gate 8 has two modeled direct routes: one to NAC and one to Cafeteria.</span></div>
+  <div class="explain-card"><strong>Main hub</strong><span>Ground Floor has the highest current degree. It ties NAC, SAC, Admin, Book Shop, Cafeteria, and Upper Plaza together.</span></div>
+  <div class="explain-card"><strong>Second floor</strong><span>Ground Floor ↔ Upper Plaza is the bridge into the second-floor network. Upper Plaza then connects to Student Affairs, Auditorium, Central Library, and Gallery.</span></div>
+</div>
 
-    ADMIN[Administrative Building] --- GF[Ground Floor]
-    ADMIN --- BOOK[Book Shop &amp; Stationery]
-
-    NAC --- GF
-    NAC --- FL[Female Lounge]
-    NAC --- ATM[City Bank ATM]
-    NAC --- PLAY[Playground]
-
-    SAC --- GF
-    SAC --- ML[Male Lounge]
-    SAC --- MED[Medical Center]
-
-    GF --- UP[Upper Plaza]
-    GF --- BOOK
-    GF --- CAFE
-
-    UP --- SA[Student Affairs]
-    UP --- AUD[Auditorium]
-    UP --- LIB[Central Library]
-    UP --- GAL[Gallery]
-</code></pre>
+<div class="callout"><strong>The easiest mental model:</strong> NAC is one branch, SAC is another branch, Admin/Cafeteria feed into Ground Floor, and Ground Floor connects upward to the Upper Plaza branch. The graph is about direct modeled connections, not exact physical distance.</div>
 <hr />
 <h1 id="8-why-the-graph-is-undirected-and-unweighted" class="anchor-heading">8. Why the graph is undirected and unweighted<a class="heading-link" href="#8-why-the-graph-is-undirected-and-unweighted" aria-label="Link to this section">#</a></h1>
 <h2 id="undirected" class="anchor-heading">Undirected<a class="heading-link" href="#undirected" aria-label="Link to this section">#</a></h2>
@@ -2206,6 +2198,15 @@ v2.0 = major redesign
 </code></pre>
 <hr />
 <h1 id="41-change-log" class="anchor-heading">41. Change log<a class="heading-link" href="#41-change-log" aria-label="Link to this section">#</a></h1>
+<h2 id="v1-1-2026-08-15" class="anchor-heading">v1.1 — 2026-08-15<a class="heading-link" href="#v1-1-2026-08-15" aria-label="Link to this section">#</a></h2>
+<ul>
+<li>Made the whole desktop sidebar collapsible.</li>
+<li>Changed sidebar groups to an automatic accordion: everything starts collapsed, and only the group containing the section currently being read opens while scrolling.</li>
+<li>Removed the unnecessary <code>main.cpp</code> shortcut from the sidebar footer.</li>
+<li>Changed the Back to top button to a high-contrast white button.</li>
+<li>Rebuilt the campus graph visualization around the exact 18 vertices and 19 edges, grouped into entrances, the main ground-floor network, and the Upper Plaza network.</li>
+<li>Removed the redundant raw Mermaid graph block and added a simpler explanation of how to read the topology.</li>
+</ul>
 <h2 id="v1-0-2026-08-15" class="anchor-heading">v1.0 — 2026-08-15<a class="heading-link" href="#v1-0-2026-08-15" aria-label="Link to this section">#</a></h2>
 <ul>
 <li>Established comprehensive project/team/viva master guide.</li>

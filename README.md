@@ -39,3 +39,7 @@ Then open `http://localhost:8000`.
 ## Source-of-truth rule
 
 If the graph, code, member responsibilities, or viva plan changes, update the website in the same commit. The final vertex/edge tables on the site override older sketches.
+
+## Handbook navigation
+
+The handbook sidebar is collapsible. All navigation groups start closed, and the group containing the section currently being read opens automatically as you scroll. The graph visualization is an exact topology diagram of the 18 vertices and 19 undirected edges used by the code.
