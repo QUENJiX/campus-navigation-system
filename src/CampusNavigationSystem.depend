@@ -1,0 +1,54 @@
+# depslib dependency file v1.0
+1787062632 source:f:\campusnavigationsystem\src\campusgraph.cpp
+	<iostream>
+	<iomanip>
+	"campusgraph.h"
+	"unsortedtype.cpp"
+	"stacktype.cpp"
+	"queuetype.cpp"
+
+1786805948 f:\campusnavigationsystem\src\campusgraph.h
+	<string>
+	"unsortedtype.h"
+	"stacktype.h"
+	"queuetype.h"
+
+1786805948 f:\campusnavigationsystem\src\unsortedtype.h
+
+1786805948 f:\campusnavigationsystem\src\stacktype.h
+
+1786805948 f:\campusnavigationsystem\src\queuetype.h
+
+1786805948 f:\campusnavigationsystem\src\unsortedtype.cpp
+	"unsortedtype.h"
+	<iostream>
+
+1786805948 f:\campusnavigationsystem\src\stacktype.cpp
+	<iostream>
+	<new>
+	"stacktype.h"
+
+1786805948 f:\campusnavigationsystem\src\queuetype.cpp
+	"queuetype.h"
+	<iostream>
+	<new>
+
+1787062629 source:f:\campusnavigationsystem\src\main.cpp
+	<iostream>
+	<string>
+	"campusgraph.h"
+
+1786805948 source:f:\campusnavigationsystem\src\queuetype.cpp
+	"queuetype.h"
+	<iostream>
+	<new>
+
+1786805948 source:f:\campusnavigationsystem\src\stacktype.cpp
+	<iostream>
+	<new>
+	"stacktype.h"
+
+1786805948 source:f:\campusnavigationsystem\src\unsortedtype.cpp
+	"unsortedtype.h"
+	<iostream>
+

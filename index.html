@@ -64,7 +64,7 @@
 <a class="nav-link" href="#31-what-should-go-into-the-3-5-page-report" data-section="31-what-should-go-into-the-3-5-page-report"><span class="nav-num">31</span><span>What should go into the 3-5 page report</span></a>
 <a class="nav-link" href="#32-important-code-details-that-are-easy-to-forget" data-section="32-important-code-details-that-are-easy-to-forget"><span class="nav-num">32</span><span>Important code details that are easy to forget</span></a>
 <a class="nav-link" href="#33-potential-improvements-we-should-not-add-unless-needed" data-section="33-potential-improvements-we-should-not-add-unless-needed"><span class="nav-num">33</span><span>Potential improvements we should NOT add unless needed</span></a>
-<a class="nav-link" href="#34-possible-simple-improvements-if-instructor-requests-them" data-section="34-possible-simple-improvements-if-instructor-requests-them"><span class="nav-num">34</span><span>Possible simple improvements if instructor requests them</span></a>
+<a class="nav-link" href="#34-implemented-extensions-beyond-the-original-requirements" data-section="34-implemented-extensions-beyond-the-original-requirements"><span class="nav-num">34</span><span>Implemented extensions beyond the original requirements</span></a>
 </div></div>
 <div class="nav-group collapsed"><button class="nav-group-title" type="button" aria-expanded="false"><span>Teach the team</span><span class="chev">⌄</span></button><div class="nav-group-links">
 <a class="nav-link" href="#35-teaching-plan-for-the-team" data-section="35-teaching-plan-for-the-team"><span class="nav-num">35</span><span>Teaching plan for the team</span></a>
@@ -92,8 +92,8 @@
       <p class="hero-copy">This is the one place we use when we sit together and go through the project. Start with the map and graph, then the code, then each member's part, then grind the viva variations until nobody freezes when the instructor changes something.</p>
       <div class="stat-grid">
         <div class="stat"><strong>18</strong><span>vertices</span></div>
-        <div class="stat"><strong>19</strong><span>undirected edges</span></div>
-        <div class="stat"><strong>363</strong><span>nonblank project lines</span></div>
+        <div class="stat"><strong>23</strong><span>undirected edges</span></div>
+        <div class="stat"><strong>649</strong><span>nonblank project lines</span></div>
         <div class="stat"><strong>5</strong><span>team members</span></div>
       </div>
       <div class="hero-actions">
@@ -106,8 +106,8 @@
     <div class="content-shell">
       <div class="callout intro-callout"><strong>How to use it:</strong> don't try to memorize this page. The left nav starts collapsed and automatically opens only the group for the section you are currently reading. You can also hide the whole sidebar when you want more room for the main content.</div>
       <article class="guide-content">
-        <p><strong>Document version:</strong> 1.1<br />
-<strong>Current code baseline:</strong> <code>CampusNavigationSystem_KR_Style</code><br />
+        <p><strong>Document version:</strong> 1.2<br />
+<strong>Current code baseline:</strong> <code>campus-navigation-system-local-v1.2</code><br />
 <strong>Course:</strong> CSE225L — Data Structures and Algorithms Lab<br />
 <strong>Project:</strong> Campus Navigation System<br />
 <strong>Purpose of this file:</strong> This is the single working reference for understanding, teaching, dividing, demonstrating, modifying, and defending the project in viva. Future project changes should be reflected here so that this document remains the source of truth.</p>
@@ -136,6 +136,7 @@
 <li><strong>Shortest path in an unweighted graph</strong></li>
 <li><strong>Dynamic addition and removal of roads</strong></li>
 </ul>
+<p><strong>Current extension set:</strong> beyond those required bullets, the program also provides direct-edge checking, direct-neighbor display, degree, graph statistics, reachability checking, and locations-within-N-hops search, in addition to ID/name search and full route reconstruction.</p>
 <p>The course project guidance also evaluates implementation, correctness, understanding, code quality, demonstration, and individual viva. The project guidance warns against relying on STL containers to implement the required data structures. This is why the project uses the ADTs from the course labs rather than <code>vector</code>, STL <code>list</code>, STL <code>queue</code>, STL <code>stack</code>, <code>map</code>, etc.</p>
 <h3 id="what-this-means-for-our-design" class="anchor-heading">What this means for our design<a class="heading-link" href="#what-this-means-for-our-design" aria-label="Link to this section">#</a></h3>
 <p>The project is not supposed to be a Google Maps clone. It is a Data Structures and Algorithms project where a campus map becomes a graph.</p>
@@ -293,134 +294,56 @@
 <h1 id="5-current-source-of-truth-edge-list" class="anchor-heading">5. Current source-of-truth edge list<a class="heading-link" href="#5-current-source-of-truth-edge-list" aria-label="Link to this section">#</a></h1>
 <p>All current campus roads are treated as <strong>undirected</strong>. <code>A &lt;-&gt; B</code> means both A can reach B and B can reach A.</p>
 <table>
-<thead>
-<tr>
-  <th style="text-align:right">#</th>
-  <th>Edge</th>
-  <th>Meaning</th>
-</tr>
-</thead>
+<thead><tr><th style="text-align:right">#</th><th>Edge</th><th>Meaning</th></tr></thead>
 <tbody>
-<tr>
-  <td style="text-align:right">1</td>
-  <td>Gate 1 <code>&lt;-&gt;</code> SAC</td>
-  <td>Gate 1 enters the SAC side</td>
-</tr>
-<tr>
-  <td style="text-align:right">2</td>
-  <td>Gate 8 <code>&lt;-&gt;</code> NAC</td>
-  <td>Gate 8 can lead toward NAC</td>
-</tr>
-<tr>
-  <td style="text-align:right">3</td>
-  <td>Gate 8 <code>&lt;-&gt;</code> Cafeteria</td>
-  <td>Gate 8 ground-floor route toward Cafeteria</td>
-</tr>
-<tr>
-  <td style="text-align:right">4</td>
-  <td>Administrative Building <code>&lt;-&gt;</code> Ground Floor</td>
-  <td>Admin connects to common ground-floor circulation</td>
-</tr>
-<tr>
-  <td style="text-align:right">5</td>
-  <td>Administrative Building <code>&lt;-&gt;</code> Book Shop &amp; Stationery</td>
-  <td>Direct useful access</td>
-</tr>
-<tr>
-  <td style="text-align:right">6</td>
-  <td>NAC <code>&lt;-&gt;</code> Ground Floor</td>
-  <td>NAC connects to common ground floor</td>
-</tr>
-<tr>
-  <td style="text-align:right">7</td>
-  <td>NAC <code>&lt;-&gt;</code> Female Lounge</td>
-  <td>Female Lounge belongs to/accessed through NAC side</td>
-</tr>
-<tr>
-  <td style="text-align:right">8</td>
-  <td>NAC <code>&lt;-&gt;</code> City Bank ATM</td>
-  <td>ATM is near the NAC entrance</td>
-</tr>
-<tr>
-  <td style="text-align:right">9</td>
-  <td>NAC <code>&lt;-&gt;</code> Playground</td>
-  <td>NAC-side access to Playground</td>
-</tr>
-<tr>
-  <td style="text-align:right">10</td>
-  <td>SAC <code>&lt;-&gt;</code> Ground Floor</td>
-  <td>SAC connects to common ground floor</td>
-</tr>
-<tr>
-  <td style="text-align:right">11</td>
-  <td>SAC <code>&lt;-&gt;</code> Male Lounge</td>
-  <td>Male Lounge belongs to/accessed through SAC side</td>
-</tr>
-<tr>
-  <td style="text-align:right">12</td>
-  <td>SAC <code>&lt;-&gt;</code> Medical Center</td>
-  <td>Medical Center is reached through SAC</td>
-</tr>
-<tr>
-  <td style="text-align:right">13</td>
-  <td>Ground Floor <code>&lt;-&gt;</code> Upper Plaza</td>
-  <td>Vertical circulation between floors</td>
-</tr>
-<tr>
-  <td style="text-align:right">14</td>
-  <td>Ground Floor <code>&lt;-&gt;</code> Book Shop &amp; Stationery</td>
-  <td>Common route to Book Shop area</td>
-</tr>
-<tr>
-  <td style="text-align:right">15</td>
-  <td>Ground Floor <code>&lt;-&gt;</code> Cafeteria</td>
-  <td>Common ground-floor access</td>
-</tr>
-<tr>
-  <td style="text-align:right">16</td>
-  <td>Upper Plaza <code>&lt;-&gt;</code> Student Affairs</td>
-  <td>Second-floor hub connection</td>
-</tr>
-<tr>
-  <td style="text-align:right">17</td>
-  <td>Upper Plaza <code>&lt;-&gt;</code> Auditorium</td>
-  <td>Auditorium accessed from Upper Plaza</td>
-</tr>
-<tr>
-  <td style="text-align:right">18</td>
-  <td>Upper Plaza <code>&lt;-&gt;</code> Central Library</td>
-  <td>Library accessed from Upper Plaza</td>
-</tr>
-<tr>
-  <td style="text-align:right">19</td>
-  <td>Upper Plaza <code>&lt;-&gt;</code> Gallery</td>
-  <td>Gallery accessed from Upper Plaza</td>
-</tr>
+<tr><td style="text-align:right">1</td><td>Gate 1 <code>&lt;-&gt;</code> SAC</td><td>Gate 1 enters the SAC side</td></tr>
+<tr><td style="text-align:right">2</td><td>Gate 8 <code>&lt;-&gt;</code> NAC</td><td>Gate 8 can lead toward NAC</td></tr>
+<tr><td style="text-align:right">3</td><td>Gate 8 <code>&lt;-&gt;</code> Cafeteria</td><td>Gate 8 ground-floor route toward Cafeteria</td></tr>
+<tr><td style="text-align:right">4</td><td>Administrative Building <code>&lt;-&gt;</code> Ground Floor</td><td>Admin connects to common ground-floor circulation</td></tr>
+<tr><td style="text-align:right">5</td><td>Administrative Building <code>&lt;-&gt;</code> Book Shop &amp; Stationery</td><td>Direct access between Admin and Book Shop</td></tr>
+<tr><td style="text-align:right">6</td><td>NAC <code>&lt;-&gt;</code> Ground Floor</td><td>NAC connects to common ground floor</td></tr>
+<tr><td style="text-align:right">7</td><td>Ground Floor <code>&lt;-&gt;</code> Female Lounge</td><td>Female Lounge connects directly to Ground Floor</td></tr>
+<tr><td style="text-align:right">8</td><td>NAC <code>&lt;-&gt;</code> City Bank ATM</td><td>ATM is near the NAC entrance</td></tr>
+<tr><td style="text-align:right">9</td><td>NAC <code>&lt;-&gt;</code> Playground</td><td>NAC-side access to Playground</td></tr>
+<tr><td style="text-align:right">10</td><td>SAC <code>&lt;-&gt;</code> Ground Floor</td><td>SAC connects to common ground floor</td></tr>
+<tr><td style="text-align:right">11</td><td>Ground Floor <code>&lt;-&gt;</code> Male Lounge</td><td>Male Lounge connects directly to Ground Floor</td></tr>
+<tr><td style="text-align:right">12</td><td>SAC <code>&lt;-&gt;</code> Medical Center</td><td>Medical Center is reached through SAC</td></tr>
+<tr><td style="text-align:right">13</td><td>Ground Floor <code>&lt;-&gt;</code> Upper Plaza</td><td>Vertical circulation between floors</td></tr>
+<tr><td style="text-align:right">14</td><td>Ground Floor <code>&lt;-&gt;</code> Book Shop &amp; Stationery</td><td>Common route to Book Shop area</td></tr>
+<tr><td style="text-align:right">15</td><td>Ground Floor <code>&lt;-&gt;</code> Cafeteria</td><td>Cafeteria sits in the central ground-floor network</td></tr>
+<tr><td style="text-align:right">16</td><td>NAC <code>&lt;-&gt;</code> Cafeteria</td><td>Cafeteria directly connects to the NAC side</td></tr>
+<tr><td style="text-align:right">17</td><td>SAC <code>&lt;-&gt;</code> Cafeteria</td><td>Cafeteria directly connects to the SAC side</td></tr>
+<tr><td style="text-align:right">18</td><td>Upper Plaza <code>&lt;-&gt;</code> Student Affairs</td><td>Second-floor hub connection</td></tr>
+<tr><td style="text-align:right">19</td><td>Upper Plaza <code>&lt;-&gt;</code> Auditorium</td><td>Auditorium accessed from Upper Plaza</td></tr>
+<tr><td style="text-align:right">20</td><td>Upper Plaza <code>&lt;-&gt;</code> Central Library</td><td>Library connects to Upper Plaza</td></tr>
+<tr><td style="text-align:right">21</td><td>Upper Plaza <code>&lt;-&gt;</code> Gallery</td><td>Gallery connects to Upper Plaza</td></tr>
+<tr><td style="text-align:right">22</td><td>Central Library <code>&lt;-&gt;</code> Gallery</td><td>Library and Gallery have a direct connection</td></tr>
+<tr><td style="text-align:right">23</td><td>SAC <code>&lt;-&gt;</code> Central Library</td><td>Central Library also has direct SAC access</td></tr>
 </tbody>
 </table>
-<p><strong>Current number of undirected edges:</strong> 19</p>
+<p><strong>Current number of undirected edges:</strong> 23</p>
 <hr />
 <h1 id="6-current-adjacency-list" class="anchor-heading">6. Current adjacency list<a class="heading-link" href="#6-current-adjacency-list" aria-label="Link to this section">#</a></h1>
-<p>Because <code>UnsortedType::Insert()</code> inserts at the head of the linked list, the printed order is reverse-ish relative to road insertion order. This is expected and does not change the graph.</p>
+<p>Because <code>UnsortedType::Insert()</code> inserts at the head of the linked list, the printed order reflects reverse insertion order for each vertex. This is expected and does not change the graph.</p>
 <p>Current program output:</p>
 <pre><code class="language-text">Gate 1 -&gt; SAC
 Gate 8 -&gt; Cafeteria, NAC
 Administrative Building -&gt; Book Shop &amp; Stationery, Ground Floor
-NAC -&gt; Playground, City Bank ATM, Female Lounge, Ground Floor, Gate 8
-SAC -&gt; Medical Center, Male Lounge, Ground Floor, Gate 1
-Ground Floor -&gt; Cafeteria, Book Shop &amp; Stationery, Upper Plaza, SAC, NAC, Administrative Building
+NAC -&gt; Cafeteria, Playground, City Bank ATM, Ground Floor, Gate 8
+SAC -&gt; Central Library, Cafeteria, Medical Center, Ground Floor, Gate 1
+Ground Floor -&gt; Cafeteria, Book Shop &amp; Stationery, Upper Plaza, Male Lounge, SAC, Female Lounge, NAC, Administrative Building
 Upper Plaza -&gt; Gallery, Central Library, Auditorium, Student Affairs, Ground Floor
-Female Lounge -&gt; NAC
-Male Lounge -&gt; SAC
+Female Lounge -&gt; Ground Floor
+Male Lounge -&gt; Ground Floor
 Book Shop &amp; Stationery -&gt; Ground Floor, Administrative Building
 Medical Center -&gt; SAC
 City Bank ATM -&gt; NAC
-Cafeteria -&gt; Ground Floor, Gate 8
+Cafeteria -&gt; SAC, NAC, Ground Floor, Gate 8
 Student Affairs -&gt; Upper Plaza
 Auditorium -&gt; Upper Plaza
-Central Library -&gt; Upper Plaza
+Central Library -&gt; SAC, Gallery, Upper Plaza
 Playground -&gt; NAC
-Gallery -&gt; Upper Plaza
+Gallery -&gt; Central Library, Upper Plaza
 </code></pre>
 <h3 id="degrees-worth-remembering" class="anchor-heading">Degrees worth remembering<a class="heading-link" href="#degrees-worth-remembering" aria-label="Link to this section">#</a></h3>
 <ul>
@@ -428,12 +351,15 @@ Gallery -&gt; Upper Plaza
 <li>Gate 8: 2</li>
 <li>Administrative Building: 2</li>
 <li>NAC: 5</li>
-<li>SAC: 4</li>
-<li><strong>Ground Floor: 6, the maximum current degree</strong></li>
+<li>SAC: 5</li>
+<li><strong>Ground Floor: 8, the maximum current degree</strong></li>
 <li>Upper Plaza: 5</li>
-<li>Single-leaf destinations such as Female Lounge, Male Lounge, Medical Center, ATM, Student Affairs, Auditorium, Central Library, Playground, Gallery: degree 1</li>
+<li>Cafeteria: 4</li>
+<li>Central Library: 3</li>
+<li>Book Shop &amp; Stationery and Gallery: 2 each</li>
+<li>Female Lounge, Male Lounge, Medical Center, ATM, Student Affairs, Auditorium, and Playground: 1 each</li>
 </ul>
-<p>The maximum degree being <strong>6</strong> matters in viva if somebody tries to replace the linked-list adjacency lists with the Lab 5 fixed-size array-based <code>UnsortedType</code>, whose manual uses <code>SIZE = 5</code>. As-is, that array would be too small for Ground Floor. The array-based alternative must use a capacity of at least 6, preferably <code>MAX_LOCATIONS</code> or another safe value such as 25.</p>
+<p>The maximum degree being <strong>8</strong> matters in viva if somebody replaces the linked adjacency lists with the Lab 5 fixed-size array-based <code>UnsortedType</code>, whose manual uses <code>SIZE = 5</code>. That capacity is too small for Ground Floor. The alternate array implementation must use capacity at least 8, preferably <code>MAX_LOCATIONS</code> or another safe value such as 25.</p>
 <hr />
 <h1 id="7-graph-visualization" class="anchor-heading">7. Graph visualization<a class="heading-link" href="#7-graph-visualization" aria-label="Link to this section">#</a></h1>
 <p>This diagram is the <strong>connectivity model used by the program</strong>. It is not trying to redraw the physical campus. Read it as: <em>which modeled place connects directly to which other modeled place?</em></p>
@@ -447,20 +373,20 @@ Gallery -&gt; Upper Plaza
 
 <div class="visual-card graph-card">
   <a class="graph-link" href="assets/campus-graph.svg" target="_blank" rel="noopener" title="Open the graph full size">
-    <img class="graph-image" src="assets/campus-graph.svg" alt="Exact campus navigation graph with 18 numbered vertices grouped into entrances, the ground-floor network, and the Upper Plaza network">
+    <img class="graph-image" src="assets/campus-graph.svg" alt="Exact campus navigation graph with 18 numbered vertices and 23 undirected edges">
   </a>
-  <p class="figure-note"><strong>Exact topology used by the project.</strong> The numbers are the same IDs used in <code>main.cpp</code>. Every line is one of the 19 undirected edges in the source-of-truth edge list. Click the diagram to open it full size.</p>
+  <p class="figure-note"><strong>Exact topology used by the project.</strong> The numbers are the same IDs used in <code>main.cpp</code>. Every line is one of the 23 undirected edges in the source-of-truth edge list. Click the diagram to open it full size.</p>
 </div>
 
 <h2 id="how-to-read-the-graph" class="anchor-heading">How to read this graph<a class="heading-link" href="#how-to-read-the-graph" aria-label="Link to this section">#</a></h2>
 <div class="explain-grid">
   <div class="explain-card"><strong>Gate 1 side</strong><span>Gate 1 connects to SAC. SAC then connects into the main network through Ground Floor.</span></div>
-  <div class="explain-card"><strong>Gate 8 side</strong><span>Gate 8 has two modeled direct routes: one to NAC and one to Cafeteria.</span></div>
-  <div class="explain-card"><strong>Main hub</strong><span>Ground Floor has the highest current degree. It ties NAC, SAC, Admin, Book Shop, Cafeteria, and Upper Plaza together.</span></div>
-  <div class="explain-card"><strong>Second floor</strong><span>Ground Floor ↔ Upper Plaza is the bridge into the second-floor network. Upper Plaza then connects to Student Affairs, Auditorium, Central Library, and Gallery.</span></div>
+  <div class="explain-card"><strong>Gate 8 side</strong><span>Gate 8 has two modeled direct routes: one to NAC and one to Cafeteria. Cafeteria also directly connects to both NAC and SAC.</span></div>
+  <div class="explain-card"><strong>Main hub</strong><span>Ground Floor has the highest current degree. It directly ties NAC, SAC, Admin, Book Shop, Cafeteria, both lounges, and Upper Plaza together.</span></div>
+  <div class="explain-card"><strong>Second floor</strong><span>Ground Floor ↔ Upper Plaza is the main bridge into the second-floor network. Upper Plaza connects to Student Affairs, Auditorium, Central Library, and Gallery; Central Library also connects directly to Gallery and SAC.</span></div>
 </div>
 
-<div class="callout"><strong>The easiest mental model:</strong> NAC is one branch, SAC is another branch, Admin/Cafeteria feed into Ground Floor, and Ground Floor connects upward to the Upper Plaza branch. The graph is about direct modeled connections, not exact physical distance.</div>
+<div class="callout"><strong>The easiest mental model:</strong> NAC and SAC both feed the central ground-floor network; Cafeteria links directly to both, both lounges connect to Ground Floor, and Central Library has extra direct links to SAC and Gallery. The graph is about direct modeled connections, not exact physical distance.</div>
 <hr />
 <h1 id="8-why-the-graph-is-undirected-and-unweighted" class="anchor-heading">8. Why the graph is undirected and unweighted<a class="heading-link" href="#8-why-the-graph-is-undirected-and-unweighted" aria-label="Link to this section">#</a></h1>
 <h2 id="undirected" class="anchor-heading">Undirected<a class="heading-link" href="#undirected" aria-label="Link to this section">#</a></h2>
@@ -472,7 +398,7 @@ adjacencyList[location2].Insert(location1);
 <h2 id="unweighted" class="anchor-heading">Unweighted<a class="heading-link" href="#unweighted" aria-label="Link to this section">#</a></h2>
 <p>The assignment asks for shortest path in an unweighted graph. Therefore every direct connection has conceptual cost 1.</p>
 <p>Example:</p>
-<pre><code class="language-text">Gate 1 -&gt; SAC -&gt; Ground Floor -&gt; NAC -&gt; Playground
+<pre><code class="language-text">Gate 1 -&gt; SAC -&gt; Cafeteria -&gt; NAC -&gt; Playground
 </code></pre>
 <p>has 4 edges, so the shortest-path length is 4.</p>
 <p>This is <strong>not claiming four meters, four minutes, or four floors</strong>. It means four modeled graph steps.</p>
@@ -515,28 +441,28 @@ adjacencyList[location2].Insert(location1);
 <tbody>
 <tr>
   <td><code>main.cpp</code></td>
-  <td style="text-align:right">123</td>
-  <td style="text-align:right">115</td>
+  <td style="text-align:right">198</td>
+  <td style="text-align:right">183</td>
 </tr>
 <tr>
   <td><code>campusgraph.h</code></td>
-  <td style="text-align:right">44</td>
-  <td style="text-align:right">34</td>
+  <td style="text-align:right">51</td>
+  <td style="text-align:right">40</td>
 </tr>
 <tr>
   <td><code>campusgraph.cpp</code></td>
-  <td style="text-align:right">277</td>
-  <td style="text-align:right">214</td>
+  <td style="text-align:right">539</td>
+  <td style="text-align:right">426</td>
 </tr>
 <tr>
   <td><strong>Project-specific total</strong></td>
-  <td style="text-align:right"><strong>444</strong></td>
-  <td style="text-align:right"><strong>363</strong></td>
+  <td style="text-align:right"><strong>788</strong></td>
+  <td style="text-align:right"><strong>649</strong></td>
 </tr>
 </tbody>
 </table>
-<p>The whole source set, including reused lab ADTs, is currently 779 raw lines.</p>
-<p>So mentally, this is not a mysterious 779-line custom application. It is roughly <strong>363 nonblank lines of actual campus-project logic sitting on top of taught ADTs</strong>.</p>
+<p>The whole source set, including reused lab ADTs, is currently 1,123 raw lines.</p>
+<p>So mentally, this is not a mysterious 1,123-line source set. It is roughly <strong>649 nonblank lines of actual campus-project logic sitting on top of taught ADTs</strong>.</p>
 <hr />
 <h1 id="10-coding-style-rule" class="anchor-heading">10. Coding style rule<a class="heading-link" href="#10-coding-style-rule" aria-label="Link to this section">#</a></h1>
 <p>Current formatting style is K&amp;R-style braces:</p>
@@ -577,7 +503,7 @@ adjacencyList[location2].Insert(location1);
 <p>Show the adjacency list using an array-based list instead.</p>
 </blockquote>
 <p>The same high-level ADT operations can be used, but the underlying storage becomes an array.</p>
-<p><strong>Important caveat:</strong> the manual's sample <code>SIZE = 5</code> is too small for our Ground Floor vertex, which currently has degree 6. Increase the array capacity for the alternate version.</p>
+<p><strong>Important caveat:</strong> the manual's sample <code>SIZE = 5</code> is too small for our Ground Floor vertex, which currently has degree 8. Increase the array capacity for the alternate version.</p>
 <hr />
 <h2 id="lab-6-sorted-list-array-based" class="anchor-heading">Lab 6 — Sorted List, Array-Based<a class="heading-link" href="#lab-6-sorted-list-array-based" aria-label="Link to this section">#</a></h2>
 <p><strong>What it teaches:</strong> sorted insertion, binary search, deletion from a sorted array.</p>
@@ -745,6 +671,12 @@ Graph Lab                             |
         +void ShortestPath(int start, int end)
         +void SearchByID(int id)
         +void SearchByName(string name)
+        +void CheckDirectConnection(int a, int b)
+        +void DisplayNeighbors(int id)
+        +void DisplayDegree(int id)
+        +void DisplayStatistics()
+        +void Reachable(int start, int end)
+        +void LocationsWithinHops(int start, int maxHops)
     }
 
     class UnsortedType~T~ {
@@ -798,7 +730,7 @@ Graph Lab                             |
 <ul>
 <li>create the <code>CampusGraph</code> object</li>
 <li>add all 18 locations in the fixed ID order</li>
-<li>add all 19 initial roads</li>
+<li>add all 23 initial roads</li>
 <li>display menu</li>
 <li>collect user input</li>
 <li>call the appropriate <code>CampusGraph</code> function</li>
@@ -831,6 +763,12 @@ void DFS(int startVertex);
 void ShortestPath(int startVertex, int endVertex);
 void SearchByID(int id);
 void SearchByName(string name);
+void CheckDirectConnection(int location1, int location2);
+void DisplayNeighbors(int id);
+void DisplayDegree(int id);
+void DisplayStatistics();
+void Reachable(int startVertex, int endVertex);
+void LocationsWithinHops(int startVertex, int maxHops);
 </code></pre>
 <hr />
 <h2 id="campusgraph-cpp" class="anchor-heading"><code>campusgraph.cpp</code><a class="heading-link" href="#campusgraph-cpp" aria-label="Link to this section">#</a></h2>
@@ -846,6 +784,8 @@ void SearchByName(string name);
 <li>BFS</li>
 <li>DFS</li>
 <li>shortest path</li>
+<li>direct-connection, neighbor, degree, and statistics queries</li>
+<li>BFS-based reachability and hop-limited nearby-location search</li>
 </ul>
 <hr />
 <h2 id="unsortedtype" class="anchor-heading"><code>unsortedtype.*</code><a class="heading-link" href="#unsortedtype" aria-label="Link to this section">#</a></h2>
@@ -974,9 +914,9 @@ while queue not empty:
         enqueue unmarked neighbors
 </code></pre>
 <p>Current Gate 1 test output:</p>
-<pre><code class="language-text">BFS: Gate 1 SAC Medical Center Male Lounge Ground Floor Cafeteria
-Book Shop &amp; Stationery Upper Plaza NAC Administrative Building Gate 8
-Gallery Central Library Auditorium Student Affairs Playground City Bank ATM Female Lounge
+<pre><code class="language-text">Gate 1 SAC Central Library Cafeteria Medical Center Ground Floor
+Gallery Upper Plaza NAC Gate 8 Book Shop &amp; Stationery Male Lounge
+Female Lounge Administrative Building Auditorium Student Affairs Playground City Bank ATM
 </code></pre>
 <p>The exact traversal order depends on adjacency-list insertion order. A different valid neighbor order can produce a different valid BFS ordering while preserving BFS levels.</p>
 <hr />
@@ -1001,9 +941,9 @@ while stack not empty:
         push unmarked neighbors
 </code></pre>
 <p>Current Gate 1 test output:</p>
-<pre><code class="language-text">DFS: Gate 1 SAC Ground Floor Administrative Building Book Shop &amp; Stationery
-NAC Gate 8 Cafeteria Female Lounge City Bank ATM Playground Upper Plaza
-Student Affairs Auditorium Central Library Gallery Male Lounge Medical Center
+<pre><code class="language-text">Gate 1 SAC Ground Floor Administrative Building Book Shop &amp; Stationery
+NAC Gate 8 Cafeteria City Bank ATM Playground Female Lounge Male Lounge
+Upper Plaza Student Affairs Auditorium Central Library Gallery Medical Center
 </code></pre>
 <p>Again, exact order depends on neighbor insertion order.</p>
 <hr />
@@ -1030,17 +970,17 @@ StackType&lt;int&gt; path;
 <h3 id="meaning-of-parent" class="anchor-heading">Meaning of <code>parent[]</code><a class="heading-link" href="#meaning-of-parent" aria-label="Link to this section">#</a></h3>
 <p><code>parent[item] = vertex</code> records which vertex first discovered <code>item</code>.</p>
 <p>Example shortest route:</p>
-<pre><code class="language-text">Gate 1 -&gt; SAC -&gt; Ground Floor -&gt; NAC -&gt; Playground
+<pre><code class="language-text">Gate 1 -&gt; SAC -&gt; Cafeteria -&gt; NAC -&gt; Playground
 </code></pre>
 <p>Conceptually:</p>
 <pre><code class="language-text">parent[Playground] = NAC
-parent[NAC] = Ground Floor
-parent[Ground Floor] = SAC
+parent[NAC] = Cafeteria
+parent[Cafeteria] = SAC
 parent[SAC] = Gate 1
 parent[Gate 1] = -1
 </code></pre>
 <p>Following parents gives the route backward:</p>
-<pre><code class="language-text">Playground -&gt; NAC -&gt; Ground Floor -&gt; SAC -&gt; Gate 1
+<pre><code class="language-text">Playground -&gt; NAC -&gt; Cafeteria -&gt; SAC -&gt; Gate 1
 </code></pre>
 <p>So those IDs are pushed onto a Stack. Popping the Stack prints the route forward.</p>
 <h3 id="current-tested-example" class="anchor-heading">Current tested example<a class="heading-link" href="#current-tested-example" aria-label="Link to this section">#</a></h3>
@@ -1049,8 +989,8 @@ parent[Gate 1] = -1
 End:   16  (Playground)
 </code></pre>
 <p>Output:</p>
-<pre><code class="language-text">Shortest path: Gate 1 -&gt; SAC -&gt; Ground Floor -&gt; NAC -&gt; Playground
-Path length: 4
+<pre><code class="language-text">Route : Gate 1 -&gt; SAC -&gt; Cafeteria -&gt; NAC -&gt; Playground
+Hops  : 4
 </code></pre>
 <h3 id="important-correctness-fact" class="anchor-heading">Important correctness fact<a class="heading-link" href="#important-correctness-fact" aria-label="Link to this section">#</a></h3>
 <p>BFS gives shortest path in an <strong>unweighted</strong> graph because vertices are discovered in nondecreasing distance from the source.</p>
@@ -1078,6 +1018,38 @@ Path length: 4
 </code></pre>
 <p>Conceptually O(V) where V is number of vertices.</p>
 <p>This feature is particularly useful for viva because the instructor explicitly mentioned changing search criteria.</p>
+<hr />
+<h2 id="feature-10-check-direct-connection" class="anchor-heading">Feature 10 — Check Direct Connection<a class="heading-link" href="#feature-10-check-direct-connection" aria-label="Link to this section">#</a></h2>
+<p>Checks whether two selected locations share a direct edge. It uses <code>Search()</code> on one adjacency list, making it a project-level version of the Graph lab's edge-existence query.</p>
+<pre><code class="language-cpp">bool found;
+adjacencyList[location1].Search(location2, found);
+</code></pre>
+<hr />
+<h2 id="feature-11-show-direct-neighbors" class="anchor-heading">Feature 11 — Show Direct Neighbors<a class="heading-link" href="#feature-11-show-direct-neighbors" aria-label="Link to this section">#</a></h2>
+<p>Displays only the adjacency list of one selected location using <code>Reset()</code>, <code>Length()</code>, and <code>GetNext()</code>. This makes the adjacency-list representation visible without printing the whole graph.</p>
+<hr />
+<h2 id="feature-12-show-location-degree" class="anchor-heading">Feature 12 — Show Location Degree<a class="heading-link" href="#feature-12-show-location-degree" aria-label="Link to this section">#</a></h2>
+<p>For this undirected graph, a location's degree is simply the number of IDs stored in its adjacency list:</p>
+<pre><code class="language-cpp">adjacencyList[id].Length();
+</code></pre>
+<p>The Graph lab teaches the closely related <code>OutDegree</code> operation for directed graphs.</p>
+<hr />
+<h2 id="feature-13-campus-statistics" class="anchor-heading">Feature 13 — Campus Statistics<a class="heading-link" href="#feature-13-campus-statistics" aria-label="Link to this section">#</a></h2>
+<p>Reports the total number of locations, total undirected roads, and the most connected location. The sum of all vertex degrees is divided by 2 because each undirected road is stored in two adjacency lists.</p>
+<pre><code class="language-text">Total locations    : 18
+Total roads        : 23
+Most connected     : Ground Floor
+Direct connections : 8
+</code></pre>
+<hr />
+<h2 id="feature-14-check-reachability" class="anchor-heading">Feature 14 — Check Reachability<a class="heading-link" href="#feature-14-check-reachability" aria-label="Link to this section">#</a></h2>
+<p>Runs a BFS-style search from one location and stops when the destination is found. It answers only whether a route exists, rather than printing a full traversal or reconstructing a shortest route.</p>
+<hr />
+<h2 id="feature-15-locations-within-n-hops" class="anchor-heading">Feature 15 — Find Locations Within N Hops<a class="heading-link" href="#feature-15-locations-within-n-hops" aria-label="Link to this section">#</a></h2>
+<p>Uses a Queue and <code>distance[]</code> exactly like unweighted BFS distance logic, but stops expanding once the requested hop limit is reached. Example for NAC within 1 hop:</p>
+<pre><code class="language-text">Cafeteria, Playground, City Bank ATM, Ground Floor, Gate 8
+</code></pre>
+<p>This is a useful extension because it reuses already-taught Queue/BFS concepts instead of introducing a new algorithm.</p>
 <hr />
 <h1 id="16-important-helper-functions" class="anchor-heading">16. Important helper functions<a class="heading-link" href="#16-important-helper-functions" aria-label="Link to this section">#</a></h1>
 <h2 id="validlocation-int-id" class="anchor-heading"><code>ValidLocation(int id)</code><a class="heading-link" href="#validlocation-int-id" aria-label="Link to this section">#</a></h2>
@@ -1138,6 +1110,26 @@ for Length() items:
   <td>linear scan of names</td>
 </tr>
 <tr>
+  <td>CheckDirectConnection</td>
+  <td>O(degree(A))</td>
+  <td>search one adjacency list</td>
+</tr>
+<tr>
+  <td>DisplayNeighbors / DisplayDegree</td>
+  <td>O(degree(v)) / O(1)</td>
+  <td>iterate one list / return stored list length</td>
+</tr>
+<tr>
+  <td>DisplayStatistics</td>
+  <td>O(V)</td>
+  <td>read each adjacency-list length once</td>
+</tr>
+<tr>
+  <td>Reachable / LocationsWithinHops</td>
+  <td>O(V + E)</td>
+  <td>BFS-based graph exploration</td>
+</tr>
+<tr>
   <td>DisplayLocations</td>
   <td>O(V)</td>
   <td>visit every vertex</td>
@@ -1189,7 +1181,7 @@ for Length() items:
 <li>designed the custom campus map used to create the graph</li>
 <li>selected the meaningful navigation vertices</li>
 <li>determined direct graph connections</li>
-<li>translated physical campus layout into the 18-vertex, 19-edge graph</li>
+<li>translated physical campus layout into the current 18-vertex, 23-edge graph</li>
 <li>decided the graph abstraction is undirected and unweighted</li>
 <li>initial <code>AddLocation()</code> setup in <code>main.cpp</code></li>
 <li>initial <code>AddRoad()</code> graph construction in <code>main.cpp</code></li>
@@ -1224,6 +1216,8 @@ for Length() items:
 <li><code>MarkVertex()</code></li>
 <li><code>IsMarked()</code></li>
 <li>Queue integration for BFS</li>
+<li><code>Reachable()</code></li>
+<li><code>LocationsWithinHops()</code> using Queue + <code>distance[]</code></li>
 </ul>
 <h3 id="must-know-cold" class="anchor-heading">Must know cold<a class="heading-link" href="#must-know-cold" aria-label="Link to this section">#</a></h3>
 <ul>
@@ -1265,6 +1259,9 @@ for Length() items:
 <li>Lab 7 <code>UnsortedType</code> integration</li>
 <li><code>Insert</code>, <code>Search</code>, <code>Delete</code></li>
 <li>undirected two-way insertion/deletion</li>
+<li><code>CheckDirectConnection()</code></li>
+<li><code>DisplayNeighbors()</code> and <code>DisplayDegree()</code></li>
+<li><code>DisplayStatistics()</code></li>
 </ul>
 <h3 id="must-know-cold" class="anchor-heading">Must know cold<a class="heading-link" href="#must-know-cold" aria-label="Link to this section">#</a></h3>
 <ul>
@@ -1286,6 +1283,7 @@ for Length() items:
 <li><code>SearchByID()</code></li>
 <li><code>SearchByName()</code></li>
 <li>user-facing input/output</li>
+<li>menu integration and clean console output for options 10-15</li>
 </ul>
 <h3 id="must-know-cold" class="anchor-heading">Must know cold<a class="heading-link" href="#must-know-cold" aria-label="Link to this section">#</a></h3>
 <ul>
@@ -1313,7 +1311,7 @@ for Length() items:
 </tr>
 <tr>
   <td>Member 2</td>
-  <td>Implemented BFS traversal, adjacency retrieval for traversal, and vertex marking/visited operations using the Queue ADT.</td>
+  <td>Implemented BFS traversal, adjacency retrieval, vertex marking/visited operations, reachability checking, and hop-limited nearby-location search using the Queue ADT.</td>
 </tr>
 <tr>
   <td>Member 3</td>
@@ -1321,11 +1319,11 @@ for Length() items:
 </tr>
 <tr>
   <td>Member 4</td>
-  <td>Implemented the linked-list adjacency-list operations and dynamic road addition/removal using the Unsorted List ADT.</td>
+  <td>Implemented linked-list adjacency-list operations, dynamic road addition/removal, direct-edge checking, neighbor/degree queries, and campus graph statistics using the Unsorted List ADT.</td>
 </tr>
 <tr>
   <td>Member 5</td>
-  <td>Implemented location/connection display, ID/name searching, menu-driven user interaction, and input/output integration.</td>
+  <td>Implemented location/connection display, ID/name searching, menu-driven interaction, clean console screens, and integration of all additional feature inputs/outputs.</td>
 </tr>
 </tbody>
 </table>
@@ -1623,7 +1621,7 @@ Reset
 GetNext
 </code></pre>
 <p>because the ADT interface is similar.</p>
-<p><strong>Critical issue:</strong> Lab 5's manual capacity 5 is insufficient for Ground Floor degree 6. Use a larger capacity.</p>
+<p><strong>Critical issue:</strong> Lab 5's manual capacity 5 is insufficient for Ground Floor degree 8. Use a larger capacity.</p>
 <p>Main viva explanation:</p>
 <blockquote>
 <p>The adjacency-list concept stays the same. Only the internal representation of each list changes from dynamically linked nodes to an array.</p>
@@ -1716,8 +1714,8 @@ Search by name: O(V) with current linear scan.</p>
 <h2 id="variation-9-display-neighbors-as-ids-instead-of-names" class="anchor-heading">Variation 9 — Display neighbors as IDs instead of names<a class="heading-link" href="#variation-9-display-neighbors-as-ids-instead-of-names" aria-label="Link to this section">#</a></h2>
 <p>Print <code>neighbor</code> instead of <code>locations[neighbor]</code>.</p>
 <hr />
-<h2 id="variation-10-add-an-outdegree-degree-menu-option" class="anchor-heading">Variation 10 — Add an OutDegree/Degree menu option<a class="heading-link" href="#variation-10-add-an-outdegree-degree-menu-option" aria-label="Link to this section">#</a></h2>
-<p>For undirected graph call it Degree, but the Graph lab uses OutDegree for directed graphs.</p>
+<h2 id="variation-10-add-an-outdegree-degree-menu-option" class="anchor-heading">Variation 10 — Explain the current Degree menu option<a class="heading-link" href="#variation-10-add-an-outdegree-degree-menu-option" aria-label="Link to this section">#</a></h2>
+<p>The project now includes <code>DisplayDegree()</code>. For our undirected graph we call it Degree; the Graph lab uses OutDegree for directed graphs. The value comes directly from <code>adjacencyList[id].Length()</code>.</p>
 <hr />
 <h1 id="26-system-wide-viva-questions-everyone-should-know" class="anchor-heading">26. System-wide viva questions everyone should know<a class="heading-link" href="#26-system-wide-viva-questions-everyone-should-know" aria-label="Link to this section">#</a></h1>
 <h2 id="what-is-a-graph" class="anchor-heading">What is a graph?<a class="heading-link" href="#what-is-a-graph" aria-label="Link to this section">#</a></h2>
@@ -1810,33 +1808,34 @@ For shortest path, use Gate 1 -&gt; Playground.</p>
 <li>Gate 1 -&gt; SAC</li>
 <li>Gate 8 -&gt; Cafeteria, NAC</li>
 <li>NAC has 5 neighbors</li>
-<li>Ground Floor has 6 neighbors</li>
-<li>Upper Plaza has 5 neighbors</li>
-<li>ATM -&gt; NAC</li>
-<li>Gallery -&gt; Upper Plaza</li>
+<li>SAC has 5 neighbors</li>
+<li>Ground Floor has 8 neighbors</li>
+<li>Cafeteria has 4 neighbors and directly connects to NAC and SAC</li>
+<li>Female Lounge and Male Lounge connect directly to Ground Floor</li>
+<li>Central Library connects to Upper Plaza, Gallery, and SAC</li>
 </ul>
 <hr />
 <h2 id="test-b-bfs-from-gate-1" class="anchor-heading">Test B — BFS from Gate 1<a class="heading-link" href="#test-b-bfs-from-gate-1" aria-label="Link to this section">#</a></h2>
 <p>Current output order:</p>
-<pre><code class="language-text">Gate 1 SAC Medical Center Male Lounge Ground Floor Cafeteria
-Book Shop &amp; Stationery Upper Plaza NAC Administrative Building Gate 8
-Gallery Central Library Auditorium Student Affairs Playground City Bank ATM Female Lounge
+<pre><code class="language-text">Gate 1 SAC Central Library Cafeteria Medical Center Ground Floor
+Gallery Upper Plaza NAC Gate 8 Book Shop &amp; Stationery Male Lounge
+Female Lounge Administrative Building Auditorium Student Affairs Playground City Bank ATM
 </code></pre>
 <p>If adjacency insertion order changes, exact order may change while still being a valid BFS.</p>
 <hr />
 <h2 id="test-c-dfs-from-gate-1" class="anchor-heading">Test C — DFS from Gate 1<a class="heading-link" href="#test-c-dfs-from-gate-1" aria-label="Link to this section">#</a></h2>
 <p>Current output order:</p>
 <pre><code class="language-text">Gate 1 SAC Ground Floor Administrative Building Book Shop &amp; Stationery
-NAC Gate 8 Cafeteria Female Lounge City Bank ATM Playground Upper Plaza
-Student Affairs Auditorium Central Library Gallery Male Lounge Medical Center
+NAC Gate 8 Cafeteria City Bank ATM Playground Female Lounge Male Lounge
+Upper Plaza Student Affairs Auditorium Central Library Gallery Medical Center
 </code></pre>
 <hr />
 <h2 id="test-d-shortest-path" class="anchor-heading">Test D — Shortest path<a class="heading-link" href="#test-d-shortest-path" aria-label="Link to this section">#</a></h2>
 <pre><code class="language-text">Gate 1 -&gt; Playground
 </code></pre>
 <p>Expected:</p>
-<pre><code class="language-text">Shortest path: Gate 1 -&gt; SAC -&gt; Ground Floor -&gt; NAC -&gt; Playground
-Path length: 4
+<pre><code class="language-text">Route : Gate 1 -&gt; SAC -&gt; Cafeteria -&gt; NAC -&gt; Playground
+Hops  : 4
 </code></pre>
 <hr />
 <h2 id="test-e-search-by-id" class="anchor-heading">Test E — Search by ID<a class="heading-link" href="#test-e-search-by-id" aria-label="Link to this section">#</a></h2>
@@ -1856,8 +1855,8 @@ Path length: 4
 </code></pre>
 <hr />
 <h2 id="test-g-add-remove-dynamic-road" class="anchor-heading">Test G — Add/remove dynamic road<a class="heading-link" href="#test-g-add-remove-dynamic-road" aria-label="Link to this section">#</a></h2>
-<p>Choose a road that does not currently exist, e.g. NAC &lt;-&gt; Central Library:</p>
-<pre><code class="language-text">3 &lt;-&gt; 15
+<p>Choose a road that does not currently exist, e.g. Administrative Building &lt;-&gt; Auditorium:</p>
+<pre><code class="language-text">2 &lt;-&gt; 14
 </code></pre>
 <ol>
 <li>Add it.</li>
@@ -1866,6 +1865,21 @@ Path length: 4
 <li>Remove it.</li>
 <li>Display again and confirm it is gone in both directions.</li>
 </ol>
+<hr />
+<h2 id="test-h-direct-connection" class="anchor-heading">Test H — Direct connection check<a class="heading-link" href="#test-h-direct-connection" aria-label="Link to this section">#</a></h2>
+<p><code>NAC &lt;-&gt; Cafeteria</code> should report <strong>Directly connected</strong>.</p>
+<hr />
+<h2 id="test-i-neighbors-degree" class="anchor-heading">Test I — Neighbors and degree<a class="heading-link" href="#test-i-neighbors-degree" aria-label="Link to this section">#</a></h2>
+<p>Cafeteria should show 4 direct neighbors. Ground Floor degree should be 8.</p>
+<hr />
+<h2 id="test-j-campus-statistics" class="anchor-heading">Test J — Campus statistics<a class="heading-link" href="#test-j-campus-statistics" aria-label="Link to this section">#</a></h2>
+<p>Expected baseline: 18 locations, 23 roads, Ground Floor as most connected with degree 8.</p>
+<hr />
+<h2 id="test-k-reachability" class="anchor-heading">Test K — Reachability<a class="heading-link" href="#test-k-reachability" aria-label="Link to this section">#</a></h2>
+<p>Gate 1 to Playground should report <strong>Reachable</strong>.</p>
+<hr />
+<h2 id="test-l-within-hops" class="anchor-heading">Test L — Locations within N hops<a class="heading-link" href="#test-l-within-hops" aria-label="Link to this section">#</a></h2>
+<p>NAC within 1 hop should list Cafeteria, Playground, City Bank ATM, Ground Floor, and Gate 8.</p>
 <hr />
 <h1 id="30-recommended-project-demo-sequence" class="anchor-heading">30. Recommended project demo sequence<a class="heading-link" href="#30-recommended-project-demo-sequence" aria-label="Link to this section">#</a></h1>
 <p>For the final demonstration, avoid randomly clicking every menu item. Tell a small story:</p>
@@ -1879,8 +1893,9 @@ Path length: 4
 <li>Re-run shortest path or display connections to show the graph changed dynamically.</li>
 <li><strong>Add the road back</strong>.</li>
 <li>Search once by <strong>ID</strong> and once by <strong>name</strong>.</li>
+<li>Show one compact extension sequence: <strong>direct connection → degree/statistics → reachability → locations within 1 hop</strong>.</li>
 </ol>
-<p>This demonstrates every major requirement without turning the demo into a menu marathon.</p>
+<p>This demonstrates every major requirement plus the added graph-analysis features without turning the demo into a menu marathon.</p>
 <hr />
 <h1 id="31-what-should-go-into-the-3-5-page-report" class="anchor-heading">31. What should go into the 3-5 page report<a class="heading-link" href="#31-what-should-go-into-the-3-5-page-report" aria-label="Link to this section">#</a></h1>
 <p>The assignment guidance asks for a short report with items such as problem description, data structures, structure/class diagram, complexity, sample input/output, and demonstration material.</p>
@@ -1963,21 +1978,17 @@ Path length: 4
 </ul>
 <p>These do not increase the educational value enough to justify extra viva risk.</p>
 <hr />
-<h1 id="34-possible-simple-improvements-if-instructor-requests-them" class="anchor-heading">34. Possible simple improvements if instructor requests them<a class="heading-link" href="#34-possible-simple-improvements-if-instructor-requests-them" aria-label="Link to this section">#</a></h1>
-<p>Safe extensions grounded in current labs:</p>
+<h1 id="34-implemented-extensions-beyond-the-original-requirements" class="anchor-heading">34. Implemented extensions beyond the original requirements<a class="heading-link" href="#34-implemented-extensions-beyond-the-original-requirements" aria-label="Link to this section">#</a></h1>
+<p>The instructor indicated that useful additions beyond the five assignment bullets can earn extra credit. We therefore added extensions that reuse already-taught graph/list/Queue ideas instead of introducing heavy new architecture:</p>
 <ul>
-<li><code>Degree(int vertex)</code></li>
-<li><code>FoundEdge(int a, int b)</code></li>
-<li><code>Reachable(int start, int end)</code> using BFS/DFS</li>
-<li>Add/Remove road by names</li>
-<li>BFS target search</li>
-<li>DFS target search</li>
-<li>shortest-path length only</li>
-<li>recursive DFS</li>
-<li>array Queue alternative</li>
-<li>array Stack alternative</li>
-<li>array-based adjacency-list alternative</li>
+<li><code>CheckDirectConnection(int a, int b)</code> — adjacency-list <code>Search()</code></li>
+<li><code>DisplayNeighbors(int id)</code> — one-vertex adjacency-list traversal</li>
+<li><code>DisplayDegree(int id)</code> — adjacency-list <code>Length()</code></li>
+<li><code>DisplayStatistics()</code> — vertex/road counts and maximum degree</li>
+<li><code>Reachable(int start, int end)</code> — BFS target search</li>
+<li><code>LocationsWithinHops(int start, int maxHops)</code> — Queue + BFS <code>distance[]</code></li>
 </ul>
+<p>These features increase visible functionality while keeping the implementation inside the same data structures and algorithms already used by the core project.</p>
 <hr />
 <h1 id="35-teaching-plan-for-the-team" class="anchor-heading">35. Teaching plan for the team<a class="heading-link" href="#35-teaching-plan-for-the-team" aria-label="Link to this section">#</a></h1>
 <p>When sitting together, teach in this order.</p>
@@ -2067,7 +2078,7 @@ LIFO
 <h1 id="37-answers-to-the-most-dangerous-viva-questions" class="anchor-heading">37. Answers to the most dangerous viva questions<a class="heading-link" href="#37-answers-to-the-most-dangerous-viva-questions" aria-label="Link to this section">#</a></h1>
 <h2 id="you-used-linked-list-do-it-with-array" class="anchor-heading">&quot;You used linked list. Do it with array.&quot;<a class="heading-link" href="#you-used-linked-list-do-it-with-array" aria-label="Link to this section">#</a></h2>
 <blockquote>
-<p>The graph can still use an adjacency list. I replace each linked-list <code>UnsortedType</code> with the array-based <code>UnsortedType</code> from Lab 5. The operations remain Insert/Search/Delete/GetNext. I need to increase capacity because our maximum degree is 6 and the lab sample uses size 5.</p>
+<p>The graph can still use an adjacency list. I replace each linked-list <code>UnsortedType</code> with the array-based <code>UnsortedType</code> from Lab 5. The operations remain Insert/Search/Delete/GetNext. I need to increase capacity because our maximum degree is 8 and the lab sample uses size 5.</p>
 </blockquote>
 <h2 id="you-used-stack-do-it-with-queue" class="anchor-heading">&quot;You used Stack. Do it with Queue.&quot;<a class="heading-link" href="#you-used-stack-do-it-with-queue" aria-label="Link to this section">#</a></h2>
 <blockquote>
@@ -2118,7 +2129,10 @@ LIFO
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>ATM still connects to NAC, not SAC</li>
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Gallery exists</li>
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Ground Floor &lt;-&gt; Upper Plaza exists</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>exactly 19 intended undirected initial roads</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>both lounges connect directly to Ground Floor</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Cafeteria connects directly to NAC and SAC</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Central Library connects directly to Gallery and SAC</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>exactly 23 intended undirected initial roads</li>
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>no accidental duplicate roads</li>
 </ul>
 <h2 id="code" class="anchor-heading">Code<a class="heading-link" href="#code" aria-label="Link to this section">#</a></h2>
@@ -2133,6 +2147,8 @@ LIFO
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>remove road works both directions</li>
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>invalid IDs handled</li>
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>name search with spaces works</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>direct connection / neighbors / degree / statistics work</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>reachability and N-hop search work</li>
 </ul>
 <h2 id="team" class="anchor-heading">Team<a class="heading-link" href="#team" aria-label="Link to this section">#</a></h2>
 <ul>
@@ -2163,7 +2179,7 @@ LIFO
 <li>Section 4 vertex list</li>
 <li>Section 5 edge list</li>
 <li>Section 6 adjacency list</li>
-<li>Section 7 Mermaid graph</li>
+<li>Section 7 graph visualization / <code>assets/campus-graph.svg</code></li>
 <li>known test cases</li>
 </ul>
 <h3 id="if-functions-change" class="anchor-heading">If functions change<a class="heading-link" href="#if-functions-change" aria-label="Link to this section">#</a></h3>
@@ -2198,19 +2214,29 @@ v2.0 = major redesign
 </code></pre>
 <hr />
 <h1 id="41-change-log" class="anchor-heading">41. Change log<a class="heading-link" href="#41-change-log" aria-label="Link to this section">#</a></h1>
+<h2 id="v1-2-2026-08-18" class="anchor-heading">v1.2 — 2026-08-18<a class="heading-link" href="#v1-2-2026-08-18" aria-label="Link to this section">#</a></h2>
+<ul>
+<li>Corrected campus topology: both lounges now connect directly to Ground Floor rather than NAC/SAC.</li>
+<li>Added Cafeteria direct connections to both NAC and SAC.</li>
+<li>Added Central Library direct connections to Gallery and SAC while keeping its Upper Plaza connection.</li>
+<li>Current graph is now 18 vertices and 23 undirected edges; Ground Floor degree is 8.</li>
+<li>Added six extra-credit-friendly features: direct connection check, direct-neighbor display, degree, campus statistics, reachability, and locations within N hops.</li>
+<li>Updated console presentation so each action runs on a clean screen and pauses before returning to the menu.</li>
+<li>Updated source links, tests, feature documentation, graph visualization, line counts, README, and viva/team notes to match the code.</li>
+</ul>
 <h2 id="v1-1-2026-08-15" class="anchor-heading">v1.1 — 2026-08-15<a class="heading-link" href="#v1-1-2026-08-15" aria-label="Link to this section">#</a></h2>
 <ul>
 <li>Made the whole desktop sidebar collapsible.</li>
 <li>Changed sidebar groups to an automatic accordion: everything starts collapsed, and only the group containing the section currently being read opens while scrolling.</li>
 <li>Removed the unnecessary <code>main.cpp</code> shortcut from the sidebar footer.</li>
 <li>Changed the Back to top button to a high-contrast white button.</li>
-<li>Rebuilt the campus graph visualization around the exact 18 vertices and 19 edges, grouped into entrances, the main ground-floor network, and the Upper Plaza network.</li>
+<li>Rebuilt the campus graph visualization around the then-current 18 vertices and 19 edges, grouped into entrances, the main ground-floor network, and the Upper Plaza network.</li>
 <li>Removed the redundant raw Mermaid graph block and added a simpler explanation of how to read the topology.</li>
 </ul>
 <h2 id="v1-0-2026-08-15" class="anchor-heading">v1.0 — 2026-08-15<a class="heading-link" href="#v1-0-2026-08-15" aria-label="Link to this section">#</a></h2>
 <ul>
 <li>Established comprehensive project/team/viva master guide.</li>
-<li>Locked current 18-vertex, 19-edge graph as baseline.</li>
+<li>Locked the original 18-vertex, 19-edge graph as the v1.0 baseline.</li>
 <li>Recorded current K&amp;R-style source architecture.</li>
 <li>Distinguished 444 raw project-specific lines from reused course ADTs.</li>
 <li>Grounded project choices in Labs 4 through Graph, with direct relevance identified.</li>
@@ -2226,7 +2252,7 @@ Campus Navigation System
 
 GRAPH
 18 campus locations = vertices
-19 direct connections = undirected edges
+23 direct connections = undirected edges
 Unweighted = every edge costs 1
 
 REPRESENTATION

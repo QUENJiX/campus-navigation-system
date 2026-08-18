@@ -1,82 +1,86 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1450 920" role="img" aria-labelledby="title desc">
   <title id="title">NSU Campus Navigation Graph</title>
-  <desc id="desc">Exact topology of the project: 18 numbered vertices and 19 undirected edges, grouped into entrances, the main ground-floor network, and the Upper Plaza second-floor network.</desc>
+  <desc id="desc">Exact current topology of the project: 18 numbered vertices and 23 undirected edges.</desc>
   <defs>
     <style>
-      .title{font:700 28px system-ui,-apple-system,"Segoe UI",sans-serif;fill:#eef3f7}.sub{font:14px system-ui,-apple-system,"Segoe UI",sans-serif;fill:#98a4af}.panelTitle{font:700 13px system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:1.7px;fill:#9da8b3}.edge{fill:none;stroke:#647382;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.edgeFloor{fill:none;stroke:#e7c65d;stroke-width:3.4;stroke-linecap:round}.node{fill:#252c34;stroke:#566575;stroke-width:1.7}.entrance{stroke:#83d7ff;stroke-width:2.2}.major{fill:#203b49;stroke:#83d7ff;stroke-width:2.2}.ground{fill:#214b46;stroke:#a7f3d0;stroke-width:2.4}.upper{fill:#4a4023;stroke:#f4d06f;stroke-width:2.4}.label{font:600 14px system-ui,-apple-system,"Segoe UI",sans-serif;fill:#edf3f6}.small{font:12px system-ui,-apple-system,"Segoe UI",sans-serif;fill:#b8c2cb}.id{font:700 11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#9ba8b4}
+      .title{font:700 28px system-ui,-apple-system,"Segoe UI",sans-serif;fill:#eef3f7}.sub{font:14px system-ui,-apple-system,"Segoe UI",sans-serif;fill:#98a4af}.panelTitle{font:700 13px system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:1.7px;fill:#9da8b3}.edge{fill:none;stroke:#647382;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.edgeFloor{fill:none;stroke:#e7c65d;stroke-width:3.4;stroke-linecap:round}.edgeExtra{fill:none;stroke:#8493a1;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:7 5}.node{fill:#252c34;stroke:#566575;stroke-width:1.7}.entrance{stroke:#83d7ff;stroke-width:2.2}.major{fill:#203b49;stroke:#83d7ff;stroke-width:2.2}.ground{fill:#214b46;stroke:#a7f3d0;stroke-width:2.4}.upper{fill:#4a4023;stroke:#f4d06f;stroke-width:2.4}.label{font:600 14px system-ui,-apple-system,"Segoe UI",sans-serif;fill:#edf3f6}.small{font:12px system-ui,-apple-system,"Segoe UI",sans-serif;fill:#b8c2cb}.id{font:700 11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#9ba8b4}
     </style>
   </defs>
 
-  <rect width="1400" height="900" rx="24" fill="#1d2228"/>
+  <rect width="1450" height="920" rx="24" fill="#1d2228"/>
   <text x="52" y="54" class="title">NSU Campus Navigation Graph</text>
-  <text x="52" y="80" class="sub">Exact program topology · 18 vertices · 19 undirected edges · line length does not represent physical distance</text>
+  <text x="52" y="80" class="sub">Exact program topology · 18 vertices · 23 undirected edges · routed lines show connectivity, not physical distance</text>
 
-  <rect x="35" y="112" width="190" height="700" rx="18" fill="#191e24" stroke="#36414c" stroke-width="1.5" stroke-dasharray="7 7"/>
+  <rect x="35" y="112" width="190" height="730" rx="18" fill="#191e24" stroke="#36414c" stroke-width="1.5" stroke-dasharray="7 7"/>
   <text x="58" y="145" class="panelTitle">ENTRANCES</text>
 
-  <rect x="250" y="112" width="720" height="700" rx="18" fill="#191e24" stroke="#36414c" stroke-width="1.5" stroke-dasharray="7 7"/>
+  <rect x="250" y="112" width="745" height="730" rx="18" fill="#191e24" stroke="#36414c" stroke-width="1.5" stroke-dasharray="7 7"/>
   <text x="274" y="145" class="panelTitle">GROUND-FLOOR / MAIN CAMPUS NETWORK</text>
 
-  <rect x="995" y="112" width="370" height="700" rx="18" fill="#191e24" stroke="#36414c" stroke-width="1.5" stroke-dasharray="7 7"/>
-  <text x="1019" y="145" class="panelTitle">SECOND FLOOR · UPPER PLAZA</text>
+  <rect x="1020" y="112" width="395" height="730" rx="18" fill="#191e24" stroke="#36414c" stroke-width="1.5" stroke-dasharray="7 7"/>
+  <text x="1044" y="145" class="panelTitle">SECOND FLOOR · UPPER PLAZA</text>
 
-  <!-- edges: entrances -->
-  <path class="edge" d="M190 230 H285"/>
-  <path class="edge" d="M190 230 H235 V348 H485"/>
-  <path class="edge" d="M190 650 H285"/>
+  <!-- 23 undirected edges -->
+  <!-- entrances -->
+  <path class="edge" d="M190 216 H300"/>
+  <path class="edge" d="M190 216 H240 V356 H520"/>
+  <path class="edge" d="M190 706 H300"/>
 
   <!-- NAC branch -->
-  <path class="edge" d="M435 230 H665 V370 H715"/>
-  <path class="edge" d="M435 230 H470 V185 H515"/>
-  <path class="edge" d="M435 230 H515"/>
-  <path class="edge" d="M435 230 H470 V275 H515"/>
+  <path class="edge" d="M450 216 H690 V455 H760"/>
+  <path class="edge" d="M450 216 H520"/>
+  <path class="edge" d="M450 216 H485 V278 H520"/>
+  <path class="edge" d="M450 216 H485 V356 H520"/>
 
-  <!-- cafeteria / admin / book / SAC into Ground Floor -->
-  <path class="edge" d="M635 348 H675 V390 H715"/>
-  <path class="edge" d="M435 455 H660 V410 H715"/>
-  <path class="edge" d="M435 455 H460 V500 H485"/>
-  <path class="edge" d="M635 500 H680 V430 H715"/>
-  <path class="edge" d="M435 650 H680 V450 H715"/>
-  <path class="edge" d="M435 650 H485"/>
-  <path class="edge" d="M435 650 H470 V720 H485"/>
+  <!-- SAC branch -->
+  <path class="edge" d="M450 706 H700 V495 H760"/>
+  <path class="edge" d="M450 706 H520"/>
+  <path class="edge" d="M450 706 H485 V356 H520"/>
+
+  <!-- Admin / Book / Cafeteria / Lounges into Ground Floor -->
+  <path class="edge" d="M450 500 H700 V475 H760"/>
+  <path class="edge" d="M450 500 H500 V650 H520"/>
+  <path class="edge" d="M680 650 H720 V515 H760"/>
+  <path class="edge" d="M680 356 H725 V435 H760"/>
+  <path class="edge" d="M680 430 H730 V455 H760"/>
+  <path class="edge" d="M680 552 H730 V495 H760"/>
 
   <!-- Ground Floor to Upper Plaza -->
-  <path class="edgeFloor" d="M865 410 H1045"/>
+  <path class="edgeFloor" d="M910 475 H1060"/>
 
   <!-- Upper Plaza branches -->
-  <path class="edge" d="M1195 410 H1225 V245 H1215"/>
-  <path class="edge" d="M1195 410 H1215 V355"/>
-  <path class="edge" d="M1195 410 H1215 V500"/>
-  <path class="edge" d="M1195 410 H1225 V610 H1215"/>
+  <path class="edge" d="M1210 475 H1240 V236 H1230"/>
+  <path class="edge" d="M1210 475 H1230 V348"/>
+  <path class="edge" d="M1210 475 H1230 V520"/>
+  <path class="edge" d="M1210 475 H1240 V660 H1230"/>
+
+  <!-- corrected extra direct connections -->
+  <path class="edgeExtra" d="M450 706 H965 V546 H1230"/>
+  <path class="edgeExtra" d="M1360 546 V634 H1360"/>
 
   <!-- nodes: entrances -->
-  <g transform="translate(70 204)"><rect class="node entrance" width="120" height="52" rx="13"/><text x="14" y="20" class="id">ID 1</text><text x="14" y="40" class="label">Gate 8</text></g>
-  <g transform="translate(70 624)"><rect class="node entrance" width="120" height="52" rx="13"/><text x="14" y="20" class="id">ID 0</text><text x="14" y="40" class="label">Gate 1</text></g>
+  <g transform="translate(70 190)"><rect class="node entrance" width="120" height="52" rx="13"/><text x="14" y="20" class="id">ID 1</text><text x="14" y="40" class="label">Gate 8</text></g>
+  <g transform="translate(70 680)"><rect class="node entrance" width="120" height="52" rx="13"/><text x="14" y="20" class="id">ID 0</text><text x="14" y="40" class="label">Gate 1</text></g>
 
   <!-- nodes: main network -->
-  <g transform="translate(285 204)"><rect class="node major" width="150" height="52" rx="13"/><text x="14" y="20" class="id">ID 3</text><text x="14" y="40" class="label">NAC</text></g>
-  <g transform="translate(515 159)"><rect class="node" width="160" height="52" rx="13"/><text x="14" y="20" class="id">ID 7</text><text x="14" y="40" class="label">Female Lounge</text></g>
-  <g transform="translate(515 204)"><rect class="node" width="160" height="52" rx="13"/><text x="14" y="20" class="id">ID 11</text><text x="14" y="40" class="label">City Bank ATM</text></g>
-  <g transform="translate(515 249)"><rect class="node" width="160" height="52" rx="13"/><text x="14" y="20" class="id">ID 16</text><text x="14" y="40" class="label">Playground</text></g>
+  <g transform="translate(300 190)"><rect class="node major" width="150" height="52" rx="13"/><text x="14" y="20" class="id">ID 3</text><text x="14" y="40" class="label">NAC</text></g>
+  <g transform="translate(520 190)"><rect class="node" width="160" height="52" rx="13"/><text x="14" y="20" class="id">ID 11</text><text x="14" y="40" class="label">City Bank ATM</text></g>
+  <g transform="translate(520 252)"><rect class="node" width="160" height="52" rx="13"/><text x="14" y="20" class="id">ID 16</text><text x="14" y="40" class="label">Playground</text></g>
+  <g transform="translate(520 330)"><rect class="node" width="160" height="52" rx="13"/><text x="14" y="20" class="id">ID 12</text><text x="14" y="40" class="label">Cafeteria</text></g>
+  <g transform="translate(520 404)"><rect class="node" width="160" height="52" rx="13"/><text x="14" y="20" class="id">ID 7</text><text x="14" y="40" class="label">Female Lounge</text></g>
+  <g transform="translate(300 474)"><rect class="node" width="150" height="52" rx="13"/><text x="14" y="20" class="id">ID 2</text><text x="14" y="40" class="label">Admin Building</text></g>
+  <g transform="translate(520 526)"><rect class="node" width="160" height="52" rx="13"/><text x="14" y="20" class="id">ID 8</text><text x="14" y="40" class="label">Male Lounge</text></g>
+  <g transform="translate(520 624)"><rect class="node" width="160" height="52" rx="13"/><text x="14" y="20" class="id">ID 9</text><text x="14" y="40" class="label">Book Shop</text></g>
+  <g transform="translate(300 680)"><rect class="node major" width="150" height="52" rx="13"/><text x="14" y="20" class="id">ID 4</text><text x="14" y="40" class="label">SAC</text></g>
+  <g transform="translate(520 680)"><rect class="node" width="160" height="52" rx="13"/><text x="14" y="20" class="id">ID 10</text><text x="14" y="40" class="label">Medical Center</text></g>
+  <g transform="translate(760 435)"><rect class="node ground" width="150" height="80" rx="15"/><text x="15" y="23" class="id">ID 5</text><text x="15" y="47" class="label">Ground Floor</text><text x="15" y="66" class="small">degree 8 · main hub</text></g>
 
-  <g transform="translate(485 322)"><rect class="node" width="150" height="52" rx="13"/><text x="14" y="20" class="id">ID 12</text><text x="14" y="40" class="label">Cafeteria</text></g>
+  <!-- Upper Plaza network -->
+  <g transform="translate(1060 435)"><rect class="node upper" width="150" height="80" rx="15"/><text x="15" y="23" class="id">ID 6</text><text x="15" y="47" class="label">Upper Plaza</text><text x="15" y="66" class="small">second-floor hub</text></g>
+  <g transform="translate(1230 210)"><rect class="node" width="130" height="52" rx="13"/><text x="12" y="20" class="id">ID 13</text><text x="12" y="40" class="label">Student Affairs</text></g>
+  <g transform="translate(1230 322)"><rect class="node" width="130" height="52" rx="13"/><text x="12" y="20" class="id">ID 14</text><text x="12" y="40" class="label">Auditorium</text></g>
+  <g transform="translate(1230 494)"><rect class="node" width="130" height="52" rx="13"/><text x="12" y="20" class="id">ID 15</text><text x="12" y="40" class="label">Central Library</text></g>
+  <g transform="translate(1230 634)"><rect class="node" width="130" height="52" rx="13"/><text x="12" y="20" class="id">ID 17</text><text x="12" y="40" class="label">Gallery</text></g>
 
-  <g transform="translate(285 429)"><rect class="node" width="150" height="52" rx="13"/><text x="14" y="20" class="id">ID 2</text><text x="14" y="40" class="label">Admin Building</text></g>
-  <g transform="translate(485 474)"><rect class="node" width="150" height="52" rx="13"/><text x="14" y="20" class="id">ID 9</text><text x="14" y="40" class="label">Book Shop</text></g>
-
-  <g transform="translate(285 624)"><rect class="node major" width="150" height="52" rx="13"/><text x="14" y="20" class="id">ID 4</text><text x="14" y="40" class="label">SAC</text></g>
-  <g transform="translate(485 624)"><rect class="node" width="150" height="52" rx="13"/><text x="14" y="20" class="id">ID 8</text><text x="14" y="40" class="label">Male Lounge</text></g>
-  <g transform="translate(485 694)"><rect class="node" width="150" height="52" rx="13"/><text x="14" y="20" class="id">ID 10</text><text x="14" y="40" class="label">Medical Center</text></g>
-
-  <g transform="translate(715 370)"><rect class="node ground" width="150" height="80" rx="15"/><text x="15" y="23" class="id">ID 5</text><text x="15" y="47" class="label">Ground Floor</text><text x="15" y="66" class="small">main navigation hub</text></g>
-
-  <!-- Upper Plaza -->
-  <g transform="translate(1045 370)"><rect class="node upper" width="150" height="80" rx="15"/><text x="15" y="23" class="id">ID 6</text><text x="15" y="47" class="label">Upper Plaza</text><text x="15" y="66" class="small">second-floor hub</text></g>
-
-  <g transform="translate(1215 219)"><rect class="node" width="130" height="52" rx="13"/><text x="12" y="20" class="id">ID 13</text><text x="12" y="40" class="label">Student Affairs</text></g>
-  <g transform="translate(1215 329)"><rect class="node" width="130" height="52" rx="13"/><text x="12" y="20" class="id">ID 14</text><text x="12" y="40" class="label">Auditorium</text></g>
-  <g transform="translate(1215 474)"><rect class="node" width="130" height="52" rx="13"/><text x="12" y="20" class="id">ID 15</text><text x="12" y="40" class="label">Central Library</text></g>
-  <g transform="translate(1215 584)"><rect class="node" width="130" height="52" rx="13"/><text x="12" y="20" class="id">ID 17</text><text x="12" y="40" class="label">Gallery</text></g>
-
-  <text x="52" y="855" class="sub">Blue outline = entrance or major building · Green = Ground Floor hub · Gold = Upper Plaza hub · Every edge is two-way</text>
+  <text x="52" y="875" class="sub">Solid gray = standard direct edge · dashed gray = corrected cross-network direct edge · green/gold nodes = major hubs · every edge is two-way</text>
 </svg>

@@ -39,6 +39,13 @@ public:
 
     void SearchByID(int id);
     void SearchByName(string name);
+
+    void CheckDirectConnection(int location1, int location2);
+    void DisplayNeighbors(int id);
+    void DisplayDegree(int id);
+    void DisplayStatistics();
+    void Reachable(int startVertex, int endVertex);
+    void LocationsWithinHops(int startVertex, int maxHops);
 };
 
 #endif
