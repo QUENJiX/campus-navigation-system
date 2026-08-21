@@ -1,21 +1,13 @@
 #include <iostream>
 #include <string>
-#include <cstdlib>
 #include "campusgraph.h"
 using namespace std;
 
-void ClearConsole() {
-    system("cls");
-}
-
-void PauseConsole() {
-    cout << endl;
-    system("pause");
-}
-
 int main() {
+    // Member 1 (Hasib) - Create the campus graph
     CampusGraph campus;
 
+    // Member 1 (Hasib) - Initialize campus locations
     campus.AddLocation("Gate 1");
     campus.AddLocation("Gate 8");
     campus.AddLocation("Administrative Building");
@@ -35,6 +27,7 @@ int main() {
     campus.AddLocation("Playground");
     campus.AddLocation("Gallery");
 
+    // Member 1 (Hasib) - Initialize campus road connections
     campus.AddRoad(0, 4);
     campus.AddRoad(1, 3);
     campus.AddRoad(1, 12);
@@ -59,140 +52,86 @@ int main() {
     campus.AddRoad(15, 17);
     campus.AddRoad(4, 15);
 
+    // Member 4 (Fabiha) - Menu and user input handling
     int choice;
 
     do {
-        ClearConsole();
-
-        cout << "+==========================================================+" << endl;
-        cout << "|               CAMPUS NAVIGATION SYSTEM                   |" << endl;
-        cout << "+==========================================================+" << endl;
-        cout << "|  1. Display all locations                                |" << endl;
-        cout << "|  2. Display campus connections                           |" << endl;
-        cout << "|  3. Add a road                                           |" << endl;
-        cout << "|  4. Remove a road                                        |" << endl;
-        cout << "|  5. BFS traversal                                        |" << endl;
-        cout << "|  6. DFS traversal                                        |" << endl;
-        cout << "|  7. Find shortest path                                   |" << endl;
-        cout << "|  8. Search location by ID                                |" << endl;
-        cout << "|  9. Search location by name                              |" << endl;
-        cout << "| 10. Check direct connection                              |" << endl;
-        cout << "| 11. Show direct neighbors                                |" << endl;
-        cout << "| 12. Show location degree                                 |" << endl;
-        cout << "| 13. Campus statistics                                    |" << endl;
-        cout << "| 14. Check reachability                                   |" << endl;
-        cout << "| 15. Find locations within N hops                         |" << endl;
-        cout << "|  0. Exit                                                 |" << endl;
-        cout << "+----------------------------------------------------------+" << endl;
-        cout << "  Select an option: ";
+        cout << "\n===== CAMPUS NAVIGATION SYSTEM =====" << endl;
+        cout << "1. Display locations" << endl;
+        cout << "2. Display connections" << endl;
+        cout << "3. Add road" << endl;
+        cout << "4. Remove road" << endl;
+        cout << "5. BFS traversal" << endl;
+        cout << "6. DFS traversal" << endl;
+        cout << "7. Shortest path" << endl;
+        cout << "8. Search location by ID" << endl;
+        cout << "9. Search location by name" << endl;
+        cout << "0. Exit" << endl;
+        cout << "Enter choice: ";
         cin >> choice;
 
-        if (choice == 0)
-            break;
-
-        ClearConsole();
-
+        // Member 4 (Fabiha) - Display and search menu operations
         if (choice == 1) {
             campus.DisplayLocations();
         } else if (choice == 2) {
             campus.DisplayGraph();
+        // Member 2 (Jaima) - Dynamic road add/remove menu operations
         } else if (choice == 3) {
             int a, b;
             campus.DisplayLocations();
-            cout << "\n  First location ID  : ";
+            cout << "Enter first location ID: ";
             cin >> a;
-            cout << "  Second location ID : ";
+            cout << "Enter second location ID: ";
             cin >> b;
             campus.AddRoad(a, b);
         } else if (choice == 4) {
             int a, b;
             campus.DisplayLocations();
-            cout << "\n  First location ID  : ";
+            cout << "Enter first location ID: ";
             cin >> a;
-            cout << "  Second location ID : ";
+            cout << "Enter second location ID: ";
             cin >> b;
             campus.RemoveRoad(a, b);
+        // Member 3 (Risha) - BFS menu operation
         } else if (choice == 5) {
             int start;
             campus.DisplayLocations();
-            cout << "\n  Starting location ID: ";
+            cout << "Enter starting location ID: ";
             cin >> start;
             campus.BFS(start);
+        // Member 5 (Safwan) - DFS menu operation
         } else if (choice == 6) {
             int start;
             campus.DisplayLocations();
-            cout << "\n  Starting location ID: ";
+            cout << "Enter starting location ID: ";
             cin >> start;
             campus.DFS(start);
+        // Member 1 (Hasib) - Shortest path menu operation
         } else if (choice == 7) {
             int start, end;
             campus.DisplayLocations();
-            cout << "\n  Starting location ID : ";
+            cout << "Enter starting location ID: ";
             cin >> start;
-            cout << "  Destination ID       : ";
+            cout << "Enter destination ID: ";
             cin >> end;
             campus.ShortestPath(start, end);
+        // Member 4 (Fabiha) - Search menu operations
         } else if (choice == 8) {
             int id;
-            cout << "\n  Enter location ID: ";
+            cout << "Enter location ID: ";
             cin >> id;
             campus.SearchByID(id);
         } else if (choice == 9) {
             string name;
             cin.ignore(1000, '\n');
-            cout << "\n  Enter location name: ";
+            cout << "Enter location name: ";
             getline(cin, name);
             campus.SearchByName(name);
-        } else if (choice == 10) {
-            int a, b;
-            campus.DisplayLocations();
-            cout << "\n  First location ID  : ";
-            cin >> a;
-            cout << "  Second location ID : ";
-            cin >> b;
-            campus.CheckDirectConnection(a, b);
-        } else if (choice == 11) {
-            int id;
-            campus.DisplayLocations();
-            cout << "\n  Location ID: ";
-            cin >> id;
-            campus.DisplayNeighbors(id);
-        } else if (choice == 12) {
-            int id;
-            campus.DisplayLocations();
-            cout << "\n  Location ID: ";
-            cin >> id;
-            campus.DisplayDegree(id);
-        } else if (choice == 13) {
-            campus.DisplayStatistics();
-        } else if (choice == 14) {
-            int start, end;
-            campus.DisplayLocations();
-            cout << "\n  Starting location ID : ";
-            cin >> start;
-            cout << "  Destination ID       : ";
-            cin >> end;
-            campus.Reachable(start, end);
-        } else if (choice == 15) {
-            int start, hops;
-            campus.DisplayLocations();
-            cout << "\n  Starting location ID : ";
-            cin >> start;
-            cout << "  Maximum hops         : ";
-            cin >> hops;
-            campus.LocationsWithinHops(start, hops);
-        } else {
-            cout << "\n[ERROR] Invalid menu option. Please choose 0-15.\n";
+        } else if (choice != 0) {
+            cout << "Invalid choice." << endl;
         }
 
-        PauseConsole();
-
     } while (choice != 0);
-
-    ClearConsole();
-    cout << "==========================================================" << endl;
-    cout << "  Campus Navigation System closed." << endl;
-    cout << "==========================================================" << endl;
 
     return 0;
 }

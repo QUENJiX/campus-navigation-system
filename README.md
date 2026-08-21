@@ -1,43 +1,27 @@
-# Campus Navigation System — CSE225L
+# Campus Navigation System
 
-A simple C++ campus navigation project for CSE225L, grounded in the data structures and graph algorithms taught in the lab manuals.
+Source-code baseline: **simple v1.1-style version**. Viva/site refresh: **2026-08-21**. — CSE225L
 
-## What is in this repository
+A straightforward C++ campus navigation project using only the data structures and graph ideas taught in the course labs.
 
-- `src/` — Code::Blocks/C++ project source
-- `index.html`, `style.css`, `script.js` — the team + viva handbook site
-- `assets/nsu-map.png` — the custom campus map used to design the graph
-- `assets/campus-graph.svg` — exact current graph visualization
+## Core project features
 
-The handbook is the working source of truth for the map, graph connections, architecture, lab grounding, member division, features, algorithms, viva variations, testing, and demo plan.
-
-## Core assignment requirements
-
-- adjacency-list graph
-- BFS traversal
-- DFS traversal
-- shortest path in an unweighted graph
+- adjacency-list graph using linked-list `UnsortedType<int>`
+- BFS traversal using Queue
+- DFS traversal using Stack
+- shortest path in an unweighted graph using BFS
 - dynamic addition and removal of roads
+- display locations/connections
+- search location by ID or name
 
-## Additional implemented features
+The later extra-feature version (degree/statistics/reachability/N-hops, etc.) is **not** used in this package.
 
-The project now also includes six lightweight graph-analysis features that reuse the same taught ADTs and algorithms:
-
-- check whether two locations are directly connected
-- show all direct neighbors of one location
-- show the degree of a location
-- show campus statistics: location count, road count, and most-connected location
-- check whether one location is reachable from another using BFS
-- find all locations within a user-selected number of hops using Queue + `distance[]`
-
-Search by ID/name, formatted displays, and full shortest-route reconstruction are also included beyond the minimum assignment bullets.
-
-## Current graph baseline
+## Current graph
 
 - 18 vertices
-- 23 undirected edges
-- unweighted, so every direct edge has conceptual cost 1
-- Ground Floor is the current highest-degree vertex with degree 8
+- 23 undirected roads
+- unweighted: every direct connection has cost 1
+- Ground Floor has the highest degree: 8
 
 Important corrected connections include:
 
@@ -46,32 +30,18 @@ Important corrected connections include:
 - Cafeteria `<->` Ground Floor, NAC, SAC, and Gate 8
 - Central Library `<->` Upper Plaza, Gallery, and SAC
 
+## Team ownership
+
+- Member 1 — Hasib: map/topology, graph setup, `AddLocation()`, `ShortestPath()`
+- Member 2 — Jaima: adjacency lists, `AddRoad()`, `RemoveRoad()`, validation
+- Member 3 — Risha: BFS, Queue, marks, `GetToVertices()`
+- Member 4 — Fabiha: menu/input, display, ID/name search
+- Member 5 — Safwan: DFS and Stack integration
+
 ## Build
 
-Open `src/CampusNavigationSystem.cbp` in Code::Blocks and build the project, or compile the project-specific source from a terminal with a C++11 compiler.
+Open `src/CampusNavigationSystem.cbp` in Code::Blocks, or compile with a C++11 compiler.
 
-The program is designed for the Windows/Code::Blocks lab environment. Its menu clears the previous console screen before each action and pauses before returning to the menu so the output stays readable.
+## Handbook
 
-## GitHub Pages
-
-Once Pages is enabled for this repository from `main` / root, the handbook will be available at:
-
-`https://quenjix.github.io/campus-navigation-system/`
-
-## Local website preview
-
-You can open `index.html` directly in a browser. For a local web server, run this from the repository folder:
-
-```bash
-python -m http.server 8000
-```
-
-Then open `http://localhost:8000`.
-
-## Source-of-truth rule
-
-If the graph, code, member responsibilities, or viva plan changes, update the website in the same commit. The final vertex/edge tables on the site override older sketches.
-
-## Handbook navigation
-
-The handbook sidebar is collapsible. All navigation groups start closed, and the group containing the section currently being read opens automatically as you scroll. The graph visualization reflects the exact current topology of 18 vertices and 23 undirected edges.
+Open `index.html`. The Viva Prep section shows only a few realistic modifications for each member, including exactly which function/file to change and roughly how much code changes.
