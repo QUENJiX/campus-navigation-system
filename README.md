@@ -44,4 +44,4 @@ Open `src/CampusNavigationSystem.cbp` in Code::Blocks, or compile with a C++11 c
 
 ## Handbook
 
-Open `index.html`. The Viva Prep section shows only a few realistic modifications for each member, including exactly which function/file to change and roughly how much code changes.
+Open `index.html`. The Viva Prep section shows a few realistic modifications for each member, including which file/function changes, how to make the change, and the exact small code snippet to practice.

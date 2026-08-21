@@ -1107,54 +1107,244 @@ for Length() items:
 <tr><td>Safwan — Member 5</td><td>Implemented DFS traversal using the Stack ADT and handled Stack integration for graph traversal.</td></tr>
 </tbody></table>
 <p>The Queue, Stack, and Unsorted List ADT files are reused from the course labs. The project contribution is applying and integrating them.</p>
+
 <h1 class="anchor-heading" id="20-viva-strategy-what-the-instructor-is-actually-testing">20. Viva strategy — change the smallest correct part<a aria-label="Link to this section" class="heading-link" href="#20-viva-strategy-what-the-instructor-is-actually-testing">#</a></h1>
-<p>When the instructor changes a requirement, first identify the exact function/file, then edit only that part. Do not rewrite the whole program.</p>
+<p>In viva, do <strong>one requested variation at a time</strong>. First say which file/function changes, then make only that edit. The snippets below are the exact small edits to practice. Do not combine all variations into the submitted project.</p>
 <table><thead><tr><th>If the instructor changes...</th><th>What stays the same?</th></tr></thead><tbody>
-<tr><td>Linked Queue → array Queue</td><td>BFS algorithm stays the same; only Queue implementation/capacity changes.</td></tr>
-<tr><td>Linked Stack → array Stack</td><td>DFS algorithm stays the same; only Stack implementation/capacity changes.</td></tr>
-<tr><td>Queue → Stack</td><td>The traversal behavior changes. Do not still call it BFS.</td></tr>
-<tr><td>ID input → name input</td><td>Convert the name to an ID first, then reuse the existing graph function.</td></tr>
+<tr><td>Linked Queue → array Queue</td><td>BFS logic stays FIFO. Only the Queue implementation/capacity changes.</td></tr>
+<tr><td>Linked Stack → array Stack</td><td>DFS logic stays LIFO. Only the Stack implementation/capacity changes.</td></tr>
+<tr><td>Queue → Stack</td><td>Traversal behavior changes, so it is no longer BFS.</td></tr>
+<tr><td>ID input → name input</td><td>Find the ID from the name first, then call the existing graph function.</td></tr>
 </tbody></table>
+
 <h1 class="anchor-heading" id="21-member-1-hasib-shortest-path">21. Member 1 — Hasib — topology + shortest path<a aria-label="Link to this section" class="heading-link" href="#21-member-1-hasib-shortest-path">#</a></h1>
 <p><strong>Know:</strong> graph setup in <code>main.cpp</code>, <code>AddLocation()</code>, and especially <code>ShortestPath()</code> in <code>campusgraph.cpp</code>.</p>
-<table><thead><tr><th>If asked</th><th>Change here</th><th>How much?</th></tr></thead><tbody>
-<tr><td>Print shortest distance only</td><td><code>ShortestPath()</code>: keep Queue + <code>distance[]</code>; remove <code>parent[]</code> and the Stack route-printing block.</td><td>Small. Mostly delete route-reconstruction code and print <code>distance[endVertex]</code>.</td></tr>
-<tr><td>Print the parent route without using Stack</td><td>Add a small recursive helper that prints the parent chain from source to destination.</td><td>About 8–12 lines plus one helper declaration.</td></tr>
-<tr><td>Roads become weighted</td><td>No small edit to <code>ShortestPath()</code>.</td><td>Explain only: normal BFS is no longer guaranteed shortest by weight.</td></tr>
-</tbody></table>
-<p><strong>Remember:</strong> <code>distance[]</code> = how far, <code>parent[]</code> = where we came from, Stack = reverse the parent chain for printing.</p>
+
+<h3>Change 1 — print only shortest distance</h3>
+<p><strong>Where:</strong> <code>campusgraph.cpp → ShortestPath()</code>. <strong>How much:</strong> about 5 small edits. Keep Queue + <code>distance[]</code>; remove <code>parent[]</code> and Stack route reconstruction.</p>
+<p>Remove <code>parent[]</code> completely, and inside the discovery block keep only:</p>
+<pre><code>if (distance[item] == -1) {
+    distance[item] = distance[vertex] + 1;
+    queue.Enqueue(item);
+}</code></pre>
+<p>Then replace the whole Stack/path-printing part at the end with:</p>
+<pre><code>cout &lt;&lt; &quot;Shortest distance: &quot; &lt;&lt; distance[endVertex] &lt;&lt; endl;</code></pre>
+
+<h3>Change 2 — print the route without using Stack</h3>
+<p><strong>Where:</strong> <code>campusgraph.h</code> + <code>campusgraph.cpp</code>. <strong>How much:</strong> one helper declaration, about 8 helper lines, and 3 replacement lines.</p>
+<p>Add this under <code>private:</code> in <code>campusgraph.h</code>:</p>
+<pre><code>void PrintPath(int parent[], int vertex);</code></pre>
+<p>Add this function in <code>campusgraph.cpp</code>:</p>
+<pre><code>void CampusGraph::PrintPath(int parent[], int vertex) {
+    if (parent[vertex] != -1) {
+        PrintPath(parent, parent[vertex]);
+        cout &lt;&lt; &quot; -&gt; &quot;;
+    }
+
+    cout &lt;&lt; locations[vertex];
+}</code></pre>
+<p>Then replace the Stack route-reconstruction block in <code>ShortestPath()</code> with:</p>
+<pre><code>cout &lt;&lt; &quot;Shortest path: &quot;;
+PrintPath(parent, endVertex);
+cout &lt;&lt; endl;
+cout &lt;&lt; &quot;Path length: &quot; &lt;&lt; distance[endVertex] &lt;&lt; endl;</code></pre>
+
+<h3>Change 3 — stop BFS as soon as destination is discovered</h3>
+<p><strong>Where:</strong> only <code>ShortestPath()</code>. <strong>How much:</strong> 3 small edits.</p>
+<p>Before the outer BFS loop, add:</p>
+<pre><code>bool found = false;</code></pre>
+<p>Change the two loop conditions to:</p>
+<pre><code>while (!queue.IsEmpty() &amp;&amp; !found) {
+    // existing code
+
+    while (!adj.IsEmpty() &amp;&amp; !found) {
+        // existing code
+    }
+}</code></pre>
+<p>Immediately after <code>parent[item] = vertex;</code>, add:</p>
+<pre><code>if (item == endVertex)
+    found = true;</code></pre>
+<p><strong>Say:</strong> <code>distance[]</code> tells how far, <code>parent[]</code> tells where we came from, and Stack only reverses the parent chain for printing.</p>
+
 <h1 class="anchor-heading" id="22-member-2-jaima-adjacency-roads">22. Member 2 — Jaima — adjacency lists + roads<a aria-label="Link to this section" class="heading-link" href="#22-member-2-jaima-adjacency-roads">#</a></h1>
 <p><strong>Know:</strong> <code>AddRoad()</code>, <code>RemoveRoad()</code>, <code>ValidLocation()</code>, and the linked adjacency lists.</p>
-<table><thead><tr><th>If asked</th><th>Change here</th><th>How much?</th></tr></thead><tbody>
-<tr><td>Make roads directed</td><td><code>AddRoad()</code> and <code>RemoveRoad()</code>.</td><td>Tiny: remove the second symmetric <code>Insert</code> and second symmetric <code>Delete</code>.</td></tr>
-<tr><td>Check whether A is directly connected to B</td><td>Search only <code>adjacencyList[A]</code> for B.</td><td>About 6–8 lines using <code>Search(B, found)</code>.</td></tr>
-<tr><td>Linked adjacency list → array-based Unsorted List</td><td>Swap the Unsorted List ADT implementation. CampusGraph logic is almost unchanged.</td><td>Main change is the ADT files/capacity. Use capacity at least 8, preferably 25.</td></tr>
-</tbody></table>
-<p><strong>Remember:</strong> an undirected road is stored twice: A contains B and B contains A.</p>
+
+<h3>Change 1 — make roads directed</h3>
+<p><strong>Where:</strong> <code>campusgraph.cpp → AddRoad()</code> and <code>RemoveRoad()</code>. <strong>How much:</strong> delete one line from each function.</p>
+<p><code>AddRoad()</code> should insert only:</p>
+<pre><code>adjacencyList[location1].Insert(location2);</code></pre>
+<p><code>RemoveRoad()</code should delete only:</p>
+<pre><code>adjacencyList[location1].Delete(location2);</code></pre>
+<p>Do not perform the symmetric operation on <code>location2</code>.</p>
+
+<h3>Change 2 — check whether two locations are directly connected</h3>
+<p><strong>Where:</strong> add one public function in <code>campusgraph.h</code> and its body in <code>campusgraph.cpp</code>. <strong>How much:</strong> about 10 lines.</p>
+<p>Header:</p>
+<pre><code>void FoundRoad(int location1, int location2);</code></pre>
+<p>Source:</p>
+<pre><code>void CampusGraph::FoundRoad(int location1, int location2) {
+    bool found;
+    adjacencyList[location1].Search(location2, found);
+
+    if (found)
+        cout &lt;&lt; &quot;Directly connected.&quot; &lt;&lt; endl;
+    else
+        cout &lt;&lt; &quot;Not directly connected.&quot; &lt;&lt; endl;
+}</code></pre>
+
+<h3>Change 3 — linked adjacency list → array-based Unsorted List</h3>
+<p><strong>Where:</strong> replace the linked <code>unsortedtype.h/.cpp</code> with the Lab 5 array-based version. <strong>CampusGraph code:</strong> stays the same because the ADT interface is the same. The important exact capacity change is:</p>
+<pre><code>const int SIZE = 25;</code></pre>
+<p>The default size 5 is too small because Ground Floor currently has 8 direct connections.</p>
+<p><strong>Say:</strong> an undirected road is stored twice: A contains B and B contains A.</p>
+
 <h1 class="anchor-heading" id="23-member-3-risha-bfs-queue">23. Member 3 — Risha — BFS + Queue<a aria-label="Link to this section" class="heading-link" href="#23-member-3-risha-bfs-queue">#</a></h1>
-<p><strong>Know:</strong> <code>BFS()</code>, <code>GetToVertices()</code>, <code>ClearMarks()</code>, <code>MarkVertex()</code>, and <code>IsMarked()</code>.</p>
-<table><thead><tr><th>If asked</th><th>Change here</th><th>How much?</th></tr></thead><tbody>
-<tr><td>BFS traversal → search for one destination</td><td><code>BFS()</code>: add a target parameter and check each processed vertex.</td><td>About 4–6 lines; return when the target is found.</td></tr>
-<tr><td>Count how many vertices BFS visits</td><td><code>BFS()</code>: add <code>count</code>, increment when a vertex is marked, print at the end.</td><td>About 3 lines.</td></tr>
-<tr><td>Linked Queue → array Queue</td><td>Swap <code>queuetype.h/.cpp</code>; keep the BFS loop.</td><td>Very small CampusGraph edit. Use enough capacity, such as <code>MAX_LOCATIONS</code>.</td></tr>
-</tbody></table>
-<p><strong>Remember:</strong> Queue = vertices waiting to be processed; marks = vertices already processed. FIFO is what makes it BFS.</p>
+<p><strong>Know:</strong> <code>BFS()</code>, <code>GetToVertices()</code>, marks, and Queue behavior.</p>
+
+<h3>Change 1 — BFS traversal → search for one destination</h3>
+<p><strong>Where:</strong> <code>campusgraph.h</code>, <code>campusgraph.cpp</code>, and the BFS menu case in <code>main.cpp</code>. <strong>How much:</strong> about 8 lines.</p>
+<p>Change the declaration/signature to:</p>
+<pre><code>void BFS(int startVertex, int targetVertex);</code></pre>
+<p>Inside <code>BFS()</code>, immediately after <code>MarkVertex(vertex);</code>, add:</p>
+<pre><code>if (vertex == targetVertex) {
+    cout &lt;&lt; &quot;Found: &quot; &lt;&lt; locations[vertex] &lt;&lt; endl;
+    return;
+}</code></pre>
+<p>In <code>main.cpp</code>, the BFS case becomes:</p>
+<pre><code>int start, target;
+campus.DisplayLocations();
+cout &lt;&lt; &quot;Enter starting location ID: &quot;;
+cin &gt;&gt; start;
+cout &lt;&lt; &quot;Enter target location ID: &quot;;
+cin &gt;&gt; target;
+campus.BFS(start, target);</code></pre>
+
+<h3>Change 2 — count how many vertices BFS visits</h3>
+<p><strong>Where:</strong> only <code>BFS()</code>. <strong>How much:</strong> 3 lines.</p>
+<p>Before the loop:</p>
+<pre><code>int count = 0;</code></pre>
+<p>Immediately after <code>MarkVertex(vertex);</code>:</p>
+<pre><code>count++;</code></pre>
+<p>After the loop:</p>
+<pre><code>cout &lt;&lt; &quot;Visited vertices: &quot; &lt;&lt; count &lt;&lt; endl;</code></pre>
+
+<h3>Change 3 — linked Queue → array Queue</h3>
+<p><strong>Where:</strong> replace <code>queuetype.h/.cpp</code> with the Lab 10 array Queue. Use the parameter constructor so capacity is safe. In the project, replace Queue declarations with:</p>
+<pre><code>QueueType&lt;int&gt; queue(MAX_LOCATIONS);
+QueueType&lt;int&gt; adj(MAX_LOCATIONS);</code></pre>
+<p>Use the same idea anywhere Queue is created. The BFS algorithm itself does not change.</p>
+<p><strong>Say:</strong> Queue = waiting vertices; marks = already processed vertices; FIFO is what makes the traversal BFS.</p>
+
 <h1 class="anchor-heading" id="24-member-4-fabiha-menu-display-search">24. Member 4 — Fabiha — menu + display + search<a aria-label="Link to this section" class="heading-link" href="#24-member-4-fabiha-menu-display-search">#</a></h1>
-<p><strong>Know:</strong> menu/input in <code>main.cpp</code>, plus <code>DisplayLocations()</code>, <code>DisplayGraph()</code>, <code>SearchByID()</code>, and <code>SearchByName()</code>.</p>
-<table><thead><tr><th>If asked</th><th>Change here</th><th>How much?</th></tr></thead><tbody>
-<tr><td>Print neighbor IDs instead of names</td><td>Inside <code>DisplayGraph()</code>.</td><td>One line: print <code>neighbor</code> instead of <code>locations[neighbor]</code>.</td></tr>
-<tr><td>Display only one location's neighbors</td><td>Make a small one-location version of <code>DisplayGraph()</code>.</td><td>About 8–12 lines: validate ID, traverse only <code>adjacencyList[id]</code>.</td></tr>
-<tr><td>Add a Degree menu option</td><td>Add a small <code>Degree(id)</code> function and one menu case.</td><td>About 10–15 lines total; the core value is <code>adjacencyList[id].Length()</code>.</td></tr>
-</tbody></table>
-<p><strong>Remember:</strong> ID search is direct array access after validation; name search is a linear scan through <code>locations[]</code>.</p>
+<p><strong>Know:</strong> menu/input in <code>main.cpp</code>, <code>DisplayLocations()</code>, <code>DisplayGraph()</code>, <code>SearchByID()</code>, and <code>SearchByName()</code>.</p>
+
+<h3>Change 1 — print neighbor IDs instead of names</h3>
+<p><strong>Where:</strong> <code>DisplayGraph()</code>. <strong>How much:</strong> exactly one output line.</p>
+<p>Replace:</p>
+<pre><code>cout &lt;&lt; locations[neighbor];</code></pre>
+<p>with:</p>
+<pre><code>cout &lt;&lt; neighbor;</code></pre>
+
+<h3>Change 2 — display only one location's neighbors</h3>
+<p><strong>Where:</strong> add one public function in <code>campusgraph.h</code> and its body in <code>campusgraph.cpp</code>. <strong>How much:</strong> about 15 lines.</p>
+<p>Header:</p>
+<pre><code>void DisplayNeighbors(int id);</code></pre>
+<p>Source:</p>
+<pre><code>void CampusGraph::DisplayNeighbors(int id) {
+    if (!ValidLocation(id)) {
+        cout &lt;&lt; &quot;Invalid location ID.&quot; &lt;&lt; endl;
+        return;
+    }
+
+    adjacencyList[id].Reset();
+    int length = adjacencyList[id].Length();
+
+    cout &lt;&lt; locations[id] &lt;&lt; &quot; -&gt; &quot;;
+
+    for (int i = 0; i &lt; length; i++) {
+        int neighbor;
+        adjacencyList[id].GetNext(neighbor);
+        cout &lt;&lt; locations[neighbor] &lt;&lt; &quot; &quot;;
+    }
+
+    cout &lt;&lt; endl;
+}</code></pre>
+
+<h3>Change 3 — add a Degree option</h3>
+<p><strong>Where:</strong> <code>campusgraph.h</code>, <code>campusgraph.cpp</code>, and one new menu case in <code>main.cpp</code>. <strong>How much:</strong> about 12 lines total.</p>
+<p>Header:</p>
+<pre><code>void Degree(int id);</code></pre>
+<p>Source:</p>
+<pre><code>void CampusGraph::Degree(int id) {
+    if (!ValidLocation(id)) {
+        cout &lt;&lt; "Invalid location ID." &lt;&lt; endl;
+        return;
+    }
+
+    cout &lt;&lt; "Degree: " &lt;&lt; adjacencyList[id].Length() &lt;&lt; endl;
+}</code></pre>
+<p>Then add one menu choice in <code>main.cpp</code> that reads an ID and calls:</p>
+<pre><code>campus.Degree(id);</code></pre>
+<p><strong>Say:</strong> for this undirected graph, degree is simply the number of IDs stored in that vertex's adjacency list.</p>
+
 <h1 class="anchor-heading" id="25-member-5-safwan-dfs-stack">25. Member 5 — Safwan — DFS + Stack<a aria-label="Link to this section" class="heading-link" href="#25-member-5-safwan-dfs-stack">#</a></h1>
-<p><strong>Know:</strong> <code>DFS()</code> in <code>campusgraph.cpp</code> and Stack operations <code>Push</code>, <code>Top</code>, <code>Pop</code>.</p>
-<table><thead><tr><th>If asked</th><th>Change here</th><th>How much?</th></tr></thead><tbody>
-<tr><td>DFS traversal → search for one destination</td><td><code>DFS()</code>: add a target parameter and test the processed vertex.</td><td>About 4–6 lines; return when found.</td></tr>
-<tr><td>Linked Stack → array Stack</td><td>Swap <code>stacktype.h/.cpp</code>; DFS body stays the same.</td><td>Very small CampusGraph edit. Increase array capacity from 5 to at least 18, preferably 25.</td></tr>
-<tr><td>Iterative DFS → recursive DFS</td><td>Replace the explicit Stack loop with a recursive helper.</td><td>About 10–15 lines: mark, print, get neighbors, recurse on unmarked neighbors.</td></tr>
-</tbody></table>
-<p><strong>Remember:</strong> Stack is LIFO, so the newest discovered vertex is processed first.</p>
+<p><strong>Know:</strong> <code>DFS()</code> and Stack operations <code>Push</code>, <code>Top</code>, <code>Pop</code>.</p>
+
+<h3>Change 1 — DFS traversal → search for one destination</h3>
+<p><strong>Where:</strong> <code>campusgraph.h</code>, <code>campusgraph.cpp</code>, and the DFS menu case in <code>main.cpp</code>. <strong>How much:</strong> about 8 lines.</p>
+<p>Change the declaration/signature to:</p>
+<pre><code>void DFS(int startVertex, int targetVertex);</code></pre>
+<p>Inside <code>DFS()</code>, immediately after <code>MarkVertex(vertex);</code>, add:</p>
+<pre><code>if (vertex == targetVertex) {
+    cout &lt;&lt; &quot;Found: &quot; &lt;&lt; locations[vertex] &lt;&lt; endl;
+    return;
+}</code></pre>
+<p>In <code>main.cpp</code>, the DFS case becomes:</p>
+<pre><code>int start, target;
+campus.DisplayLocations();
+cout &lt;&lt; &quot;Enter starting location ID: &quot;;
+cin &gt;&gt; start;
+cout &lt;&lt; &quot;Enter target location ID: &quot;;
+cin &gt;&gt; target;
+campus.DFS(start, target);</code></pre>
+
+<h3>Change 2 — linked Stack → array Stack</h3>
+<p><strong>Where:</strong> replace <code>stacktype.h/.cpp</code> with the Lab 9 array-based Stack. The DFS body still uses <code>Push</code>, <code>Top</code>, and <code>Pop</code>, so it stays the same. Change the array Stack capacity from 5 to:</p>
+<pre><code>const int SIZE = 25;</code></pre>
+<p>This is enough for the current 18-vertex graph.</p>
+
+<h3>Change 3 — iterative DFS → recursive DFS</h3>
+<p><strong>Where:</strong> <code>campusgraph.h</code> + <code>campusgraph.cpp</code>. <strong>How much:</strong> about 20 lines. Add this private helper declaration:</p>
+<pre><code>void DFSRecursive(int vertex);</code></pre>
+<p>Add the helper:</p>
+<pre><code>void CampusGraph::DFSRecursive(int vertex) {
+    MarkVertex(vertex);
+    cout &lt;&lt; locations[vertex] &lt;&lt; &quot; &quot;;
+
+    QueueType&lt;int&gt; adj;
+    GetToVertices(vertex, adj);
+
+    while (!adj.IsEmpty()) {
+        int item;
+        adj.Dequeue(item);
+
+        if (!IsMarked(item))
+            DFSRecursive(item);
+    }
+}</code></pre>
+<p>Then replace the current Stack-based <code>DFS()</code> body with:</p>
+<pre><code>void CampusGraph::DFS(int startVertex) {
+    if (!ValidLocation(startVertex)) {
+        cout &lt;&lt; &quot;Invalid location ID.&quot; &lt;&lt; endl;
+        return;
+    }
+
+    ClearMarks();
+    cout &lt;&lt; &quot;DFS: &quot;;
+    DFSRecursive(startVertex);
+    cout &lt;&lt; endl;
+}</code></pre>
+<p><strong>Say:</strong> iterative DFS uses an explicit Stack; recursive DFS uses the function-call stack instead.</p>
 <h1 class="anchor-heading" id="26-system-wide-viva-questions-everyone-should-know">26. System-wide viva questions everyone should know<a aria-label="Link to this section" class="heading-link" href="#26-system-wide-viva-questions-everyone-should-know">#</a></h1>
 <h2 class="anchor-heading" id="what-is-a-graph">What is a graph?<a aria-label="Link to this section" class="heading-link" href="#what-is-a-graph">#</a></h2>
 <p>A data structure made of vertices and edges representing relationships/connections.</p>
@@ -1634,7 +1824,7 @@ v1.2 = another small update
 v2.0 = major redesign
 </code></pre>
 <hr/>
-<h1 class="anchor-heading" id="41-change-log">41. Change log<a aria-label="Link to this section" class="heading-link" href="#41-change-log">#</a></h1><h2 class="anchor-heading" id="v1-1-viva-refresh-2026-08-21">v1.1 viva refresh — 2026-08-21<a aria-label="Link to this section" class="heading-link" href="#v1-1-viva-refresh-2026-08-21">#</a></h2>
+<h1 class="anchor-heading" id="41-change-log">41. Change log<a aria-label="Link to this section" class="heading-link" href="#41-change-log">#</a></h1><h2>Exact-code viva refresh — 2026-08-21</h2><ul><li>Expanded member viva variations with exact small code edits and where to place them.</li><li>Kept the simple v1.1 source baseline unchanged.</li></ul><h2 class="anchor-heading" id="v1-1-viva-refresh-2026-08-21">v1.1 viva refresh — 2026-08-21<a aria-label="Link to this section" class="heading-link" href="#v1-1-viva-refresh-2026-08-21">#</a></h2>
 <ul><li>Kept the simple v1.1-style source code instead of the later extra-feature version.</li><li>Updated the campus topology to the current 23-road graph.</li><li>Corrected member numbering/names and rebuilt viva prep around small, exact code changes.</li></ul>
 <h2 class="anchor-heading" id="v1-1-2026-08-15">v1.1 — 2026-08-15<a aria-label="Link to this section" class="heading-link" href="#v1-1-2026-08-15">#</a></h2>
 <ul>
